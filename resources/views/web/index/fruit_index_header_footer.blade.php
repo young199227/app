@@ -15,7 +15,7 @@
 
 
 <body>
-  <!-- 置頂導覽列JQuery load -->
+  <!-- 置頂導覽列-->
   <div class="header">
 
     <div class="container">
@@ -81,20 +81,20 @@
 
   </div>
 
-  <!-- 內容物 -->
+  <!-- 內容物 Blade 模板顯示-->
   <div class="main">
     @section('main')
     
     @show
   </div>
 
-  <!-- 頁尾標籤JQuery load -->
+  <!-- 頁尾標籤-->
   <div class="footer">
 
     <div class="container">
       <div class="row">
         <div class="col-12 mt-1">
-          @2022-12-12~現在
+          @2023-2-1~現在
         </div>
       </div>
     </div>
