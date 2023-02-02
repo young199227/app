@@ -18,4 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//首頁(展示頁面)
 Route::get('/index',[GoodsController::class,'index']);
+
+//第二首頁
+Route::get('/fruit',[GoodsController::class,'fruit']);
+

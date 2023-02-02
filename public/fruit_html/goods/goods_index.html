@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>水果商品頁</title>
+    <link rel="shortcut icon" href="/img/tree.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/mycolor.css">
+    <link rel="stylesheet" href="/css/goods_index.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!-- 置頂導覽列JQuery load -->
+    <div class="header">
+    </div>
+
+    <!-- 中間內容物 -->
+    <div class="main">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <!-- 左分類表 -->
+                <div class="col-3 mt-4 d-none d-lg-block d-flex justify-content-center">
+                    <div class="category">
+                        <ul>
+                            <strong>大分類大分類大</strong>
+                            <li><a href="#">小分類1</a></li>
+                            <li><a href="#">小分類2</a></li>
+                            <li><a href="#">小分類3</a></li>
+
+                            <strong>大分類2</strong>
+                            <li><a href="#">小分類1</a></li>
+                            <li><a href="#">小分類2</a></li>
+                            <li><a href="#">小分類3</a></li>
+
+                            <strong>大分類3</strong>
+                            <li><a href="#">小分類1</a></li>
+                            <li><a href="#">小分類2</a></li>
+                            <li><a href="#">小分類3</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 右上 #篩選/綜合排行/最新  -->
+                <div class="col-md-9 col-12 mt-4">
+                    <div class="sort ">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="d-inline-block">篩選</div>
+                                <div class="btn sorttext">綜合排行</div>
+                                <div class="btn sorttext">最新</div>
+                                <div class="btn sorttext">最熱銷</div>
+                            </div>
+                            <div class="col-6">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 商品排列 -->
+                    <div class="row mt-2 showgoodsitem">
+                        <!-- result_items showgoodsitem-->
+                        <!-- <div class="col-lg-3 mt-2">
+                            <div class="itemsbox">
+                                <div class="imgbox img-fluid">
+                                    <img src="/img/fruit_images/fruit1.jpg" alt="">
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span class="">商品名稱</span>
+                                    </div>
+                                    <div class="col-12">
+                                        <span class="">價格元</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 頁尾標籤JQuery load -->
+    <div class="footer mt-3">
+    </div>
+
+</body>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/jquery-3.6.1.min.js"></script>
+<!-- icon圖片載入 -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<script>
+
+    $(function () {
+
+        $(".header").load("/fruit/index/index_header.html");
+        $(".footer").load("/fruit/index/index_footer.html");
+
+
+        $.ajax({
+            type: "post",
+            url: "/php/goods/R_api.php",
+            dataType: "json",
+            success: function (data) {
+
+                console.log(data);
+
+                var del = "";
+
+                for (i = 0; i < data.data.length; i++) {
+
+                    if (del != data.data[i].Goods_name) {
+                        $(".showgoodsitem").append(
+
+                            // '<h1>' + data.data[i].Goods_name + '</h1>' +
+                            // '<h1>' + "img路徑:" + data.data[i].Goods_img + '</h1>' +
+                            // '<h1>' + data.data[i].Goods_money + '</h1>'
+                            '<div class="col-lg-3 mt-3">'+
+                                '<div class="itemsbox">'+
+                                    '<div class="imgbox img-fluid">'+
+                                        '<img src="'+data.data[i].Goods_img+'" alt="">'+
+                                    '</div>'+
+                                    '<div class="row">'+
+                                        '<div class="col-12">'+
+                                            '<span class="">'+data.data[i].Goods_name+'</span>'+
+                                        '</div>'+
+                                        '<div class="col-12">'+
+                                            '<span class="">'+data.data[i].Goods_money+'</span>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'
+                        );
+                    }
+
+                    var del = data.data[i].Goods_name;
+                }
+                // console.log("成功");
+                // console.log(data);
+            },
+            error: function () {
+
+                console.log("失敗");
+            }
+
+        });
+
+    });
+
+</script>
+
+</html>

@@ -81,7 +81,7 @@
                         <div class="display-3">Fruit world</div>
                         <small class="">the fruit is so sweet.</small>
                         <div class="col-5 d-flex justify-content-end">
-                            <a href="fruit.html" class="btn btn-danger" style="width: 200px;">Go to shopping</a>
+                            <a href="/test" class="btn btn-danger" style="width: 200px;">Go to shopping</a>
                         </div>
                     </div>
 
