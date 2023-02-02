@@ -81,7 +81,7 @@
                         <div class="display-3">Fruit world</div>
                         <small class="">the fruit is so sweet.</small>
                         <div class="col-5 d-flex justify-content-end">
-                            <a href="/test" class="btn btn-danger" style="width: 200px;">Go to shopping</a>
+                            <a href="/fruit" class="btn btn-danger" style="width: 200px;">Go to shopping</a>
                         </div>
                     </div>
 
@@ -114,8 +114,8 @@
                         <div class="row mt-5">
                             <div class="col-12 d-flex justify-content-center">
                                 <div class="">
-                                    <a href="fruit.html" class="btn btn-outline-secondary p-2">了解更多</a>
-                                    <a href="fruit.html" class="btn btn-success p-2">買買買</a>
+                                    <a href="/fruit" class="btn btn-outline-secondary p-2">了解更多</a>
+                                    <a href="/fruit" class="btn btn-success p-2">買買買</a>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
 
                     <div class="col-12  wow animate__fadeInUp" data-wow-duration="1.7s">
                         <div class="display-3 ">Fruit world</div>
-                        <a href="fruit.html" class="btn btn-warning">點我去商店:3</a>
+                        <a href="/fruit" class="btn btn-warning">點我去商店:3</a>
                     </div>
 
                     <div class="col-6 d-flex justify-content-center">

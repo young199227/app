@@ -14,13 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 //首頁(展示頁面)
-Route::get('/index',[GoodsController::class,'index']);
+Route::get('/',[GoodsController::class,'show_index']);
 
 //第二首頁
-Route::get('/fruit',[GoodsController::class,'fruit']);
+Route::get('/fruit',[GoodsController::class,'fruit_index']);
+
 
