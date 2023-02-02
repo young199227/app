@@ -1,0 +1,209 @@
+@font-face {
+    font-family: Naikai;
+    src: url("/fonts/NaikaiFont-Regular.woff2") format("woff2");
+    src: url("/fonts/NaikaiFont-Regular.woff") format("woff");
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Naikai;
+}
+
+body {
+    background-color: #ffecec;
+}
+
+/* 置頂導覽列 */
+.header {
+    background-color: #3a6254;
+    color: white;
+    position: fixed;
+    width: 100%;
+    height: 3.5em;
+    z-index: 999;
+}
+
+/* 聖誕樹LOGO */
+.navigation .logo {
+    height: 50px;
+    margin-bottom: 7px;
+}
+
+/* 左上導覽 */
+.navigation .laftNav ul {
+    list-style-type: none;
+}
+
+.navigation .laftNav ul li {
+    display: inline-block;
+}
+
+.navigation .laftNav ul li a {
+    text-decoration: none;
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+/* 右上導覽 */
+.navigation .rightNav ul {
+    list-style-type: none;
+}
+
+.navigation .rightNav ul li {
+    display: inline-block;
+}
+
+.navigation .rightNav ul li a {
+    text-decoration: none;
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+/* RWD選單 */
+.navaside {
+    position: fixed;
+    margin-top: -3px;
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+    background-image: url("/img/nav-w.png");
+    background-size: cover;
+    display: block;
+}
+
+
+/* 內容物 左邊列排 */
+.main .aside {
+    position: fixed;
+    background-color: rgb(97, 146, 109);
+    float: left;
+    margin-top: 3em;
+    width: 15em;
+    height: 100%;
+}
+
+.main .aside ul li {
+    list-style-type: none;
+    margin-top: 5px;
+    margin: 10px;
+}
+
+.main .aside ul li a {
+    display: block;
+    text-decoration: none;
+    padding: 5px;
+    color: white;
+    font-size: 1.5em;
+}
+
+.main .aside ul li a:hover {
+    color: #ffd16e;
+}
+
+/* 內容物 右邊內容 */
+.main .article {
+    padding-top: 3.5em;
+    color: #000000;
+    display: block;
+}
+
+/* 右面新增大框放裏東西 */
+.main .article .ownerbox {
+    background-color: #f4f5f5;
+    color: #123456;
+    width: 90%;
+    padding: 20px;
+    margin: 30px;
+    border-radius: 15px;
+}
+
+/* 商品圖片限制 */
+.main .article .ownerbox .imgbox {
+    width: 80px;
+    height: 80px;
+    border: 1px solid var(--grey01);
+    background-color: #fff;
+    margin: 0px 10px 10px 0px;
+}
+
+/* 商品圖片橫向排列 */
+.main .article .ownerbox .imgrow {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* 商品圖片等比例縮放 */
+.main .article .ownerbox .imgbox img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* 價錢＆數量 的 寬度 */
+.main .article .goodsPNW {
+    width: 150px;
+}
+
+
+
+/* 商品敘述框框 */
+.main .article #goods_textarea {
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+    width: 100%;
+    padding: 15px;
+
+}
+
+/* 頁尾 */
+/* .footer {
+    background-color: #ccc;
+    text-align: center;
+    font-size: 2em;
+} */
+
+@media screen and (max-width:768px) {
+
+    /* 紅色區 */
+    .header {
+        padding: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* 隱藏logo圖 */
+    .navigation .logo {
+        display: none;
+    }
+
+    .navigation {
+        text-align: center;
+    }
+
+    .navigation ul {
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* 左邊列 */
+    .aside {
+        display: none;
+    }
+
+    /* 價錢＆數量 的 寬度 */
+    .main .article .goodsPNW {
+        width: 70%;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .article {
+        margin-left: 15em;
+    }
+}

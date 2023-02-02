@@ -1,0 +1,118 @@
+@font-face {
+    font-family: Naikai;
+    src: url("/fonts/NaikaiFont-Regular.woff2") format("woff2");
+    src: url("/fonts/NaikaiFont-Regular.woff") format("woff");
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Naikai;
+}
+
+/* 置頂導覽列 */
+.header {
+    background-color: #449440;
+    color: white;
+}
+
+.header .menu {
+    font-size: 1em;
+}
+
+.header .menu a {
+    text-decoration: none;
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+/* 水果超好ㄘ */
+.navigation .logo {
+    height: 50px;
+    margin-bottom: 7px;
+}
+
+.navigation .logo-text {
+    font-size: 2.5em;
+}
+
+@media screen and (max-width: 1200px) {
+    .navigation .logo-text {
+        font-size: 2em;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .navigation .logo-text {
+        display: none;
+    }
+}
+
+/* 搜尋框按鈕 */
+.navigation button {
+    background-color: #b8fcbe;
+    color: rgb(66, 40, 17);
+}
+
+.navigation button:hover {
+    background-color: rgb(255, 189, 89);
+    color: rgb(66, 40, 17);
+}
+
+/* 購物車 */
+.navigation .icon {
+    margin-top: 5px;
+    width: 70px;
+    height: 40px;
+    font-size: 2em;
+}
+
+body {
+    background-color: #ffecec;
+}
+
+/* 商品圖片限制 */
+.main .ownerbox .imgbox {
+    width: 80px;
+    height: 80px;
+    border: 1px solid var(--grey01);
+    background-color: #fff;
+    margin: 0px 10px 10px 0px;
+}
+
+/* 商品圖片橫向排列 */
+.main .ownerbox .imgrow {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* 商品圖片等比例縮放 */
+.main .ownerbox .imgbox img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* 商品圖片限制 */
+.modal-body .imgbox {
+    width: 80px;
+    height: 80px;
+    border: 1px solid var(--grey01);
+    background-color: #fff;
+    margin: 0px 10px 10px 0px;
+}
+/* 商品圖片等比例縮放 */
+.modal-body .imgbox img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+/* 頁尾 */
+.footer {
+    background-color: #ccc;
+    text-align: center;
+    font-size: 2em;
+}

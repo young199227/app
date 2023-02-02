@@ -1,0 +1,109 @@
+@font-face {
+    font-family: Naikai;
+    src: url("/fonts/NaikaiFont-Regular.woff2") format("woff2");
+    src: url("/fonts/NaikaiFont-Regular.woff") format("woff");
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Naikai;
+    /* box-sizing: border-box; */
+}
+
+/* 置頂導覽列 */
+.header{
+    background-color: #449440;
+    color: white;
+}
+
+.header .menu {
+    font-size: 1em;
+}
+
+.header .menu a{
+    text-decoration: none;
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+/* 水果超好ㄘ */
+.navigation .logo{
+    height: 50px;
+    margin-bottom: 7px;
+}
+
+.navigation .logo-text{
+    font-size: 2.5em;
+}
+
+@media screen and (max-width: 1200px) {
+    .navigation .logo-text{
+        font-size: 2em;
+    }    
+}
+
+@media screen and (max-width: 992px) {
+    .navigation .logo-text{
+        display: none;
+    }    
+}
+
+/* 搜尋框按鈕 */
+.navigation button{
+    background-color: rgb(184, 252, 190);
+    color:rgb(66, 40, 17);
+}
+
+.navigation button:hover{
+    background-color: rgb(255, 189, 89);
+    color:rgb(66, 40, 17);
+}
+/* 購物車 */
+.navigation .icon{
+    margin-top: 5px;
+    width: 70px;
+    height: 40px;
+    font-size: 2em;
+}
+
+
+body{
+    background-color: rgb(255, 253, 232);
+}
+
+/* .advertise-box{
+    height: 500px;
+} */
+
+.main .shopee-box{
+    background-color: var(--grey01);
+    text-align: center;
+    font-weight: bolder;
+    color: var(--brown02);
+    border-radius: 15px;
+    /* transition: 0.5s ease-in-out; */
+}
+
+.main .shopee-box:hover {
+    background-color: var(--orange01);
+}
+
+.main .shopee-box:hover .bttn {
+    background-color: var(--blue02);
+    color: var(--brown02);
+}
+
+.main .shopee-box a {
+    text-decoration: none;
+    color: #403426;
+}
+
+
+/* 頁尾 */
+.footer{
+    background-color: #ccc;
+    text-align: center;
+    font-size: 2em;
+}

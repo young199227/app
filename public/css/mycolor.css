@@ -1,0 +1,98 @@
+@font-face {
+    font-family: NaikaiFont;
+    src: url("/fonts/NaikaiFont-Regular.woff2") format("woff2");
+    src: url("/fonts/NaikaiFont-Regular.woff") format("woff");
+}
+
+/* 自訂顏色 */
+:root {
+    --green01: #7fb174;
+    --green02: #aaf8b5;
+    --green03: #c5f5ab;
+    --green04: #63925a;
+    --green05: #2B3C1A;
+    --green06: #1E3815;
+
+    --blue01: #1D6A96;
+    --blue02: #84C0E9;
+    --blue03: #6D8DB6;
+    --blue04: #69cbd8;
+    --blue05: #234179;
+    --blue06: #232941;
+
+    --orange01: #E99A24;
+    --orange02: #ff9431;
+    --orange03: #EF6E2C;
+
+    --grey01: #d1dddb;
+    --grey02: #A5A79A;
+    --grey03: #655C57;
+
+    --pink01:#ffb4c4;
+    --pink02:#ffaca6;
+    --pink03:#ff8eb3;
+
+    --purple01:#7700ff;
+    --purple02:#dc82ff;
+
+    --brown01:#dbbd9b;
+    --brown02:#403426;
+
+    --white: #ffffff;
+    --black: #000000;
+
+    --dc01:#202225;
+    --dc02:#2f3136;
+    --dc03:#36393f;
+
+}
+
+/* 讓背景圖片有中心位置 */
+.bg-cover{
+    background-size: cover;
+    background-position: center center;
+}
+
+/* 按鈕基本設定+hover功能 */
+.bttn{
+    display: block;
+    background-color: var(--green04);
+    color: var(--white);
+    text-decoration: none;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 15px;
+
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    /* transition: 0.5s ease-in-out; */
+}
+.bttn:hover{
+    background-color: var(--pink01);
+    color: var(--grey03);
+}
+
+/* 角落生物 */
+.mypet {
+    border: 2px solid var(--green04);
+    width: 80px ;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 3%;
+    right: 3%;
+    cursor: pointer;
+    background-color: var(--green02);
+    border-radius: 10px;  
+    color: var(--blue01);
+    font-weight: bolder;
+    transition: 0.2s ease-in-out;
+}
+.mypet:hover{
+    background-color: var(--blue03);
+    border: 2px solid var(--green01);
+    color: var(--white);
+}
