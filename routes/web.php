@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//測試頁面
+Route::get('/test',function(){return view('test');});
+
 //首頁(展示頁面)
 Route::get('/',[GoodsController::class,'show_index']);
 

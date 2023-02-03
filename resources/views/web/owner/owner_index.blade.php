@@ -85,7 +85,8 @@
 @section('script')
 @parent
 <script>
-    //ajax刪除商品 delete_goods
+    //ajax刪除商品
+    //delete_goods方法傳入按鈕自身html(this)改名(html)
     function delete_goods(html) {
 
         if (confirm("確實要刪除嗎?")) {
