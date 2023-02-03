@@ -74,14 +74,14 @@
         <div class="col-md-4 d-flex justify-content-center align-items-center">
 
             <div class="textbox">
-                <div class="h1 text-center">好吃的蘋果</div>
+                <div class="h1 text-center">{{ $row->Goods_name }}</div>
 
                 <div class="row mt-4">
                     <div class="col-3 d-flex align-items-center justify-content-end">
                         <div class="">價錢：</div>
                     </div>
                     <div class="col-9">
-                        <div class="">100元</div>
+                        <div class="">{{ $row->Goods_money }}元</div>
                     </div>
                 </div>
 
@@ -142,8 +142,8 @@
                 </div>
                 <div class="row">
                     <div class="mt-4 d-inline-flex justify-content-evenly">
-                        <button class="btn btn-success ">購物車</button>
-                        <button class="btn btn-success">購買</button>
+                        <a href="/fruit/goods_car"><button class="btn btn-success">加入購物車</button></a>
+                        <a href="/fruit/goods_car"><button class="btn btn-success">直接購買</button></a>
                     </div>
                 </div>
             </div>
@@ -156,10 +156,7 @@
 @parent
 <script>
     $(function() {
-
-        $(".header").load("/fruit/index/index_header.html");
-        $(".footer").load("/fruit/index/index_footer.html");
-
+        
         // $("#show_img").css("background-image", "url(/img/fruit_images/123456.png)");
 
 

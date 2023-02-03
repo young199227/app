@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
-    //
+    public function member_sign_up(){
+
+        return view('web.member.member_sign_up');
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Goods;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GoodsController extends Controller
 {
@@ -24,12 +25,18 @@ class GoodsController extends Controller
 
     //商品列表
     public function goods_list(){
-        return view('web.goods.goods_list');
+
+        $row = DB::table('goods')->get();
+
+        return view('web.goods.goods_list',compact('row'));
     }
 
     //商品詳細
-    public function goods_only(){
-        return view('web.goods.goods_only');
+    public function test(Request $req,$goods_id){
+
+        $row = DB::table('goods')->where('goods_id',$goods_id)->first();
+
+        return view('web.goods.goods_only', compact('row'));
     }
 
 }

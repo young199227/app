@@ -58,23 +58,28 @@
             </div>
 
             <!-- 商品排列 -->
-            <div class="row mt-2 showgoodsitem">
+            <div class="row mt-2 showgoodsitem" id="show_goods">
                 <!-- result_items showgoodsitem-->
-                <!-- <div class="col-lg-3 mt-2">
-                            <div class="itemsbox">
-                                <div class="imgbox img-fluid">
-                                    <img src="/img/fruit_images/fruit1.jpg" alt="">
+
+                @foreach ($row as $goods)
+                <div class="col-lg-3 mt-2">
+                    <a href="/fruit/goods_only/{{$goods->Goods_id}}">
+                        <div class="itemsbox">
+                            <div class="imgbox img-fluid">
+                                <img src="/img/fruit_images/fruit{{$goods->Goods_id}}.jpg" alt="">
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="">{{$goods->Goods_name}}</span>
                                 </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span class="">商品名稱</span>
-                                    </div>
-                                    <div class="col-12">
-                                        <span class="">價格元</span>
-                                    </div>
+                                <div class="col-12">
+                                    <span class="">{{$goods->Goods_money}}元</span>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
+                    </a>
+                </div>
+                @endforeach
 
             </div>
         </div>
@@ -86,6 +91,29 @@
 @section('script')
 @parent
 <script>
-    console.log("test");
+    $(function() {
+
+        // for (i = 0; i < 10; i++) {
+
+        //     $("#show_goods").append(
+        //         '<div class="col-lg-3 mt-2">' +
+        //         '<div class="itemsbox">' +
+        //         '<div class="imgbox img-fluid">' +
+        //         '<img src="/img/fruit_images/fruit1.jpg" alt="">' +
+        //         '</div>' +
+        //         '<div class="row">' +
+        //         '<div class="col-12">' +
+        //         '<span class="">商品名稱</span>' +
+        //         '</div>' +
+        //         '<div class="col-12">' +
+        //         '<span class="">價格元</span>' +
+        //         '</div>' +
+        //         '</div>' +
+        //         '</div>' +
+        //         '</div>'
+        //     );
+        // }
+
+    });
 </script>
 @endsection

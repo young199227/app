@@ -28,13 +28,13 @@
       <div class="menu">
         <div class="row">
           <div class="col-md-6 d-flex d-none d-md-block ">
-            <a href="#">水豚</a>
-            <a href="#">烏龜</a>
-            <a href="#">鯊鯊</a>
+            <a href="/">水豚</a>
+            <a href="/">烏龜</a>
+            <a href="/">鯊鯊</a>
           </div>
           <div class="col-md-6 d-md-flex justify-content-end d-none">
-            <a href="#">幫助中心</a>
-            <a href="#">會員註冊</a>
+            <a href="https://www.google.com.tw/" target="_blank">幫助中心</a>
+            <a href="/member_sign_up">會員註冊</a>
             <a href="#">會員登入</a>
           </div>
         </div>
@@ -73,9 +73,8 @@
                   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     選單
                   </button>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">幫助中心</a></li>
-                    <li><a class="dropdown-item" href="#">會員註冊 </a></li>
+                  <ul class="dropdown-menu">                   
+                    <li><a class="dropdown-item" href="/member_sign_up">會員註冊 </a></li>
                     <li><a class="dropdown-item" href="#">會員登入</a></li>
                   </ul>
                 </div>
@@ -96,7 +95,7 @@
   </div>
 
   <!-- 頁尾標籤-->
-  <div class="footer">
+  <div class="footer mt-3">
 
     <div class="container">
       <div class="row">
