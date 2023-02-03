@@ -157,9 +157,6 @@
 <script>
     $(function() {
 
-        $(".header").load("/fruit/index/index_header.html");
-        $(".footer").load("/fruit/index/index_footer.html");
-
         // $("#show_img").css("background-image", "url(/img/fruit_images/123456.png)");
 
 
