@@ -27,7 +27,7 @@
 
 
 
-    <input accept="image/*" type='file' id="imgInp" name="ImageFile" multiple />
+    <input accept="image/*" type='file' id="imgInp" enctype="multipart/form-data" name="formName" multiple />
     <br>
 
 

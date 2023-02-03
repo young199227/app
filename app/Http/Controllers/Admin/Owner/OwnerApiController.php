@@ -33,9 +33,12 @@ class OwnerApiController extends Controller
     //修改商品 http://127.0.0.1:8000/api/owner/update_goods
     public function update_goods(Request $req)
     {   //date('Y_m_d').'_1'
-        // $path = $req->file('links')->store('images');
-        $stored = Storage::put('test.jpg', $req->file('ImageFile'));
-        return $stored;
+        
+        $image = $req->file('ggyy');
+        $filename = $image->getClientOriginalName();
+        $uploadPic = Storage::disk('publicFruit')->put($filename,file_get_contents($image->getRealPath()));
+
+        return $filename;
     }
 
     //刪除商品 http://127.0.0.1:8000/api/owner/delete_goods {"id":"1"}
