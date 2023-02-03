@@ -10,6 +10,12 @@
   <link rel="stylesheet" href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/fruit.css">
   <link rel="stylesheet" href="/css/mycolor.css">
+  <!-- link Blade 模板顯示-->
+  @section('link')
+  @show
+  <!-- style Blade 模板顯示-->
+  @section('style')
+  @show
 
 </head>
 
@@ -40,9 +46,11 @@
             <div class="row">
               <!-- LOGO -->
               <div class="col-md-3 d-none d-md-block">
-                <span class="logo-text">
-                  <img src="/img/tree.png" class="logo ">水果超好ㄘ
-                </span>
+                <a href="/fruit" style="text-decoration:none;color:#fff">
+                  <span class="logo-text">
+                    <img src="/img/tree.png" class="logo ">水果超好ㄘ
+                  </span>
+                </a>
               </div>
               <!-- 搜尋框 -->
               <div class="col-md-6 col-9">
@@ -55,7 +63,7 @@
               </div>
               <!-- 購物車 -->
               <div class="col-md-3 d-none d-md-block">
-                <a href="/fruit/goods/goods_car.html" class="text-light"><ion-icon name="cart-outline" class="icon"></ion-icon></a>
+                <a href="/fruit/goods_car" class="text-light"><ion-icon name="cart-outline" class="icon"></ion-icon></a>
               </div>
 
               <!-- RWD縮進 -->
@@ -84,7 +92,6 @@
   <!-- 內容物 Blade 模板顯示-->
   <div class="main">
     @section('main')
-    
     @show
   </div>
 
@@ -108,11 +115,15 @@
 <!-- icon圖片載入 -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/jquery-3.6.1.min.js"></script>
 <script>
   $(function() {
 
   });
 </script>
+<!-- script Blade 模板顯示-->
+@section('script')
+@show
 
 </html>

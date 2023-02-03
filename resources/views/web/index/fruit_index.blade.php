@@ -4,7 +4,7 @@
 <!-- 把內容插入到index_header_footer的section('main')位置 -->
 <!-- 最下面還要補上endsection -->
 @section('main')
-    @parent
+@parent
 
 <div class="container">
     <div class="row">
@@ -19,21 +19,27 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="/img/fruit_images/fruit6.jpg" class="d-block w-100" alt="...">
+                        <a href="/fruit/goods_list">
+                            <img src="/img/fruit_images/fruit6.jpg" class="d-block w-100" alt="...">
+                        </a>
                         <div class="carousel-caption d-none d-md-block">
                             <h5>看起來超好ㄘ</h5>
                             <p>台灣大香蕉</p>
                         </div>
                     </div>
                     <div class="carousel-item">
+                        <a href="/fruit/goods_list">
                         <img src="/img/fruit_images/fruit4.jpg" class="d-block w-100" alt="...">
+                        </a>
                         <div class="carousel-caption d-none d-md-block">
                             <h5>超大葡萄</h5>
                             <p>沒有仔</p>
                         </div>
                     </div>
                     <div class="carousel-item">
+                        <a href="/fruit/goods_list">
                         <img src="/img/fruit_images/fruit5.jpg" class="d-block w-100" alt="...">
+                        </a>
                         <div class="carousel-caption d-none d-md-block">
                             <h5>超厲害草莓</h5>
                             <p>又大又甜</p>
