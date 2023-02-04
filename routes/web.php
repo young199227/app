@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Goods\GoodsController;
 use App\Http\Controllers\Admin\Owner\OwnerController;
 use App\Http\Controllers\Admin\Member\MemberController;
+use App\Http\Controllers\Admin\Test\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//測試頁面2
+Route::get('/test2',[TestController::class,'testpo']);
 
 //測試頁面
 Route::get('/test',function(){return view('test');});
