@@ -34,13 +34,25 @@ class OwnerApiController extends Controller
     public function update_goods(Request $req)
     {   //date('Y_m_d').'_1'
         
-        $image = $req->file('ggyy');
-        $filename = $image->getClientOriginalName();
-        $uploadPic = Storage::disk('publicFruit')->put($filename,file_get_contents($image->getRealPath()));
-
         // return response()->json(["state" => true, "message" => "新增成功"]);
-        $array =  array($req->id,$filename);
-        return $array;
+        // $array =  array($req->id,$filename);
+
+        if($req->filled(['id'])){
+
+            if($req->hasFile('ggyy')){
+
+                $image = $req->file('ggyy');
+                $filename = $image->getClientOriginalName();
+                $uploadPic = Storage::disk('publicFruit')->put($filename,file_get_contents($image->getRealPath()));
+
+                return response()->json(["state" => true, "message" => $req->id]);
+            }
+
+            return response()->json(["state" => false, "message" => ""]);
+        } else {
+            return response()->json(["state" => false, "message" => ""]);
+        }
+
     }
 
     //刪除商品 http://127.0.0.1:8000/api/owner/delete_goods {"id":"1"}

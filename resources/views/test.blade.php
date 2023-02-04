@@ -52,7 +52,7 @@
 
                     var formData = new FormData();
                     formData.append("ggyy", imgInp.files[0]);
-
+                    formData.append("id", "321");
                     $.ajax({
                         type: "POST",
                         url: "/api/owner/update_goods",
