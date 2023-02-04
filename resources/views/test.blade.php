@@ -8,29 +8,15 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 
     <title>Document</title>
-
-    <style>
-
-        img{
-
-            height: 200px;
-            width: 200px;
-        }
-
-    </style>
 </head>
-
-
 
 <body>
 
+    <input accept="image/*" type='file' id="imgInp" multiple />
 
-
-
-    <input accept="image/*" type='file' id="imgInp" enctype="multipart/form-data" name="formName" multiple />
     <br>
-
-
+    <button type="button" class="btn btn-success" id="upload_btn">上傳</button>
+    <br>
     <div class="row mt-4 img_ee">
         <div class="col-3 d-flex align-items-center justify-content-end">
             <div class="">商品圖片：</div>
@@ -39,47 +25,54 @@
 
             <div class="imgrow" id="show_img">
 
-
             </div>
-            
+
         </div>
     </div>
 </body>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery-3.6.1.min.js"></script>
 <script>
+    $(function() {
 
-    
-    $("#imgInp").bind('input propertychange', function () {
+        $("#imgInp").bind('input propertychange', function() {
 
-        $("#show_img").empty();
+            for (i = 0; i < imgInp.files.length; i++) {
+                console.log("123");
+                console.log(imgInp.files[i]);
+                $("#show_img").append(
+                    '<div class="imgbox img-fluid ">' +
+                    '<img src="' + URL.createObjectURL(imgInp.files[i]) + '">' +
+                    '</div>'
+                );
+            }
 
-        var img_array = $("#imgInp")[0].files;
+            //按鈕監聽 #upload_btn
+            $("#upload_btn").bind("click", function() {
 
-        console.log(img_array[0]);
+                    var formData = new FormData();
+                    formData.append("ggyy", imgInp.files[0]);
 
-        for (i = 0; i < img_array.length; i++) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/owner/update_goods",
+                        data: formData,
+                        dataType: "json",
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function(data){
+                            console.log(data);
+                        },
+                        error: function(data) {
+                            console.log(data);
+                        }
+                    });
+            })
 
-            $("#show_img").append(
-                '<div class="imgbox img-fluid ">'+
-                '<img src="' + URL.createObjectURL(img_array[i]) + '>'+
-                '</div>'
-            );
-        }
-
-        $.ajax({
-            type:"post",
-            url:"/api/owner/update_goods",
-            data:"",
-            dataType:"",
-            success:function(data){
-                console.log(data);
-            },
-            error:function(){console.log("失敗");}
         });
 
     });
-
 </script>
 
 </html>

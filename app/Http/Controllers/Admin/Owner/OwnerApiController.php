@@ -38,7 +38,9 @@ class OwnerApiController extends Controller
         $filename = $image->getClientOriginalName();
         $uploadPic = Storage::disk('publicFruit')->put($filename,file_get_contents($image->getRealPath()));
 
-        return $filename;
+        // return response()->json(["state" => true, "message" => "新增成功"]);
+        $array =  array($req->id,$filename);
+        return $array;
     }
 
     //刪除商品 http://127.0.0.1:8000/api/owner/delete_goods {"id":"1"}
