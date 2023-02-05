@@ -47,3 +47,6 @@ Route::get('/owner',[OwnerController::class,'owner_index']);
 
 //後臺owner_po_goods
 Route::get('/owner_po_goods',[OwnerController::class,'owner_po_goods']);
+
+//後台owner_update_goods
+Route::get('/owner/{goods_id}',[OwnerController::class,'owner_update_goods']);

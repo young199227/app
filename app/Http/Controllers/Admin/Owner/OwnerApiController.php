@@ -32,9 +32,29 @@ class OwnerApiController extends Controller
 
     //修改商品 http://127.0.0.1:8000/api/owner/update_goods
     public function update_goods(Request $req)
-    {   //date('Y_m_d').'_1'
+    {   
         
+        if ($req->filled(['Goods_name', 'Goods_money', 'Goods_sum', 'Goods_area', 'Goods_detail'])) {
 
+            $row =
+            DB::table('goods')->
+            where('Goods_id',$req->Goods_id)->
+            update([
+                    'Goods_name' => $req -> Goods_name,
+                    'Goods_money' => $req -> Goods_money,
+                    'Goods_sum' => $req -> Goods_sum,
+                    'Goods_area' => $req -> Goods_area,
+                    'Goods_detail' => $req -> Goods_detail,
+            ]);
+
+            if ($row) {
+                return response()->json(["state" => true, "message" => "更新成功"]);
+            } else {
+                return response()->json(["state" => false, "message" => "更新失敗或資料一樣沒更新"]);
+            }
+        }else{
+            return response()->json(["state" => false, "message" => "缺少欄位或沒有值"]);
+        }
 
     }
 

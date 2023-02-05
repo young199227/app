@@ -1,5 +1,5 @@
 <!-- 繼承了owner_index_header頁面 -->
-@extends('web.test.owner_index_header')
+@extends('web.owner.owner_index_header')
 
 <!-- link回傳 -->
 @section('link')
@@ -147,7 +147,7 @@
         console.log(JSON.stringify(dataJson));
         $.ajax({
             type: "post",
-            url: "/test2/test_upload",
+            url: "/api/owner/update_goods",
             data: JSON.stringify(dataJson),
             dataType: "json",
             contentType: "application/json; charset=utf-8",

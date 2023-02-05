@@ -43,7 +43,7 @@
                         <td>{{ $goods->Goods_sum}}</td>
                         <td>{{ $goods->Goods_created_at}}</td>
                         <td>
-                            <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#updateModal">修改</button>
+                            <a href="/owner/{{$goods->Goods_id}}"><button class="btn btn-outline-dark">修改</button></a>
                             <button class="btn btn-danger ms-3" onclick="delete_goods(this)" data-goods_id="{{ $goods->Goods_id}}">刪除</button>
                         </td>
                     </tr>
@@ -55,31 +55,6 @@
     </div>
 </div>
 
-
-<!-- 修改Modal -->
-<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">修改商品</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h1>商品ID</h1>
-                
-                <input type="text" class="form-control mt-3" placeholder="Username">
-                <input type="text" class="form-control mt-3" placeholder="Username">
-                <input type="text" class="form-control mt-3" placeholder="Username">
-                <input type="text" class="form-control mt-3" placeholder="Username">
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">確認</button>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 
 @section('script')

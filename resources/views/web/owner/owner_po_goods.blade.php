@@ -87,7 +87,7 @@
                 </div>
 
                 <div class="col-9">
-                    <textarea name="" id="goods_textarea" rows="6"></textarea>
+                    <textarea name="Goods_detail" id="Goods_detail" class="goods_textarea" rows="6"></textarea>
                 </div>
             </div>
 
