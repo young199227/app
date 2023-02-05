@@ -150,7 +150,7 @@ body {
 
 
 /* 商品敘述框框 */
-.main .article #goods_textarea {
+.main .article .goods_textarea {
     border-radius: 10px;
     border: 1px solid #ced4da;
     width: 100%;
