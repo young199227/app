@@ -35,6 +35,7 @@
 <script>
     $(function() {
 
+        //選取檔案時
         $("#imgInp").bind('input propertychange', function() {
 
             for (i = 0; i < imgInp.files.length; i++) {
@@ -46,32 +47,30 @@
                     '</div>'
                 );
             }
-
-            //按鈕監聽 #upload_btn
-            $("#upload_btn").bind("click", function() {
-
-                    var formData = new FormData();
-                    formData.append("ggyy", imgInp.files[0]);
-                    formData.append("id", "321");
-                    $.ajax({
-                        type: "POST",
-                        url: "/api/owner/update_goods",
-                        data: formData,
-                        dataType: "json",
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        success: function(data){
-                            console.log(data);
-                        },
-                        error: function(data) {
-                            console.log(data);
-                        }
-                    });
-            })
-
         });
 
+        //按鈕監聽 #upload_btn
+        $("#upload_btn").bind("click", function() {
+
+            var formData = new FormData();
+            formData.append("ggyy", imgInp.files[0]);
+            formData.append("id", "321");
+            $.ajax({
+                type: "POST",
+                url: "/api/owner/update_goods",
+                data: formData,
+                dataType: "json",
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    console.log(data);
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+        })
     });
 </script>
 
