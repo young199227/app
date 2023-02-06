@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\Owner\OwnerApiController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('/test_insert',[OwnerApiController::class,'test_insert']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

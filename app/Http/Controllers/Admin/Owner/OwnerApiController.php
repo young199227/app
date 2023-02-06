@@ -14,48 +14,74 @@ class OwnerApiController extends Controller
     public function insert_goods(Request $req)
     {
         //filled檢查欄位&&空值
-        if ($req->filled(['goods_name', 'goods_money', 'goods_sum', 'goods_area', 'goods_detail'])) {
+        if ($req->filled(['goods_name', 'goods_money', 'goods_sum', 'goods_area', 'goods_detail']) && $req->hasFile('ggyy')) {
 
-            $row = DB::table('goods')->insert([
-                'Goods_name' => $req->goods_name,
-                'Goods_money' => $req->goods_money,
-                'Goods_sum' => $req->goods_sum,
-                'Goods_area' => $req->goods_area,
-                'Goods_detail' => $req->goods_detail
-            ]);
+            //把$req圖片名稱存到$img_array
+            $img_array = array($req->file('ggyy'),$req->file('ggyy01'),$req->file('ggyy01'),$req->file('ggyy01'),$req->file('ggyy01'),$req->file('ggyy01'));
+            //array_filter刪除陣列空值
+            $img_array_filter = array_filter($img_array);
+            
+            //再用count($img_array_filter)跑迴圈的次數
+            for($i=0;$i<count($img_array_filter);$i++){
 
-            return response()->json(["state" => true, "message" => "新增成功"]);
+                echo $i;
+            }
+
+            // $row = DB::table('goods')->insert([
+            //     'Goods_name' => $req->goods_name,
+            //     'Goods_money' => $req->goods_money,
+            //     'Goods_sum' => $req->goods_sum,
+            //     'Goods_area' => $req->goods_area,
+            //     'Goods_detail' => $req->goods_detail
+            // ]);
+
+            if (1) {
+
+                // $id = DB::table('goods')->select('Goods_id')->orderByDesc('Goods_id')->first();
+
+
+                // $image = $req->file('ggyy');
+                // $filename = $image->getClientOriginalName();
+                // $uploadPic = Storage::disk('publicFruit')->put($filename, file_get_contents($image->getRealPath()));
+
+
+                // $row = DB::table('goods_imges')->insert([
+                //     'Goods_id' => $id->Goods_id,
+                //     'Goods_img' => $filename
+                // ]);
+
+
+            } else {
+                return response()->json(["state" => true, "message" => "新增失敗資料庫問題"]);
+            }
         } else {
-            return response()->json(["state" => false, "message" => "新增失敗"]);
+            return response()->json(["state" => false, "message" => "新增失敗缺少欄位或值"]);
         }
     }
 
     //修改商品 http://127.0.0.1:8000/api/owner/update_goods
     public function update_goods(Request $req)
-    {   
-        
+    {
+
         if ($req->filled(['Goods_name', 'Goods_money', 'Goods_sum', 'Goods_area', 'Goods_detail'])) {
 
             $row =
-            DB::table('goods')->
-            where('Goods_id',$req->Goods_id)->
-            update([
-                    'Goods_name' => $req -> Goods_name,
-                    'Goods_money' => $req -> Goods_money,
-                    'Goods_sum' => $req -> Goods_sum,
-                    'Goods_area' => $req -> Goods_area,
-                    'Goods_detail' => $req -> Goods_detail,
-            ]);
+                DB::table('goods')->where('Goods_id', $req->Goods_id)->update([
+                    'Goods_name' => $req->Goods_name,
+                    'Goods_money' => $req->Goods_money,
+                    'Goods_sum' => $req->Goods_sum,
+                    'Goods_area' => $req->Goods_area,
+                    'Goods_detail' => $req->Goods_detail,
+                ]);
 
             if ($row) {
                 return response()->json(["state" => true, "message" => "更新成功"]);
             } else {
                 return response()->json(["state" => false, "message" => "更新失敗或資料一樣沒更新"]);
             }
-        }else{
+        } else {
             return response()->json(["state" => false, "message" => "缺少欄位或沒有值"]);
         }
-
     }
 
     //刪除商品 http://127.0.0.1:8000/api/owner/delete_goods {"id":"1"}
@@ -71,22 +97,11 @@ class OwnerApiController extends Controller
     }
 
     //備案
-        // return response()->json(["state" => true, "message" => "新增成功"]);
-        // $array =  array($req->id,$filename);
-
-        // if($req->filled(['id'])){
-
-        //     if($req->hasFile('ggyy')){
-
-        //         $image = $req->file('ggyy');
-        //         $filename = $image->getClientOriginalName();
-        //         $uploadPic = Storage::disk('publicFruit')->put($filename,file_get_contents($image->getRealPath()));
-
-        //         return response()->json(["state" => true, "message" => $req->id]);
-        //     }
-
-        //     return response()->json(["state" => false, "message" => ""]);
-        // } else {
-        //     return response()->json(["state" => false, "message" => ""]);
-        // }
+    public function test_insert()
+    {
+        $row = DB::table('goods_imges')->insert([
+            'Goods_id' => "27",
+            'Goods_img' => "123"
+        ]);
+    }
 }
