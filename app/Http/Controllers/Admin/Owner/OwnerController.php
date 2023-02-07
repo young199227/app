@@ -8,10 +8,21 @@ use Illuminate\Support\Facades\DB;
 
 class OwnerController extends Controller
 {   
+    //測試
+    public function img_test(){
+
+        $row_img = DB::table('goods_imges')->where('goods_id','37')->get();
+
+        echo $row_img;
+    }
+
     //後臺首頁(顯示所有商品)
     public function owner_index(){
 
-        $row = DB::table('goods')->get();
+        $row = DB::table('goods')
+        ->select('*',DB::raw('(select Goods_img FROM goods_imges where Goods_id = a.Goods_id LIMIT 1) as Goods_imges'))
+        ->from('goods as a')
+        ->get();
 
         return view('web.owner.owner_index',compact('row'));
     }

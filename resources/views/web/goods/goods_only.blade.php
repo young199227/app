@@ -13,7 +13,7 @@
     #show_img {
         border-radius: 25px;
         height: 650px;
-        background-image: url(/img/fruit_images/123456.png);
+        /* background-image: url(/img/fruit_images/123456.png); */
         background-size: cover;
         background-position: center center;
     }
@@ -56,16 +56,10 @@
                 </div>
                 <div class="col-12 d-inline-flex justify-content-center">
                     <div class="row overflow-auto flex-nowrap">
-                        <div class="imgbox" id="show_img1"><img src="/img/fruit_images/fruit54.png" alt="">
+                    @foreach ($row_img as $goods)
+                        <div class="imgbox" id="show_img"><img src="{{ $goods->Goods_img}}" alt="">
                         </div>
-                        <div class="imgbox" id="show_img2"><img src="/img/fruit_images/fruit34.png" alt="">
-                        </div>
-                        <div class="imgbox" id="show_img3"><img src="/img/fruit_images/fruit55.png" alt="">
-                        </div>
-                        <div class="imgbox" id="show_img4"><img src="/img/fruit_images/fruit56.png" alt="">
-                        </div>
-                        <div class="imgbox" id="show_img5"><img src="/img/fruit_images/fruit50.png" alt="">
-                        </div>
+                    @endforeach
                     </div>
                 </div>
             </div>
@@ -90,7 +84,7 @@
                         <div class="">產地：</div>
                     </div>
                     <div class="col-9">
-                        <div class="">南投</div>
+                        <div class="">{{ $row->Goods_area }}</div>
                     </div>
                 </div>
 
@@ -137,7 +131,7 @@
                         <div class="">描述：</div>
                     </div>
                     <div class="col-9">
-                        <div class="">蘋果好好吃蘋果好好吃蘋果好好吃蘋果好好吃蘋果好好吃蘋果好好吃蘋果好好吃蘋果好好吃蘋果好好吃蘋果好好吃蘋果好好吃蘋果好好吃</div>
+                        <div class="">{{ $row->Goods_detail }}</div>
                     </div>
                 </div>
                 <div class="row">
@@ -161,24 +155,24 @@
 
 
         // 鼠標滑動hover效果
-        $("#show_img").hover(function() {
-            $(this).css("background-image", "url(/img/fruit_images/123456.png)");
-        });
-        $("#show_img1").hover(function() {
-            $("#show_img").css("background-image", "url(/img/fruit_images/fruit54.png)");
-        });
-        $("#show_img2").hover(function() {
-            $("#show_img").css("background-image", "url(/img/fruit_images/fruit34.png)");
-        });
-        $("#show_img3").hover(function() {
-            $("#show_img").css("background-image", "url(/img/fruit_images/fruit55.png)");
-        });
-        $("#show_img4").hover(function() {
-            $("#show_img").css("background-image", "url(/img/fruit_images/fruit56.png)");
-        });
-        $("#show_img5").hover(function() {
-            $("#show_img").css("background-image", "url(/img/fruit_images/fruit50.png)");
-        });
+        // $("#show_img").hover(function() {
+        //     $(this).css("background-image", "url(/img/fruit_images/123456.png)");
+        // });
+        // $("#show_img1").hover(function() {
+        //     $("#show_img").css("background-image", "url(/img/fruit_images/fruit54.png)");
+        // });
+        // $("#show_img2").hover(function() {
+        //     $("#show_img").css("background-image", "url(/img/fruit_images/fruit34.png)");
+        // });
+        // $("#show_img3").hover(function() {
+        //     $("#show_img").css("background-image", "url(/img/fruit_images/fruit55.png)");
+        // });
+        // $("#show_img4").hover(function() {
+        //     $("#show_img").css("background-image", "url(/img/fruit_images/fruit56.png)");
+        // });
+        // $("#show_img5").hover(function() {
+        //     $("#show_img").css("background-image", "url(/img/fruit_images/fruit50.png)");
+        // });
     });
 </script>
 @endsection

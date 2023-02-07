@@ -22,7 +22,7 @@ Route::get('/test2/{goods_id}',[TestController::class,'test_update']);
 Route::get('/test2',[TestController::class,'test_index']);
 
 //測試頁面
-Route::get('/test',function(){return view('test');});
+Route::get('/test',[OwnerController::class,'img_test']);
 
 //首頁(展示頁面)
 Route::get('/',[GoodsController::class,'show_index']);

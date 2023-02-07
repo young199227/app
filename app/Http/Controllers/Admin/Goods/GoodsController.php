@@ -26,7 +26,10 @@ class GoodsController extends Controller
     //商品列表
     public function goods_list(){
 
-        $row = DB::table('goods')->get();
+        $row = DB::table('goods')
+        ->select('*',DB::raw('(select Goods_img FROM goods_imges where Goods_id = a.Goods_id LIMIT 1) as Goods_imges'))
+        ->from('goods as a')
+        ->get();
 
         return view('web.goods.goods_list',compact('row'));
     }
@@ -36,7 +39,9 @@ class GoodsController extends Controller
 
         $row = DB::table('goods')->where('goods_id',$goods_id)->first();
 
-        return view('web.goods.goods_only', compact('row'));
+        $row_img = DB::table('goods_imges')->where('goods_id',$goods_id)->get();
+
+        return view('web.goods.goods_only', compact('row','row_img'));
     }
 
 }

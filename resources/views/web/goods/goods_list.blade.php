@@ -66,7 +66,7 @@
                     <a href="/fruit/goods_only/{{$goods->Goods_id}}">
                         <div class="itemsbox">
                             <div class="imgbox img-fluid">
-                                <img src="/img/fruit_images/fruit{{$goods->Goods_id}}.jpg" alt="">
+                                <img src="{{$goods->Goods_imges}}" alt="">
                             </div>
                             <div class="row">
                                 <div class="col-12">

@@ -37,7 +37,7 @@
                     @foreach($row as $goods)
                     <tr id="goods_id{{ $goods->Goods_id}}" style="line-height: 80px;">
                         <td>{{ $goods->Goods_id}}</td>
-                        <td class="imgbox"><img src="/img/fruit_images/fruit{{ $goods->Goods_id}}.jpg" alt=""></td>
+                        <td class="imgbox"><img src="{{ $goods->Goods_imges}}" alt=""></td>
                         <td>{{ $goods->Goods_name}}</td>
                         <td>{{ $goods->Goods_money}}</td>
                         <td>{{ $goods->Goods_sum}}</td>
