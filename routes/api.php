@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Member\MemberApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Owner\OwnerApiController;
@@ -27,3 +28,7 @@ Route::post('/owner/update_goods',[OwnerApiController::class,'update_goods']);
 
 //後臺刪除商品 owner刪除商品
 Route::post('/owner/delete_goods',[OwnerApiController::class,'delete_goods']);
+
+
+//註冊頁面 註冊
+Route::post('/member_sign_up/gogogo',[MemberApiController::class,'sign_gogo']);

@@ -7,5 +7,10 @@ use Illuminate\Http\Request;
 
 class MemberApiController extends Controller
 {
-    //
+    public function sign_gogo (Request $req){
+
+        
+
+        return $req ;
+    }
 }

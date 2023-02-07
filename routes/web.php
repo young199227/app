@@ -17,8 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //測試頁面2
-Route::post('/test2/test_upload',[TestController::class,'test_upload']);
-Route::get('/test2/{goods_id}',[TestController::class,'test_update']);
 Route::get('/test2',[TestController::class,'test_index']);
 
 //測試頁面

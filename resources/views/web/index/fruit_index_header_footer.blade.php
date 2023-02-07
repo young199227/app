@@ -35,7 +35,7 @@
           <div class="col-md-6 d-md-flex justify-content-end d-none">
             <a href="https://www.google.com.tw/" target="_blank">幫助中心</a>
             <a href="/member_sign_up">會員註冊</a>
-            <a href="#">會員登入</a>
+            <a href="" data-bs-toggle="modal" data-bs-target="#login_modal">會員登入</a>
           </div>
         </div>
       </div>
@@ -69,13 +69,13 @@
               <!-- RWD縮進 -->
               <div class="col-3 d-md-none">
 
-                <div class="dropdown mt-2">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+               <div class="dropdown mt-2">
+                  <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     選單
                   </button>
                   <ul class="dropdown-menu">                   
                     <li><a class="dropdown-item" href="/member_sign_up">會員註冊 </a></li>
-                    <li><a class="dropdown-item" href="#">會員登入</a></li>
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#login_modal" href="">會員登入</a></li>
                   </ul>
                 </div>
 
@@ -87,6 +87,45 @@
     </div>
 
   </div>
+
+    <!-- Modal -->
+<div class="modal fade" id="login_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">會員登入</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+            <div class="row mb-4 mt-4 text-center">
+                <div class="col-2">
+                    <label for="email" class="form-label col-form-label">信箱</label>
+                </div>
+                <div class="col-9 text-start">
+                    <input type="text" class="form-control" id="email" placeholder="輸入信箱">
+                  <div class="form-text" id="">測試</div>
+                </div>
+            </div>
+            <div class="row mb-4 text-center">
+                <div class="col-2">
+                    <label for="password" class="form-label col-form-label">密碼</label>
+                </div>
+                <div class="col-9 text-start">
+                    <input type="password" class="form-control" id="password" placeholder="輸入密碼">
+                  <div class="form-text" id="">測試</div>
+                </div>
+            </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">送出</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
   <!-- 內容物 Blade 模板顯示-->
   <div class="main">
@@ -108,8 +147,6 @@
   </div>
 
 </body>
-<script src="/js/bootstrap.bundle.min.js"></script>
-<script src="/js/jquery-3.6.1.min.js"></script>
 
 <!-- icon圖片載入 -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

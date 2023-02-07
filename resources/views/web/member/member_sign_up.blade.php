@@ -99,22 +99,22 @@
                         </div>
 
                         <div class="mb-5">
-                            <label for="" class="form-label">驗證email</label>
+                            <label for="email" class="form-label">驗證email</label>
                             <div class="input-group">
-                                <input type="email" class="form-control" id="" placeholder="輸入信箱">
+                                <input type="email" class="form-control" id="email" placeholder="輸入信箱">
                                 <button id="" class="btn btn-outline-secondary">驗證</button>
                             </div>
-                            <div class="font-text" id="">測試</div>
+                            <div class="form-text" id="error_em"></div>
                         </div>
 
                         <div class="mb-5">
-                            <label for="" class="form-label">密碼</label>
-                            <input type="password" class="form-control" id="" placeholder="輸入密碼">
-                            <div class="font-text" id="">測試</div>
+                            <label for="password" class="form-label">密碼</label>
+                            <input type="password" class="form-control" id="password" placeholder="輸入密碼">
+                            <div class="form-text" id="error_pw"></div>
                         </div>
 
                         <div class="mb-5 text-center">
-                            <button type="button" id="" class="btn btn-outline-secondary">送出</button>
+                            <button type="button" id="goodsmember_btn" class="btn btn-outline-secondary">送出</button>
                         </div>
                     </div>
                 </div>
@@ -126,5 +126,20 @@
 
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery-3.6.1.min.js"></script>
+<script>
+    $(function(){
 
+
+        $("#goodsmember_btn").click(function(){
+
+            var memJ = {};
+            memJ["email"] = $("#email").val();
+            memJ["password"] = $("#password").val();
+            console.log(JSON.stringify(memJ));
+
+
+        });
+
+    });
+</script>
 </html>
