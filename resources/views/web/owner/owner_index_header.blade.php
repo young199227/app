@@ -33,13 +33,10 @@
                 <div class="dropdown">
                     <button class="navaside d-md-none btn" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/index.html"></a></li>
-                        <li><a class="dropdown-item" href="/index.html">測試</a></li>
-                        <li><a class="dropdown-item" href="/index.html">測試2</a></li>
-                        <li><a class="dropdown-item" href="/index.html">測試3</a></li>
-                        <li><a class="dropdown-item" href="/index.html">測試4</a></li>
-                        <li><a class="dropdown-item" href="/index.html">測試5</a></li>
-                        <li><a class="dropdown-item" href="/index.html">測試6</a></li>
+                        <li><a class="dropdown-item" href="/fruit"></a></li>
+                        <li><a class="dropdown-item" href="/fruit">測試</a></li>
+                        <li><a class="dropdown-item" href="/fruit">測試2</a></li>
+                        <li><a class="dropdown-item" href="/fruit">測試3</a></li>
                     </ul>
                 </div>
 
@@ -65,9 +62,9 @@
                             <div class="col-md-12 d-flex justify-content-end ">
                                 <div class="rightNav">
                                     <ul>
-                                        <li><a href="/index.html">你好,owner</a></li>
+                                        <li><a href="/fruit">你好,owner</a></li>
                                         <span class="d-none d-md-inline-block">
-                                            <li><a href="/index.html"><img src="/img/tree.png" class="logo "></a></li>
+                                            <li><a href="/fruit"><img src="/img/tree.png" class="logo "></a></li>
                                         </span>
                                     </ul>
                                 </div>

@@ -36,8 +36,13 @@ class OwnerController extends Controller
     //後台修改商品頁面 把商品值帶過ㄑ並顯示
     public function owner_update_goods (Request $req,$goods_id)
     {
+
         $row = DB::table('goods')->where('goods_id',$goods_id)->first();
 
-        return view('web.owner.owner_update_goods',compact('row'));
+        $row_img = DB::table('goods_imges')->where('goods_id',$goods_id)->get();
+
+        // return $row_img;
+        return view('web.owner.owner_update_goods', compact('row','row_img'));
+        // return view('web.owner.owner_update_goods',compact('row'));
     }
 }

@@ -30,6 +30,11 @@
                     <input accept="image/*" type='file' id="imgInp" style="width: 100%;" multiple />
                     <div class="imgrow" id="show_img">
                         <!-- 圖片顯示的地方 -->
+                    @foreach ($row_img as $goods)
+                        <div class="imgbox img-fluid">
+                            <img src="{{$goods->Goods_img}}" alt="">
+                        </div>
+                    @endforeach
                     </div>
                 </div>
             </div>
@@ -40,7 +45,7 @@
                     <div class="">商品名稱：</div>
                 </div>
                 <div class="col-9">
-                    <input type="text" class="form-control inputtext" id="Goods_name" name="Goods_name" value="{{$row->Goods_name}}">
+                    <input type="text" class="form-control inputtext" id="fruit_name" value="{{$row->Goods_name}}">
                 </div>
             </div>
 
@@ -50,7 +55,7 @@
                     <div class="">商品價錢：</div>
                 </div>
                 <div class="col-9 goodsPNW">
-                    <input type="number" class="form-control inputtext" min="1" max="100000" id="Goods_money" name="Goods_money" value="{{$row->Goods_money}}">
+                    <input type="number" class="form-control inputtext" min="1" max="100000" id="fruit_money" value="{{$row->Goods_money}}">
                 </div>
             </div>
 
@@ -60,7 +65,7 @@
                     <div class="">商品數量(箱)：</div>
                 </div>
                 <div class="col-9 goodsPNW">
-                    <input type="number" class="form-control inputtext" id="Goods_sum" name="Goods_sum" value="{{$row->Goods_sum}}">
+                    <input type="number" class="form-control inputtext" id="fruit_sum" value="{{$row->Goods_sum}}">
                 </div>
             </div>
 
@@ -69,13 +74,19 @@
                 <div class="col-3 d-flex align-items-center justify-content-end">
                     <div class="">產地：</div>
                 </div>
-                <div class="col-9 goodsPNW">
+                <!-- <div class="col-9 goodsPNW">
                     <select class="form-select" aria-label="Default select example" id="Goods_area">
-                        <!-- <option selected>ㄧ請選擇ㄧ</option> -->
                         <option selected value="{{ $row->Goods_area }}">{{ $row->Goods_area }}</option> 
-                        <option value="台北">台北</option>
-                        <option value="台中">台中</option>
-                        <option value="南投">南投</option>
+                    </select>
+                </div> -->
+                <div class="col goodsPNW">
+                    <select class="form-select" aria-label="Default select example" id="fruit_city">
+                        <option selected value="{{ $row->Goods_area }}">{{ $row->Goods_area }}</option>
+                    </select>
+                </div>
+                <div class="col goodsPNW">
+                    <select class="form-select" aria-label="Default select example" id="fruit_area">
+                        <option selected>ㄧ請選擇ㄧ</option>
                     </select>
                 </div>
             </div>
@@ -87,7 +98,7 @@
                 </div>
                 <!-- Goods_detail -->
                 <div class="col-9">
-                    <textarea name="Goods_detail" id="Goods_detail" class="goods_textarea" rows="6">{{$row->Goods_detail}}</textarea>
+                    <textarea id="fruit_detail" class="goods_textarea" rows="6">{{$row->Goods_detail}}</textarea>
                 </div>
             </div>
 
@@ -104,7 +115,40 @@
 
 @section('script')
 @parent
+<!-- 全台縣市鎮資料引入 -->
+<script src="/js/CityCountyData.js"></script>
 <script>
+    //縣市選擇變動
+    CityCountyData.forEach(element => {
+
+        if (element.CityName == "釣魚臺" || element.CityName == "南海島") {
+            return;
+        }
+
+        $("#fruit_city").append(
+            '<option value="' + element.CityName + '">' + element.CityName + '</option>'
+        );
+    });
+
+    $("#fruit_city").change(function() {
+
+        $("#fruit_area").empty();
+
+        for (i = 0; i < CityCountyData.length; i++) {
+
+            if (CityCountyData[i].CityName == $("#fruit_city :selected").val()) {
+
+                CityCountyData[i].AreaList.forEach(element => {
+
+                    $("#fruit_area").append(
+                        '<option value="' + element.AreaName + '">' + element.AreaName + '</option>'
+                    );
+                });
+            }
+        }
+    });
+
+
     //圖片上傳前預覽
     $("#imgInp").bind('input propertychange', function() {
 
@@ -135,15 +179,31 @@
 
     });
 
+    // 修改上傳商品
     function update_goods(html) {
 
-        dataJson = {};
-        dataJson["Goods_id"] = $(html).data("goods_id");
-        dataJson["Goods_name"] = $("#Goods_name").val();
-        dataJson["Goods_money"] = $("#Goods_money").val();
-        dataJson["Goods_sum"] = $("#Goods_sum").val();
-        dataJson["Goods_area"] = $("#Goods_area :selected").val();
-        dataJson["Goods_detail"] = $("#Goods_detail").val();
+        // dataJson = {};
+        // dataJson["Goods_id"] = $(html).data("goods_id");
+        // dataJson["Goods_name"] = $("#fruit_name").val();
+        // dataJson["Goods_money"] = $("#fruit_money").val();
+        // dataJson["Goods_sum"] = $("#fruit_sum").val();
+        // dataJson["Goods_area"] = $("#fruit_city :selected").val();
+        // dataJson["Goods_detail"] = $("#fruit_detail").val();
+
+        var formData = new FormData();
+        formData.append("ggyy00", fruit_imginp.files[0]);
+        formData.append("ggyy01", fruit_imginp.files[1]);
+        formData.append("ggyy02", fruit_imginp.files[2]);
+        formData.append("ggyy03", fruit_imginp.files[3]);
+        formData.append("ggyy04", fruit_imginp.files[4]);
+        formData.append("ggyy05", fruit_imginp.files[5]);
+
+        formData.append("goods_name", $("#fruit_name").val());
+        formData.append("goods_money", $("#fruit_money").val());
+        formData.append("goods_sum", $("#fruit_sum").val());
+        formData.append("goods_area", $("#fruit_city :selected").val() + $("#fruit_area :selected").val());
+        formData.append("goods_detail", $("#fruit_detail").val());
+
         console.log(JSON.stringify(dataJson));
         $.ajax({
             type: "post",

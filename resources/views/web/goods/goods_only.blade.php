@@ -10,9 +10,9 @@
 @section('style')
 @parent
 <style>
-    #show_img {
+    .show_img {
         border-radius: 25px;
-        height: 650px;
+        height: 500px;
         /* background-image: url(/img/fruit_images/123456.png); */
         background-size: cover;
         background-position: center center;
@@ -51,13 +51,14 @@
         <div class="col-md-8">
 
             <div class="row">
-                <div class="col-12" id="show_img">
-                    <!-- <img src="/img/fruit_images/123456.png" alt=""> -->
+                <div class="col-12">
+                    <div class="show_img" id="goodshover" style="background-image:url({{$row_img_1->Goods_img}})">
+                    </div>
                 </div>
                 <div class="col-12 d-inline-flex justify-content-center">
                     <div class="row overflow-auto flex-nowrap">
                     @foreach ($row_img as $goods)
-                        <div class="imgbox" id="show_img"><img src="{{ $goods->Goods_img}}" alt="">
+                        <div class="imgbox" id="ho" ><img id="goodshover2"src="{{$goods->Goods_img}}" alt="">
                         </div>
                     @endforeach
                     </div>
@@ -153,26 +154,17 @@
         
         // $("#show_img").css("background-image", "url(/img/fruit_images/123456.png)");
 
-
         // 鼠標滑動hover效果
         // $("#show_img").hover(function() {
         //     $(this).css("background-image", "url(/img/fruit_images/123456.png)");
         // });
-        // $("#show_img1").hover(function() {
-        //     $("#show_img").css("background-image", "url(/img/fruit_images/fruit54.png)");
-        // });
-        // $("#show_img2").hover(function() {
-        //     $("#show_img").css("background-image", "url(/img/fruit_images/fruit34.png)");
-        // });
-        // $("#show_img3").hover(function() {
-        //     $("#show_img").css("background-image", "url(/img/fruit_images/fruit55.png)");
-        // });
-        // $("#show_img4").hover(function() {
-        //     $("#show_img").css("background-image", "url(/img/fruit_images/fruit56.png)");
-        // });
-        // $("#show_img5").hover(function() {
-        //     $("#show_img").css("background-image", "url(/img/fruit_images/fruit50.png)");
-        // });
+
+        $("#ho #goodshover2").hover(function(){
+            var T0 = $(this).attr("src");
+            // console.log(T0);
+            $("#goodshover").css('background-image', 'url("'+T0+'")');
+        });
+
     });
 </script>
 @endsection

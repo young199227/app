@@ -75,6 +75,9 @@ class OwnerApiController extends Controller
                 ]);
 
             if ($row) {
+
+                
+
                 return response()->json(["state" => true, "message" => "更新成功"]);
             } else {
                 return response()->json(["state" => false, "message" => "更新失敗或資料一樣沒更新"]);
