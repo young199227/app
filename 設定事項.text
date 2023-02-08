@@ -1,0 +1,10 @@
+
+1. 新增一個 .env 設定(SQL等等...)
+
+    1_1. DB_CONNECTION設定時注意環境 /config/database.php (不同的sql 還有"mac!!!")
+
+    1_2. 新設定一個 APP_KEY  指令: php artisan key:generate
+
+2. 丟一個vendor資料夾過來(隱藏檔案不讓上傳)
+
+3. 上傳檔案的路徑設定/config/filesystems.php 指令: php artisan storage:link
