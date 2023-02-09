@@ -43,7 +43,7 @@
                         <td>{{ $goods->Goods_sum}}</td>
                         <td>{{ $goods->Goods_created_at}}</td>
                         <td>
-                            <a href="/owner/{{$goods->Goods_id}}"><button class="btn btn-outline-dark">修改</button></a>
+                            <a href="/owner/owner_update_goods/{{$goods->Goods_id}}"><button class="btn btn-outline-dark">修改</button></a>
                             <button class="btn btn-danger ms-3" onclick="delete_goods(this)" data-goods_id="{{ $goods->Goods_id}}">刪除</button>
                         </td>
                     </tr>

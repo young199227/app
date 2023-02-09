@@ -87,7 +87,7 @@
                     <div class="col-12">
                         <ul>
                             <li><a href=""></a></li>
-                            <li><a href="/owner_po_goods">上架商品✈</a></li>
+                            <li><a href="/owner/owner_po_goods">上架商品✈</a></li>
                             <li><a href="/owner">管理商品☺</a></li>
                             <li><a href="">訂單➤</a></li>
                             <li><a href="">上架廣告</a></li>
