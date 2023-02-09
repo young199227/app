@@ -11,9 +11,13 @@ class OwnerController extends Controller
     //測試
     public function test()
     {
-        session(['user' => '123']);
+        session(['user' => '123ggyy']);
 
-        session()->flush();
+        // session()->flush();
+
+        $row = DB::table('goods')->paginate(3);
+
+        return view('test',compact('row'));
     }
 
     //後臺首頁(顯示所有商品)
