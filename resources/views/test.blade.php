@@ -10,6 +10,13 @@
 </div>
 @endif
 
+
+@if (session()->has('user'))
+    <h1>Welcome {{ session('user') }}</h1>
+@else
+    <h1>Please Login</h1>
+@endif
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,4 +39,8 @@
     {{ $row->links() }}
 </body>
 <script src="/js/bootstrap.bundle.min.js"></script>
+<script>
+    var data = "{{ Session::get('user') }}";
+    console.log(data);
+</script>
 </html>

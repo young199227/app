@@ -12,18 +12,14 @@ class OwnerController extends Controller
     //測試
     public function test()
     {
-        // session(['user' => '123ggyy']);
+        session(['user' => '123']);
 
         // session()->flush('user');
 
-        // $row = DB::table('goods')->paginate(3);
+        $row = DB::table('goods')->paginate(3);
 
-        // return view('test',compact('row'));
+        return view('test',compact('row'));
 
-        if (Auth::attempt(['Member_meail' => '123', 'Member_password' => '123'])) {
-            // 认证成功 ...
-            echo '123';
-        }
     }
 
     //後臺首頁(顯示所有商品)
