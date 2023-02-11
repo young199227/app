@@ -11,4 +11,9 @@ class MemberController extends Controller
 
         return view('web.member.member_sign_up');
     }
+
+    public function member_index(){
+
+        return view('web.member.member_index');
+    }
 }
