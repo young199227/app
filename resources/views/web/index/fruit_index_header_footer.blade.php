@@ -32,10 +32,16 @@
             <a href="/">烏龜</a>
             <a href="/">鯊鯊</a>
           </div>
-          <div class="col-md-6 d-md-flex justify-content-end d-none">
+          <div class="col-md-6 d-md-flex justify-content-end d-none">          
+            @if(Session::has('member'))
+            <a href="">會員中心</a>
+            <a href="">你好{{ Session('member') }}</a>
+            <a href="/session/member/logout">登出</a>
+            @else
             <a href="https://www.google.com.tw/" target="_blank">幫助中心</a>
-            <a href="/member_sign_up">會員註冊</a>
+            <a href="/member/member_sign_up">會員註冊</a>
             <a href="" data-bs-toggle="modal" data-bs-target="#login_modal">會員登入</a>
+            @endif
           </div>
         </div>
       </div>
@@ -69,13 +75,17 @@
               <!-- RWD縮進 -->
               <div class="col-3 d-md-none">
 
-               <div class="dropdown mt-2">
+                <div class="dropdown mt-2">
                   <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     選單
                   </button>
-                  <ul class="dropdown-menu">                   
-                    <li><a class="dropdown-item" href="/member_sign_up">會員註冊 </a></li>
-                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#login_modal" href="">會員登入</a></li>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" href="/member_sign_up">會員註冊 </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#login_modal" href="">會員登入</a>
+                    </li>
                   </ul>
                 </div>
 
@@ -88,43 +98,42 @@
 
   </div>
 
-    <!-- Modal -->
-<div class="modal fade" id="login_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">會員登入</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
+  <!-- Modal -->
+  <div class="modal fade" id="login_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">會員登入</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
 
-            <div class="row mb-4 mt-4 text-center">
-                <div class="col-2">
-                    <label for="email" class="form-label col-form-label">信箱</label>
-                </div>
-                <div class="col-9 text-start">
-                    <input type="text" class="form-control" id="email" placeholder="輸入信箱">
-                  <div class="form-text" id="">測試</div>
-                </div>
+          <div class="row mb-4 mt-4 text-center">
+            <div class="col-2">
+              <label for="email" class="form-label col-form-label">信箱</label>
             </div>
-            <div class="row mb-4 text-center">
-                <div class="col-2">
-                    <label for="password" class="form-label col-form-label">密碼</label>
-                </div>
-                <div class="col-9 text-start">
-                    <input type="password" class="form-control" id="password" placeholder="輸入密碼">
-                  <div class="form-text" id="">測試</div>
-                </div>
+            <div class="col-9 text-start">
+              <input type="text" class="form-control" id="member_email" placeholder="輸入信箱">
+              <div class="form-text" id="member_email_error"></div>
             </div>
+          </div>
+          <div class="row mb-4 text-center">
+            <div class="col-2">
+              <label for="password" class="form-label col-form-label">密碼</label>
+            </div>
+            <div class="col-9 text-start">
+              <input type="password" class="form-control" id="member_password" placeholder="輸入密碼">
+            </div>
+          </div>
 
-      </div>
+        </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">送出</button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="member_login">送出</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
   <!-- 內容物 Blade 模板顯示-->
@@ -154,8 +163,33 @@
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery-3.6.1.min.js"></script>
 <script>
-  $(function() {
 
+  //登入 按下按鈕member_login登入
+  $("#member_login").click(function() {
+
+    var jsonData = {};
+    jsonData["member_email"] = $("#member_email").val();
+    jsonData["member_password"] = $("#member_password").val();
+
+    $.ajax({
+      type: "POST",
+      url: "http://127.0.0.1:8000/session/member/long",
+      data: JSON.stringify(jsonData),
+      dataType: "json",
+      contentType: "application/json; charset=utf-8",
+      success: function(data) {
+
+        if (data.state) {
+          // console.log(data);
+          window.location.reload();
+        } else {
+          $("#member_email_error").text(data.message + "帳號或密碼錯誤").css("color", "red");
+        }
+      },
+      error: function() {
+        console.log("ajax失敗");
+      }
+    });
   });
 </script>
 <!-- script Blade 模板顯示-->

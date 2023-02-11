@@ -43,7 +43,6 @@ class GoodsController extends Controller
 
         $row_img_1 = DB::table('goods_imges')->where('goods_id',$goods_id)->first();
 
-
         return view('web.goods.goods_only', compact('row','row_img','row_img_1'));
     }
 

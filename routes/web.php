@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Goods\GoodsController;
 use App\Http\Controllers\Admin\Owner\OwnerController;
 use App\Http\Controllers\Admin\Member\MemberController;
 use App\Http\Controllers\Admin\Test\TestController;
+use App\Http\Controllers\Admin\Member\MemberApiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,14 @@ Route::get('/test2', [TestController::class, 'test_index']);
 Route::get('/test', [OwnerController::class, 'test']);
 Route::get('/test1',function(){return view('test');});
 
+//處理session的group (因為aip.php不能分發seeion)
+Route::group(["prefix" => "session"],function(){
+    //會員登入 
+    Route::post('/member/long',[MemberApiController::class,'member_long']);
+
+    //會員登出
+    Route::get('/member/logout',[MemberApiController::class,'member_logout']);
+});
 
 //首頁(展示頁面)
 Route::get('/', [GoodsController::class, 'show_index']);
@@ -30,7 +39,7 @@ Route::get('/', [GoodsController::class, 'show_index']);
 //fruit的group
 Route::group(["prefix" => "fruit"], function () {
     //第二首頁
-    Route::get('/', [GoodsController::class, 'fruit_index']);
+    Route::get('/', [GoodsController::class, 'fruit_index'])->name('fruit');
 
     //購物車
     Route::get('/goods_car', [GoodsController::class, 'goods_car']);
@@ -42,8 +51,6 @@ Route::group(["prefix" => "fruit"], function () {
     Route::get('/goods_only/{goods_id}', [GoodsController::class, 'test']);
 });
 
-
-
 //會員的group
 Route::group(["prefix" => "member"],function(){
 
@@ -53,12 +60,10 @@ Route::group(["prefix" => "member"],function(){
 
 });
 
-
-
 //owner的group
 Route::group(["prefix" => "owner"], function () {
     //後臺首頁(顯示所有商品)
-    Route::get('/', [OwnerController::class, 'owner_index']);
+    Route::get('/', [OwnerController::class, 'owner_index'])->name('owner');
 
     //後臺owner_po_goods
     Route::get('/owner_po_goods', [OwnerController::class, 'owner_po_goods']);
