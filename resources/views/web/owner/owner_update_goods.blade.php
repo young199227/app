@@ -27,7 +27,7 @@
                     <div class="">商品圖片：</div>
                 </div>
                 <div class="col-9">
-                    <input accept="image/*" type='file' id="imgInp" style="width: 100%;" multiple />
+                    <input accept="image/*" type='file' id="fruit_imginp" style="width: 100%;" multiple />
                     <div class="imgrow" id="show_img">
                         <!-- 圖片顯示的地方 -->
                     @foreach ($row_img as $goods)
@@ -105,7 +105,7 @@
             <!-- 更新按鈕 -->
             <div class="row mt-4">
                 <div class="col-12 d-flex align-items-center justify-content-center">
-                    <div class="btn btn-outline-success" onclick="update_goods(this)" data-goods_id="{{ $row->Goods_id}}">更新</div>
+                    <div class="btn btn-outline-success" id="upd" onclick="update_goods(this)" data-goods_id="{{ $row->Goods_id}}">更新</div>
                 </div>
             </div>
         </div>
@@ -150,10 +150,10 @@
 
 
     //圖片上傳前預覽
-    $("#imgInp").bind('input propertychange', function() {
+    $("#fruit_imginp").bind('input propertychange', function() {
 
         //把過長的files名稱縮短
-        var img_array = $("#imgInp")[0].files;
+        var img_array = $("#fruit_imginp")[0].files;
 
         if (img_array.length <= 6 && img_array.length >= 1) {
 
@@ -182,13 +182,7 @@
     // 修改上傳商品
     function update_goods(html) {
 
-        // dataJson = {};
         // dataJson["Goods_id"] = $(html).data("goods_id");
-        // dataJson["Goods_name"] = $("#fruit_name").val();
-        // dataJson["Goods_money"] = $("#fruit_money").val();
-        // dataJson["Goods_sum"] = $("#fruit_sum").val();
-        // dataJson["Goods_area"] = $("#fruit_city :selected").val();
-        // dataJson["Goods_detail"] = $("#fruit_detail").val();
 
         var formData = new FormData();
         formData.append("ggyy00", fruit_imginp.files[0]);
@@ -198,19 +192,23 @@
         formData.append("ggyy04", fruit_imginp.files[4]);
         formData.append("ggyy05", fruit_imginp.files[5]);
 
+
+        formData.append("goods_id", $("#upd").data('goods_id'));
         formData.append("goods_name", $("#fruit_name").val());
         formData.append("goods_money", $("#fruit_money").val());
         formData.append("goods_sum", $("#fruit_sum").val());
         formData.append("goods_area", $("#fruit_city :selected").val() + $("#fruit_area :selected").val());
         formData.append("goods_detail", $("#fruit_detail").val());
 
-        console.log(JSON.stringify(dataJson));
+        console.log(formData);
         $.ajax({
             type: "post",
             url: "/api/owner/update_goods",
-            data: JSON.stringify(dataJson),
+            data: formData,
             dataType: "json",
-            contentType: "application/json; charset=utf-8",
+            cache: false,
+            contentType: false,
+            processData: false,
             success: function(data) {
                 if(data.state){
                     console.log(data.message);

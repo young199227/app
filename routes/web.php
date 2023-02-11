@@ -43,8 +43,16 @@ Route::group(["prefix" => "fruit"], function () {
 });
 
 
-//會員註冊
-Route::get('/member_sign_up', [MemberController::class, 'member_sign_up']);
+
+//會員的group
+Route::group(["prefix" => "member"],function(){
+
+    Route::get('/', [MemberController::class, 'member_index']);
+
+    Route::get('/member_sign_up', [MemberController::class, 'member_sign_up']);
+
+});
+
 
 
 //owner的group

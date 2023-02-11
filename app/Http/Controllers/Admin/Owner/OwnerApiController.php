@@ -39,7 +39,7 @@ class OwnerApiController extends Controller
 
                     $image = $img_array[$i];
                     $imageType = explode(".", $image->getClientOriginalName());
-                    $imageName = date('Y_m_d').'_'.$id->Goods_id.'_'.$i.'.'.$imageType[1];
+                    $imageName = $id->Goods_id.'_'.$i.'.'.$imageType[1];
                     Storage::disk('publicFruit')->put($imageName, file_get_contents($image->getRealPath()));
 
                     //把圖片名稱存到資料庫
@@ -63,20 +63,40 @@ class OwnerApiController extends Controller
     public function update_goods(Request $req)
     {
 
-        if ($req->filled(['Goods_name', 'Goods_money', 'Goods_sum', 'Goods_area', 'Goods_detail'])) {
+        if ($req->filled(['goods_name', 'goods_money', 'goods_sum', 'goods_area', 'goods_detail'])) {
 
             $row =
-                DB::table('goods')->where('Goods_id', $req->Goods_id)->update([
-                    'Goods_name' => $req->Goods_name,
-                    'Goods_money' => $req->Goods_money,
-                    'Goods_sum' => $req->Goods_sum,
-                    'Goods_area' => $req->Goods_area,
-                    'Goods_detail' => $req->Goods_detail,
+                DB::table('goods')->where('Goods_id', $req->goods_id)->update([
+                    'Goods_name' => $req->goods_name,
+                    'Goods_money' => $req->goods_money,
+                    'Goods_sum' => $req->goods_sum,
+                    'Goods_area' => $req->goods_area,
+                    'Goods_detail' => $req->goods_detail,
                 ]);
 
             if ($row) {
 
-                
+                //把$req圖片名稱存到$img_array
+                $img_array = array($req->file('ggyy00'), $req->file('ggyy01'), $req->file('ggyy02'), $req->file('ggyy03'), $req->file('ggyy04'), $req->file('ggyy05'));
+                //array_filter刪除陣列空值
+                $img_array_filter = array_filter($img_array);
+
+                $row = DB::table('goods_imges')->where('Goods_id', $req->goods_id)->delete();
+
+                //再用count($img_array_filter)跑迴圈的次數
+                for ($i = 0; $i < count($img_array_filter); $i++) {
+
+                    $image = $img_array[$i];
+                    $imageType = explode(".", $image->getClientOriginalName());
+                    $imageName = $req->goods_id.'_'.$i.'.'.$imageType[1];
+                    Storage::disk('publicFruit')->put($imageName, file_get_contents($image->getRealPath()));
+
+                    //把圖片名稱存到資料庫
+                    $row = DB::table('goods_imges')->insert([
+                        'Goods_id' => $req->goods_id,
+                        'Goods_img' => 'http://127.0.0.1:8000/storage/images/'.$imageName
+                    ]);
+                }
 
                 return response()->json(["state" => true, "message" => "更新成功"]);
             } else {
