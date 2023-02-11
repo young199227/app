@@ -20,6 +20,7 @@ Route::post('/test_insert',[OwnerApiController::class,'test_insert']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 //後臺新增商品 owner新增商品
 Route::post('/owner/insert_goods',[OwnerApiController::class,'insert_goods']);
 
@@ -32,3 +33,6 @@ Route::post('/owner/delete_goods',[OwnerApiController::class,'delete_goods']);
 
 //註冊頁面 註冊
 Route::post('/member_sign_up/gogogo',[MemberApiController::class,'sign_gogo']);
+
+//註冊頁面 註冊
+Route::post('/member/long',[MemberApiController::class,'member_long']);
