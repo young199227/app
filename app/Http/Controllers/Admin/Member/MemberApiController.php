@@ -9,7 +9,7 @@ use Illuminate\Routing\Redirector;
 
 class MemberApiController extends Controller
 {
-    //會員登入 http://127.0.0.1:8000/api/member/long
+    //會員登入 http://127.0.0.1:8000/session/member/long
     //{"member_meail":"123","member_password":"123"}
     public function member_long(Request $req)
     {
@@ -21,9 +21,11 @@ class MemberApiController extends Controller
                 ->first();
 
             if ($row) {
-
-                $member_session = $row->Member_email;
-                session(['member' => $member_session]);
+                //如果是管理員的帳號改丟一個owner session給他
+                if($row->Member_email=='owner'){
+                    session(['owner' => $row->Member_email]);            
+                }
+                session(['member' => $row->Member_email]);
 
                 return response()->json(['state' => true, 'message' => '登入成功', 'data' => $row->Member_email]);
             } else {
@@ -36,9 +38,9 @@ class MemberApiController extends Controller
 
     //會員登出
     public function member_logout(){
-
+        //清空session
         session()->flush();
-
+        //返回首頁
         return redirect()->route('fruit');
     }
 }

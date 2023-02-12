@@ -54,12 +54,12 @@ Route::group(["prefix" => "fruit"], function () {
 
 //會員的group
 Route::group(["prefix" => "member"],function(){
-
+    //會員心
     Route::get('/', [MemberController::class, 'member_index']);
-
+    //會員註冊頁面
     Route::get('/member_sign_up', [MemberController::class, 'member_sign_up']);
-
-    Route::get('/member_login', [MemberController::class, 'member_login']);
+    //單獨的會員登入頁面
+    Route::get('/member_login', [MemberController::class, 'member_login'])->name('member_login');
 
 });
 

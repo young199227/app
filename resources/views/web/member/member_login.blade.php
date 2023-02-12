@@ -126,16 +126,14 @@
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery-3.6.1.min.js"></script>
 <script>
-    $(function(){
 
+    $("#member_login").click(function() {
 
-        $("#member_login").click(function(){
+        var jsonData = {};
+        jsonData["member_email"] = $("#member_email").val();
+        jsonData["member_password"] = $("#member_password").val();
 
-            var jsonData = {};
-            jsonData["member_email"] = $("#member_email").val();
-            jsonData["member_password"] = $("#member_password").val();
-
-            $.ajax({
+        $.ajax({
             type: "POST",
             url: "http://127.0.0.1:8000/session/member/long",
             data: JSON.stringify(jsonData),
@@ -144,20 +142,18 @@
             success: function(data) {
 
                 if (data.state) {
-                // console.log(data);
-                window.location.reload();
+                    // console.log(data);
+                    $(location).attr("href","http://127.0.0.1:8000/fruit");
                 } else {
-                $("#member_email_error").text(data.message + "帳號或密碼錯誤").css("color", "red");
+                    $("#member_email_error").text(data.message + "帳號或密碼錯誤").css("color", "red");
                 }
             },
             error: function() {
                 console.log("ajax失敗");
             }
-            });
         });
-
-
     });
 
 </script>
+
 </html>

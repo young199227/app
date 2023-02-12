@@ -20,9 +20,11 @@ class GoodsController extends Controller
 
     //購物車
     public function goods_car(){
-        // if(!session()->has('member')){
-        //     echo '沒有權限';
-        // }
+
+        //判斷有沒有member的session 沒有的話回傳到登入頁面
+        if(!session()->has('member')){
+            return redirect()->route('member_login');
+        }
         return view('web.goods.goods_car');
     }
 

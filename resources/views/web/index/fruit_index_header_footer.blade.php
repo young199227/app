@@ -32,10 +32,10 @@
             <a href="/">烏龜</a>
             <a href="/">鯊鯊</a>
           </div>
-          <div class="col-md-6 d-md-flex justify-content-end d-none">          
+          <div class="col-md-6 d-md-flex justify-content-end d-none">    
             @if(Session::has('member'))
-            <a href="">會員中心</a>
-            <a href="">你好{{ Session('member') }}</a>
+            <a href="/member">會員中心</a>
+            <a href="/member">你好{{ Session('member') }}</a>
             <a href="/session/member/logout">登出</a>
             @else
             <a href="https://www.google.com.tw/" target="_blank">幫助中心</a>
@@ -166,14 +166,25 @@
 
   //登入 按下按鈕member_login登入
   $("#member_login").click(function() {
+    index_member_login();
+  });
+  
+  //#member_password 按下enter時登入
+  $("#member_password").keypress(function(){
+    if(event.which == 13){
+      index_member_login();
+    }
+  });
 
+  //index_member_login 
+  function index_member_login(){
     var jsonData = {};
     jsonData["member_email"] = $("#member_email").val();
     jsonData["member_password"] = $("#member_password").val();
 
     $.ajax({
       type: "POST",
-      url: "http://127.0.0.1:8000/session/member/long",
+      url: "/session/member/long",
       data: JSON.stringify(jsonData),
       dataType: "json",
       contentType: "application/json; charset=utf-8",
@@ -181,7 +192,14 @@
 
         if (data.state) {
           // console.log(data);
-          window.location.reload();
+          var session_data = data.data;
+          //管理員帳號登入時傳到後臺首頁
+          if(session_data=='owner'){
+            $(location).attr("href","http://127.0.0.1:8000/owner");
+
+          }else{
+            window.location.reload();
+          }
         } else {
           $("#member_email_error").text(data.message + "帳號或密碼錯誤").css("color", "red");
         }
@@ -190,7 +208,8 @@
         console.log("ajax失敗");
       }
     });
-  });
+  }
+
 </script>
 <!-- script Blade 模板顯示-->
 @section('script')
