@@ -7,4 +7,18 @@
 
 2. 丟一個vendor資料夾過來(隱藏檔案不讓上傳)
 
+
 3. 上傳檔案的路徑設定/config/filesystems.php 指令: php artisan storage:link
+
+4.session api.php的路由是不能設定的
+
+
+5.寄email設定.env
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=ggyy的email
+MAIL_PASSWORD=nomfxpftiuvgoihx
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=null
+MAIL_FROM_NAME="${APP_NAME}"

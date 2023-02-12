@@ -9,24 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class OwnerController extends Controller
 {
-    //測試
-    public function test(Request $req)
-    {
-        // session(['user' => '123']);
-        // session(['member' => '123321']);
-
-        session()->flush();
-
-        // $row = DB::table('goods')->paginate(3);
-
-        // return view('test',compact('row'));
-
-        // if ($req->session()->has('member')) {
-        //     echo "123";
-        // }
-
-    }
-
     //後臺首頁(顯示所有商品)
     public function owner_index()
     {

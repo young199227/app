@@ -20,6 +20,9 @@ class GoodsController extends Controller
 
     //購物車
     public function goods_car(){
+        // if(!session()->has('member')){
+        //     echo '沒有權限';
+        // }
         return view('web.goods.goods_car');
     }
 

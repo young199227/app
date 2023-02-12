@@ -21,8 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/test2', [TestController::class, 'test_index']);
 
 //測試頁面
-Route::get('/test', [OwnerController::class, 'test']);
-Route::get('/test1',function(){return view('test');});
+Route::get('/test', [TestController::class, 'test']);
+Route::get('/test1', [TestController::class, 'test1']);
+Route::get('/test2', [TestController::class, 'test2']);
 
 //處理session的group (因為aip.php不能分發seeion)
 Route::group(["prefix" => "session"],function(){
