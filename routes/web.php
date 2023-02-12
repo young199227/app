@@ -59,6 +59,8 @@ Route::group(["prefix" => "member"],function(){
 
     Route::get('/member_sign_up', [MemberController::class, 'member_sign_up']);
 
+    Route::get('/member_login', [MemberController::class, 'member_login']);
+
 });
 
 //owner的group

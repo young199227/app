@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>水果註冊</title>
+    <title>水果登入</title>
     <link rel="shortcut icon" href="/img/tree.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/mycolor.css">
@@ -44,7 +44,7 @@
             font-size: 2.5em;
         }
 
-        /* 內容物 的 註冊框 */
+        /* 內容物 的 登入框 */
         .main .card {
             /* background-color: #222; */
             padding: 4.5em;
@@ -90,34 +90,31 @@
         <div class="container ">
             <div class="row d-flex justify-content-center mt-4">
                 <div class="col-md-6 mt-3">
-                    <!-- 註冊框 -->
+                    <!-- 登入框 -->
                     <div class="card">
 
-                        <!-- 註冊大字 -->
+                        <!-- 登入大字 -->
                         <div class="signuptext">
-                            <span>註冊</span>
+                            <span>登入</span>
                         </div>
 
                         <div class="mb-5">
-                            <label for="email" class="form-label">驗證email</label>
-                            <div class="input-group">
-                                <input type="email" class="form-control" id="email" placeholder="輸入信箱">
-                                <button id="" class="btn btn-outline-secondary">驗證</button>
-                            </div>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="member_email" placeholder="輸入信箱">
                             <div class="form-text" id="error_em"></div>
                         </div>
 
                         <div class="mb-5">
                             <label for="password" class="form-label">密碼</label>
-                            <input type="password" class="form-control" id="password" placeholder="輸入密碼">
+                            <input type="password" class="form-control" id="member_password" placeholder="輸入密碼">
                             <div class="form-text" id="error_pw"></div>
                         </div>
 
                         <div class="mb-5 text-center">
-                            <button type="button" id="goodsmember_btn" class="btn btn-outline-secondary">送出</button>
+                            <button type="button" id="member_login" class="btn btn-outline-secondary">送出</button>
                         </div>
 
-                        <a href="/member/member_login">我有帳號，前往登入</a>
+                        <a href="/member/member_sign_up">沒有帳號，前往註冊</a>
                     </div>
                 </div>
             </div>
@@ -132,16 +129,35 @@
     $(function(){
 
 
-        $("#goodsmember_btn").click(function(){
+        $("#member_login").click(function(){
 
-            var memJ = {};
-            memJ["email"] = $("#email").val();
-            memJ["password"] = $("#password").val();
-            console.log(JSON.stringify(memJ));
+            var jsonData = {};
+            jsonData["member_email"] = $("#member_email").val();
+            jsonData["member_password"] = $("#member_password").val();
 
+            $.ajax({
+            type: "POST",
+            url: "http://127.0.0.1:8000/session/member/long",
+            data: JSON.stringify(jsonData),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
 
+                if (data.state) {
+                // console.log(data);
+                window.location.reload();
+                } else {
+                $("#member_email_error").text(data.message + "帳號或密碼錯誤").css("color", "red");
+                }
+            },
+            error: function() {
+                console.log("ajax失敗");
+            }
+            });
         });
 
+
     });
+
 </script>
 </html>
