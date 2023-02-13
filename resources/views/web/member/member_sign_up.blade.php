@@ -101,20 +101,29 @@
                         <div class="mb-5">
                             <label for="email" class="form-label">驗證email</label>
                             <div class="input-group">
-                                <input type="email" class="form-control" id="email" placeholder="輸入信箱">
-                                <button id="" class="btn btn-outline-secondary">驗證</button>
+                                <input type="email" class="form-control" id="member_email" placeholder="輸入信箱">
+                                <button id="member_email_session" class="btn btn-outline-secondary">發送驗證信</button>
+                            </div>
+                            <div class="form-text" id="error_em"></div>
+                        </div>
+
+                        <div class="mb-5 d-none email_verify">
+                            <label for="email" class="form-label">驗證碼</label>
+                            <div class="input-group">
+                                <input type="email" class="form-control" id="email_session_verify" placeholder="請輸入驗證碼">
+                                <button id="email_session_check" class="btn btn-outline-secondary">驗證</button>
                             </div>
                             <div class="form-text" id="error_em"></div>
                         </div>
 
                         <div class="mb-5">
                             <label for="password" class="form-label">密碼</label>
-                            <input type="password" class="form-control" id="password" placeholder="輸入密碼">
+                            <input type="password" class="form-control" id="member_password" placeholder="輸入密碼">
                             <div class="form-text" id="error_pw"></div>
                         </div>
 
                         <div class="mb-5 text-center">
-                            <button type="button" id="goodsmember_btn" class="btn btn-outline-secondary">送出</button>
+                            <button type="button" id="member_sign_up" class="btn btn-outline-secondary">送出</button>
                         </div>
 
                         <a href="/member/member_login">我有帳號，前往登入</a>
@@ -129,19 +138,101 @@
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery-3.6.1.min.js"></script>
 <script>
-    $(function(){
+    //發送驗證信按鈕
+    $("#member_email_session").click(function() {
+        //重新發送時間設定 300s
+        var stop_time = 300;
+        //改變發送驗證信按鈕 文字
+        $("#member_email_session").text(stop_time+"s");
+        //顯示驗證框框
+        $(".email_verify").removeClass("d-none");
+        //鎖定框框
+        $("#member_email,#member_email_session").attr('disabled', true);
 
+        //每1秒鐘重複執行1次
+        var timer = setInterval(function(){
+            stop_time--;
+            $("#member_email_session").text(stop_time+"s");
 
-        $("#goodsmember_btn").click(function(){
+            //時間為0的時候停止
+            if(stop_time==0){
+                clearInterval(timer);
 
-            var memJ = {};
-            memJ["email"] = $("#email").val();
-            memJ["password"] = $("#password").val();
-            console.log(JSON.stringify(memJ));
+                $("#member_email,#member_email_session").attr('disabled', false);
+                $("#member_email_session").text("發送驗證信");
+            }
+        },1000);
 
-
+        var dataJson = {};
+        dataJson["member_email"] = $("#member_email").val();
+        // console.log(JSON.stringify(dataJson));
+        $.ajax({
+            type:"POST",
+            url:"/session/member/email_session",
+            data:JSON.stringify(dataJson),
+            dataType:"json",
+            contentType: "application/json; charset=utf-8",
+            success:function(data){
+                console.log(data);
+            },
+            error:function(){console.log("ajax失敗");}
         });
 
     });
+
+    //驗證email驗證碼
+    $("#email_session_check").click(function(){
+
+        var dataJson = {};
+        dataJson["email_session"] = $("#email_session_verify").val();
+        // console.log(JSON.stringify(dataJson));
+        $.ajax({
+            type:"POST",
+            url:"/session/member/email_session_verify",
+            data:JSON.stringify(dataJson),
+            dataType:"json",
+            contentType: "application/json; charset=utf-8",
+            success:function(data){
+                // console.log(data);
+                if(data.state){
+                    $("#email_session_check").css("color","green").text("認證成功");
+                }else{
+                    $("#email_session_check").css("color","red").text("認證失敗");
+                }
+            },
+            error:function(){console.log("ajax失敗");}
+        });
+    });
+
+
+    //送出註冊資料
+    $("#member_sign_up").click(function() {
+
+        var dataJson = {};
+        dataJson["member_email"] = $("#member_email").val();
+        dataJson["email_session"] = $("#email_session_verify").val();
+        dataJson["member_password"] = $("#member_password").val();
+        // console.log(JSON.stringify(dataJson));
+        $.ajax({
+            type:"POST",
+            url:"/session/member/member_sign_up",
+            data:JSON.stringify(dataJson),
+            dataType:"json",
+            contentType: "application/json; charset=utf-8",
+            success:function(data){
+                // console.log(data);
+                if(data.state){
+                    alert(data.message);
+                    $(location).attr("href","http://127.0.0.1:8000/member/member_login");
+                }else{
+                    console.log(data);
+                }
+            },
+            error:function(){console.log("ajax失敗");}
+        });
+    });
+
+
 </script>
+
 </html>

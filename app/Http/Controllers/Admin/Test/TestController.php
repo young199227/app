@@ -40,7 +40,7 @@ class TestController extends Controller
 
     public function test2(Request $req){
         //判斷這個session是不是==123
-        if(session()->get('email_session')=='123'){
+        if(session()->get('email_session')=='dhNwdr'){
             echo '==';
         }
     }
