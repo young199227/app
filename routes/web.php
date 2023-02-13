@@ -37,7 +37,8 @@ Route::group(["prefix" => "session"],function(){
     Route::post('/member/email_session_verify',[MemberApiController::class,'email_session_verify']);
     //會員註冊頁面 認證email_session
     Route::post('/member/member_sign_up',[MemberApiController::class,'member_sign_up']);
-
+    //會員更改密碼
+    Route::post('/member/updata_password', [MemberApiController::class, 'updata_password']);
 });
 
 //首頁(展示頁面)
@@ -57,21 +58,22 @@ Route::group(["prefix" => "fruit"], function () {
 
 //會員的group
 Route::group(["prefix" => "member"],function(){
-    //會員心
+    //會員中心
     Route::get('/', [MemberController::class, 'member_index']);
     //會員註冊頁面
     Route::get('/member_sign_up', [MemberController::class, 'member_sign_up']);
     //單獨的會員登入頁面
     Route::get('/member_login', [MemberController::class, 'member_login'])->name('member_login');
-
 });
 
 //owner的group
 Route::group(["prefix" => "owner"], function () {
-    //後臺首頁(顯示所有商品)
+    //後台首頁(顯示所有商品)
     Route::get('/', [OwnerController::class, 'owner_index'])->name('owner');
-    //後臺owner_po_goods
+    //後台owner_po_goods
     Route::get('/owner_po_goods', [OwnerController::class, 'owner_po_goods']);
     //後台owner_update_goods
     Route::get('/owner_update_goods/{goods_id}', [OwnerController::class, 'owner_update_goods']);
+    //後台owner_member(管理會員頁面)
+    Route::get('/owner_member', [OwnerController::class, 'owner_member']);
 });

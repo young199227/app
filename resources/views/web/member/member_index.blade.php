@@ -28,7 +28,7 @@
                     <div class="">註冊信箱：</div>
                 </div>
                 <div class="col-6">
-                    <input type="text" class="form-control inputtext" id="" value="" disabled>
+                    <input type="text" class="form-control inputtext" id="" value="{{ Session('member') }}" disabled>
                 </div>
             </div>
             
@@ -40,7 +40,7 @@
                     <div class="">舊密碼：</div>
                 </div>
                 <div class="col-6">
-                    <input type="text" class="form-control inputtext" id="">
+                    <input type="text" class="form-control inputtext" id="old_password">
                 </div>
             </div>
             <div class="row mt-4">
@@ -48,7 +48,7 @@
                     <div class="">新密碼：</div>
                 </div>
                 <div class="col-6">
-                    <input type="text" class="form-control inputtext" id="">
+                    <input type="text" class="form-control inputtext" id="new_password">
                 </div>
             </div>
             <div class="row mt-4">
@@ -56,12 +56,14 @@
                     <div class="">確認密碼：</div>
                 </div>
                 <div class="col-6">
-                    <input type="text" class="form-control inputtext" id="">
+                    <input type="text" class="form-control inputtext" id="re_new_password">
                 </div>
             </div>
+
             <div class="row mt-4">
                 <div class="col-9 d-flex align-items-center justify-content-end">
-                    <button class="btn btn-success">修改密碼</button>
+                    <div class="form-text" id="err_text"></div>
+                    <button class="btn btn-success" id="password_btn">修改密碼</button>
                 </div>
             </div>
 
@@ -81,5 +83,35 @@
 @section('script')
 @parent
 <script>
+    $("#password_btn").click(function(){
+
+        if($("#new_password").val() == $("#re_new_password").val() ){
+            console.log("有一樣");
+            $("#err_text").text("");
+
+            var psd = {} ;
+            psd["old_password"] = $("#old_password").val();
+            psd["new_password"] = $("#new_password").val();
+
+            console.log(JSON.stringify(psd));
+
+            // $.ajax({
+            //     type:"post",
+            //     url:"api/member/updata_password",
+            //     data:JSON.stringify(psd),
+            //     dataType:"json",
+            //     success:function(data){
+            //         console.log("有進去");
+            //     },
+            //     error:function(){
+            //         console.log("沒進去ajax");
+            //     }
+            // });
+
+
+        }else{
+            $("#err_text").text("新密碼 與 確認密碼 必須一致！").css("color","red");
+        }
+    });
 </script>
 @endsection

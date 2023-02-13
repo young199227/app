@@ -74,19 +74,14 @@
                 <div class="col-3 d-flex align-items-center justify-content-end">
                     <div class="">產地：</div>
                 </div>
-                <!-- <div class="col-9 goodsPNW">
-                    <select class="form-select" aria-label="Default select example" id="Goods_area">
-                        <option selected value="{{ $row->Goods_area }}">{{ $row->Goods_area }}</option> 
-                    </select>
-                </div> -->
                 <div class="col goodsPNW">
                     <select class="form-select" aria-label="Default select example" id="fruit_city">
-                        <option selected value="{{ $row->Goods_area }}">{{ $row->Goods_area }}</option>
+                        <option selected value="{{ $part1 }}">{{ $part1 }}</option>
                     </select>
                 </div>
                 <div class="col goodsPNW">
                     <select class="form-select" aria-label="Default select example" id="fruit_area">
-                        <option selected>ㄧ請選擇ㄧ</option>
+                        <option selected value="{{ $part2 }}">{{ $part2 }}</option>
                     </select>
                 </div>
             </div>

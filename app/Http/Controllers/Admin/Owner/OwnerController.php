@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OwnerController extends Controller
 {
-    //後臺首頁(顯示所有商品)
+    //後台首頁(顯示所有商品)
     public function owner_index()
     {
 
@@ -22,7 +22,7 @@ class OwnerController extends Controller
         return view('web.owner.owner_index', compact('row'));
     }
 
-    //後臺PO商品頁面
+    //後台PO商品頁面
     public function owner_po_goods()
     {
 
@@ -37,8 +37,23 @@ class OwnerController extends Controller
 
         $row_img = DB::table('goods_imges')->where('goods_id', $goods_id)->get();
 
+        // 把地址拆成兩部分顯示  一個中文字=3
+        $string = $row->Goods_area;
+        $part1 = substr($string, 0, 9);
+        $part2 = substr($string, 9);
+
         // return $row_img;
-        return view('web.owner.owner_update_goods', compact('row', 'row_img'));
-        // return view('web.owner.owner_update_goods',compact('row'));
+
+        return view('web.owner.owner_update_goods', compact('row', 'row_img','part1','part2'));
+    }
+
+    //後台管理會員頁面 (顯示所有會員)
+    public function owner_member()
+    {
+        $row = DB::table('member')->paginate(5);
+
+        // return $row;
+
+        return view('web.owner.owner_member', compact('row'));
     }
 }

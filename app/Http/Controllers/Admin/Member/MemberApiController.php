@@ -122,4 +122,25 @@ class MemberApiController extends Controller
             return response()->json(['state' => false, 'message' => '缺少欄位或空值']);
         }
     }
+
+    //會員修改密碼
+    //{"old_password":"123","new_password":"12345"}
+    public function updata_password(Request $req)
+    {
+        if($req->filled(['old_password','new_password'])){
+
+
+
+            // if(){
+
+
+
+            //     return response()->json(['state' => true, 'message' => '修改成功,請重新登入']);
+            // }else{
+            //     return response()->json(['state' => false, 'message' => '舊密碼不符,修改失敗']);
+            // }
+        }else{
+            return response()->json(['state' => false, 'message' => '缺少欄位或空值']);
+        }
+    }
 }
