@@ -198,7 +198,7 @@
           var session_data = data.data;
           //管理員帳號登入時傳到後臺首頁
           if(session_data=='owner'){
-            $(location).attr("href","http://127.0.0.1:8000/owner");
+            // $(location).attr("href","http://127.0.0.1:8000/owner");
 
           }else{
             window.location.reload();

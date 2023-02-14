@@ -25,6 +25,7 @@ class MemberApiController extends Controller
                 //如果是管理員的帳號改丟一個owner session給他
                 if ($row->Member_email == 'owner') {
                     session(['owner' => $row->Member_email]);
+                    return redirect()->route('owner');
                 }
                 if ($row->Member_email == 'demomap') {
                     session(['demomap' => $row->Member_email]);
