@@ -34,7 +34,6 @@
 <script src="/json/car.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 <script>
-    console.log(CarData);
 
     //預設地圖在台中顯示
     var map = L.map('map').setView([24.15911076044162, 120.6540480461248], 12);
@@ -53,9 +52,7 @@
     $("#area_name").change(function() {
         //清除圖標
         removeMarker();
-
-        // console.log($("#area_name :selected").val());
-
+        //移動座標儲存
         var lat = 0;
         var lng = 0;
 
@@ -63,13 +60,8 @@
 
             if(element.Name==$("#area_name :selected").val()){
 
-                // console.log(element.ParkingLots);
-
                 element.ParkingLots.forEach(element => {
 
-                    // console.log(element.Position);
-                    // console.log(element.X);
-                    // console.log(element.Y);
                     L.marker([element.Y,element.X]).addTo(map)
                             .bindPopup(element.Position + "<br>" + "剩餘車位:" + element.TotalCar + "<br>" + "資訊:" + element.Notes)
                             .openPopup();
@@ -79,42 +71,8 @@
                 });
             }
         });
+        //畫面移動到這個座標
         map.panTo([lat, lng]);
-
-        // $.ajax({
-        //     type: "get",
-        //     url: "/json/points.json",
-        //     dataType: "json",
-        //     async: false,
-        //     success: function(data) {
-
-        //         var lat = 0;
-        //         var lng = 0;
-
-        //         data.features.forEach(element => {
-
-        //             if ($("#city_name :selected").val() == element.properties.county && $("#area_name :selected").val() == element.properties.town) {
-        //                 console.log(element.properties.name);
-        //                 console.log(element.properties.mask_adult);
-        //                 console.log(element.properties.mask_child);
-
-        //                 L.marker([element.geometry.coordinates[1], element.geometry.coordinates[0]]).addTo(map)
-        //                     .bindPopup(element.properties.name + "<br>" + "成人口罩:" + element.properties.mask_adult + "<br>" + "兒童口罩:" + element.properties.mask_child)
-        //                     .openPopup();
-
-        //                 lat = element.geometry.coordinates[1];
-        //                 lng = element.geometry.coordinates[0];
-        //             }
-        //         });
-
-        //         map.panTo([lat, lng]);
-
-        //     },
-        //     error: function() {
-        //         console.log("ajax失敗");
-        //     }
-
-        // });
     });
 
     //清除圖標
