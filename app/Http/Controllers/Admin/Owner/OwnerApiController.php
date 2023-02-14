@@ -94,7 +94,7 @@ class OwnerApiController extends Controller
                     //把圖片名稱存到資料庫
                     $row = DB::table('goods_imges')->insert([
                         'Goods_id' => $req->goods_id,
-                        'Goods_img' => 'http://127.0.0.1:8000/storage/images/'.$imageName
+                        'Goods_img' => '/storage/images/'.$imageName
                     ]);
                 }
 
