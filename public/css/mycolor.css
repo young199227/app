@@ -1,7 +1,13 @@
 @font-face {
-    font-family: NaikaiFont;
-    src: url("/fonts/NaikaiFont-Regular.woff2") format("woff2");
-    src: url("/fonts/NaikaiFont-Regular.woff") format("woff");
+    font-family: Cubic;
+    src: url("/fonts/Cubic_11_1.013_R.woff2") format("woff2");
+    src: url("/fonts/Cubic_11_1.013_R.woff") format("woff");
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Cubic;
 }
 
 /* 自訂顏色 */

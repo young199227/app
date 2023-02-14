@@ -52,8 +52,6 @@ class OwnerController extends Controller
     {
         $row = DB::table('member')->paginate(5);
 
-        // return $row;
-
         return view('web.owner.owner_member', compact('row'));
     }
 }

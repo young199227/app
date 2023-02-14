@@ -9,21 +9,8 @@
     <link rel="shortcut icon" href="/img/tree.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/mycolor.css">
-    <!-- <link rel="stylesheet" href="/css/fruit.css"> -->
+    <link rel="stylesheet" href="/css/fruit.css">
     <style>
-        @font-face {
-            font-family: Naikai;
-            src: url("/fonts/NaikaiFont-Regular.woff2") format("woff2");
-            src: url("/fonts/NaikaiFont-Regular.woff") format("woff");
-        }
-
-        * {
-            padding: 0;
-            margin: 0;
-            font-family: Naikai;
-        }
-
-
         body {
             background-color: rgb(255, 253, 232);
         }

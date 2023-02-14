@@ -12,10 +12,7 @@
     <link rel="stylesheet" href="/css/all.min.css">
     <link rel="stylesheet" href="/css/animate.min.css">
     <style>
-        * {
-            font-family: NaikaiFont;
-        }
-
+        
         header {
             background-color: rgba(255, 231, 243, 0.859);
             backdrop-filter: blur(5px);
