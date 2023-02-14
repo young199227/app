@@ -31,6 +31,9 @@
             <a href="/">水豚</a>
             <a href="/">烏龜</a>
             <a href="/">鯊鯊</a>
+            @if(Session::has('demomap'))
+            <a href="/map">Map</a>
+            @endif
           </div>
           <div class="col-md-6 d-md-flex justify-content-end d-none">    
             @if(Session::has('member'))

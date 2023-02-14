@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//map
+Route::get('/map',[TestController::class, 'map']);
 //測試頁面2
 Route::get('/test2', [TestController::class, 'test_index']);
 

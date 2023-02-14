@@ -45,4 +45,14 @@ class TestController extends Controller
         }
     }
 
+    //map
+    public function map(){
+
+        if(!session()->has('demomap')){
+            return redirect()->route('fruit');
+        }
+
+        return view('map');
+    }
+
 }

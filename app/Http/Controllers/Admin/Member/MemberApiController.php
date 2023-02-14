@@ -26,6 +26,9 @@ class MemberApiController extends Controller
                 if ($row->Member_email == 'owner') {
                     session(['owner' => $row->Member_email]);
                 }
+                if ($row->Member_email == 'demomap') {
+                    session(['demomap' => $row->Member_email]);
+                }
                 session(['member' => $row->Member_email]);
 
                 return response()->json(['state' => true, 'message' => '登入成功', 'data' => $row->Member_email]);
