@@ -129,6 +129,6 @@
 @section('script')
 @parent
 <script>
-    console.log("test");
+    
 </script>
 @endsection

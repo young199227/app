@@ -207,7 +207,7 @@
             success: function(data) {
                 if(data.state){
                     console.log(data.message);
-                    $(location).attr("href","http://127.0.0.1:8000/owner");
+                    $(location).attr("href","/owner");
                 }else{
                     alert (data.message);
                 }

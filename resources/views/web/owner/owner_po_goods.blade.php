@@ -199,9 +199,9 @@
                     
                     if(confirm(data.message+",繼續新增嗎")){
 
-                        $(location).attr("href","http://127.0.0.1:8000/owner/owner_po_goods");
+                        $(location).attr("href","/owner/owner_po_goods");
                     }else{
-                        $(location).attr("href","http://127.0.0.1:8000/owner");
+                        $(location).attr("href","/owner");
                     }
 
                 }else{

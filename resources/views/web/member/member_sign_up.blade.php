@@ -210,7 +210,7 @@
                 // console.log(data);
                 if(data.state){
                     alert(data.message);
-                    $(location).attr("href","http://127.0.0.1:8000/member/member_login");
+                    $(location).attr("href","/member/member_login");
                 }else{
                     console.log(data);
                 }

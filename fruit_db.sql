@@ -91,7 +91,8 @@ CREATE TABLE IF NOT EXISTS `member` (
 
 INSERT INTO `member` (`Member_id`, `Member_email`, `Member_password`, `Member_state`, `Member_session`, `Member_created_at`) VALUES
 (1, 'owner', '123456', 0, 0, '2022-12-14 14:03:39'),
-(4, '123', '123', 1, NULL, '2023-02-10 01:30:11');
+(2, 'demomap', '123456', 0, 0, '2022-12-14 14:03:39'),
+(3, '123', '123', 1, NULL, '2023-02-10 01:30:11');
 
 -- --------------------------------------------------------
 

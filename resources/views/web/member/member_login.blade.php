@@ -123,7 +123,7 @@
 
         $.ajax({
             type: "POST",
-            url: "http://127.0.0.1:8000/session/member/long",
+            url: "/session/member/long",
             data: JSON.stringify(jsonData),
             dataType: "json",
             contentType: "application/json; charset=utf-8",
@@ -131,7 +131,7 @@
 
                 if (data.state) {
                     // console.log(data);
-                    $(location).attr("href","http://127.0.0.1:8000/fruit");
+                    $(location).attr("href","/fruit");
                 } else {
                     $("#member_email_error").text(data.message + "帳號或密碼錯誤").css("color", "red");
                 }
