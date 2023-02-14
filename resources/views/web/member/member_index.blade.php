@@ -95,18 +95,24 @@
 
             console.log(JSON.stringify(psd));
 
-            // $.ajax({
-            //     type:"post",
-            //     url:"api/member/updata_password",
-            //     data:JSON.stringify(psd),
-            //     dataType:"json",
-            //     success:function(data){
-            //         console.log("有進去");
-            //     },
-            //     error:function(){
-            //         console.log("沒進去ajax");
-            //     }
-            // });
+            $.ajax({
+                type:"post",
+                url:"/session/member/updata_password",
+                data:JSON.stringify(psd),
+                dataType:"json",
+                contentType: "application/json; charset=utf-8",
+                success:function(data){
+                    if(data.state){
+                        alert("修改成功，請重新登入！");
+                        $(location).attr("href","/session/member/logout");
+                    }else{
+                        alert(data.message);
+                    }
+                },
+                error:function(){
+                    console.log("沒進去ajax");
+                }
+            });
 
 
         }else{

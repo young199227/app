@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Mail;
 class MemberApiController extends Controller
 {
     //會員登入 http://127.0.0.1:8000/session/member/long
-    //{"member_meail":"123","member_password":"123"}
+    //{"member_email":"123","member_password":"123"}
     public function member_long(Request $req)
     {
         if ($req->filled(['member_email', 'member_password'])) {
@@ -133,15 +133,25 @@ class MemberApiController extends Controller
         if($req->filled(['old_password','new_password'])){
 
 
+            $see = session()->get('member');
 
-            // if(){
+                $row = DB::table('member')
+                ->where('Member_email',$see)
+                ->where('Member_password',$req->old_password)
+                ->first();
 
+                if($row){
 
-
-            //     return response()->json(['state' => true, 'message' => '修改成功,請重新登入']);
-            // }else{
-            //     return response()->json(['state' => false, 'message' => '舊密碼不符,修改失敗']);
-            // }
+                    DB::table('member')
+                    ->where('Member_email',$see)
+                    ->where('Member_password',$req->old_password)
+                    ->update(['Member_password'=>$req->new_password]);
+                    
+                    return response()->json(['state' => true, 'message' => '修改成功,請重新登入']);
+                    
+                }else{
+                    return response()->json(['state' => false, 'message' => '舊密碼錯誤']);
+                }
         }else{
             return response()->json(['state' => false, 'message' => '缺少欄位或空值']);
         }
