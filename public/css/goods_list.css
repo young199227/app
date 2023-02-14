@@ -1,14 +1,3 @@
-@font-face {
-    font-family: Naikai;
-    src: url("/fonts/NaikaiFont-Regular.woff2") format("woff2");
-    src: url("/fonts/NaikaiFont-Regular.woff") format("woff");
-}
-
-* {
-    padding: 0;
-    margin: 0;
-    font-family: Naikai;
-}
 
 /* 置頂導覽列 */
 .header {
