@@ -37,7 +37,7 @@ Route::group(["prefix" => "session"],function(){
     Route::post('/member/email_session',[MemberApiController::class,'email_session']);
     //會員註冊頁面 認證email_session
     Route::post('/member/email_session_verify',[MemberApiController::class,'email_session_verify']);
-    //會員註冊頁面 認證email_session
+    //會員註冊
     Route::post('/member/member_sign_up',[MemberApiController::class,'member_sign_up']);
     //會員更改密碼
     Route::post('/member/updata_password', [MemberApiController::class, 'updata_password']);
