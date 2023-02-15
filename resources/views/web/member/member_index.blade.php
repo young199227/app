@@ -40,7 +40,7 @@
                     <div class="">舊密碼：</div>
                 </div>
                 <div class="col-6">
-                    <input type="text" class="form-control inputtext" id="old_password">
+                    <input type="password" class="form-control inputtext" id="old_password">
                 </div>
             </div>
             <div class="row mt-4">
@@ -48,7 +48,7 @@
                     <div class="">新密碼：</div>
                 </div>
                 <div class="col-6">
-                    <input type="text" class="form-control inputtext" id="new_password">
+                    <input type="password" class="form-control inputtext" id="new_password">
                 </div>
             </div>
             <div class="row mt-4">
@@ -56,7 +56,7 @@
                     <div class="">確認密碼：</div>
                 </div>
                 <div class="col-6">
-                    <input type="text" class="form-control inputtext" id="re_new_password">
+                    <input type="password" class="form-control inputtext" id="re_new_password">
                 </div>
             </div>
 
@@ -86,14 +86,12 @@
     $("#password_btn").click(function(){
 
         if($("#new_password").val() == $("#re_new_password").val() ){
-            console.log("有一樣");
+            
             $("#err_text").text("");
 
             var psd = {} ;
             psd["old_password"] = $("#old_password").val();
             psd["new_password"] = $("#new_password").val();
-
-            console.log(JSON.stringify(psd));
 
             $.ajax({
                 type:"post",

@@ -62,7 +62,8 @@
                             <div class="col-md-12 d-flex justify-content-end ">
                                 <div class="rightNav">
                                     <ul>
-                                        <li><a href="/session/member/logout">你好{{ Session('member') }} 登出</a></li>
+                                        <li><a href="/member">你好,{{ Session('member') }}</a></li>
+                                        <li><a href="/session/member/logout">登出</a></li>
                                         <span class="d-none d-md-inline-block">
                                             <li><a href="/fruit"><img src="/img/tree.png" class="logo "></a></li>
                                         </span>

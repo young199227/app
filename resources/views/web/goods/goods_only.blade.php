@@ -152,16 +152,9 @@
 <script>
     $(function() {
         
-        // $("#show_img").css("background-image", "url(/img/fruit_images/123456.png)");
-
-        // 鼠標滑動hover效果
-        // $("#show_img").hover(function() {
-        //     $(this).css("background-image", "url(/img/fruit_images/123456.png)");
-        // });
 
         $("#ho #goodshover2").hover(function(){
             var T0 = $(this).attr("src");
-            // console.log(T0);
             $("#goodshover").css('background-image', 'url("'+T0+'")');
         });
 
