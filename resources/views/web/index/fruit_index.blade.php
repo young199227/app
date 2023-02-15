@@ -184,7 +184,6 @@
                 <a href="" class="mt-auto">
                     <h3>草莓</h3>
                 </a>
-                <!-- <a href="#" target="_blank" class="bttn mt-auto">詳細</a> -->
 
             </div>
         </div>

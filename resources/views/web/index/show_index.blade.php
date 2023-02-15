@@ -47,25 +47,6 @@
 </head>
 
 <body>
-    <!-- 頁眉 -->
-    <!-- <header style="z-index: 2;position: relative;">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-6 mt-3 d-flex align-items-center">
-                    <i class="fa-solid fa-tree fa-5x" style="color:#06843c"></i>
-                    <span class="fa-2x p-3" style="color:#403426">水果很好ㄘ</span>
-                </div>
-                <div class="col-6 mt-3 d-inline-flex justify-content-end">
-                    <ul class="">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Shop</a></li>
-                        <li><a href="#">About us</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </header> -->
 
     <!-- 主內容 -->
     <main style="z-index: 1;position: relative;">

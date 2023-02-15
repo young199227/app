@@ -91,29 +91,5 @@
 @section('script')
 @parent
 <script>
-    $(function() {
-
-        // for (i = 0; i < 10; i++) {
-
-        //     $("#show_goods").append(
-        //         '<div class="col-lg-3 mt-2">' +
-        //         '<div class="itemsbox">' +
-        //         '<div class="imgbox img-fluid">' +
-        //         '<img src="/img/fruit_images/fruit1.jpg" alt="">' +
-        //         '</div>' +
-        //         '<div class="row">' +
-        //         '<div class="col-12">' +
-        //         '<span class="">商品名稱</span>' +
-        //         '</div>' +
-        //         '<div class="col-12">' +
-        //         '<span class="">價格元</span>' +
-        //         '</div>' +
-        //         '</div>' +
-        //         '</div>' +
-        //         '</div>'
-        //     );
-        // }
-
-    });
 </script>
 @endsection

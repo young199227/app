@@ -86,14 +86,12 @@
     $("#password_btn").click(function(){
 
         if($("#new_password").val() == $("#re_new_password").val() ){
-            console.log("有一樣");
+            
             $("#err_text").text("");
 
             var psd = {} ;
             psd["old_password"] = $("#old_password").val();
             psd["new_password"] = $("#new_password").val();
-
-            console.log(JSON.stringify(psd));
 
             $.ajax({
                 type:"post",
