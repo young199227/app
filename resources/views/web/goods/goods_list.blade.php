@@ -66,7 +66,12 @@
                     <a href="/fruit/goods_only/{{$goods->Goods_id}}">
                         <div class="itemsbox">
                             <div class="imgbox img-fluid">
+                                <!-- 商品沒有圖片時就用img_Prepare.png代替 -->
+                                @if(isset($goods->Goods_imges))
                                 <img src="{{$goods->Goods_imges}}" alt="">
+                                @else
+                                <img src="/img/img_Prepare.png" alt="">
+                                @endif  
                             </div>
                             <div class="row">
                                 <div class="col-12">

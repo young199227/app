@@ -46,12 +46,13 @@ class GoodsController extends Controller
     //商品詳細
     public function goods_only(Request $req, $goods_id)
     {
-
+        
         $row = DB::table('goods')->where('goods_id', $goods_id)->first();
 
         $row_img = DB::table('goods_imges')->where('goods_id', $goods_id)->get();
 
-        if ($row_img) {
+        //$row_img查詢到圖片時視圖才會帶圖片資料
+        if ($row_img->count() > 0) {
 
             return view('web.goods.goods_only', compact('row', 'row_img'));
             

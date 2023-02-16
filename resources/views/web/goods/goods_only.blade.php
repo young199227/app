@@ -52,15 +52,24 @@
 
             <div class="row">
                 <div class="col-12">
+                <!-- 商品沒有圖片時就用img_Prepare.png代替 -->
+                @if(isset($row_img))
                     <div class="show_img" id="goodshover" style="background-image:url({{$row_img[0]->Goods_img}})">
                     </div>
+                @else
+                <div class="show_img" id="goodshover" style="background-image:url(/img/img_Prepare.png)">
+                    </div>
+                @endif
                 </div>
                 <div class="col-12 d-inline-flex justify-content-center">
                     <div class="row overflow-auto flex-nowrap">
+                    <!-- 商品有圖片資料才會foreach -->
+                    @if(isset($row_img))
                     @foreach ($row_img as $goods)
                         <div class="imgbox" id="ho" ><img id="goodshover2"src="{{$goods->Goods_img}}" alt="">
                         </div>
                     @endforeach
+                    @endif
                     </div>
                 </div>
             </div>
