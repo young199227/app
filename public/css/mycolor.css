@@ -10,6 +10,17 @@
     font-family: Cubic;
 }
 
+/* laravel分頁boot */
+.pagination .page-item.active .page-link {
+    background-color: var(--green02);
+    border-color: var(--green01);
+  }
+  
+  .pagination .page-link {
+    color: #403426;
+  }
+  
+
 /* 自訂顏色 */
 :root {
     --green01: #7fb174;

@@ -25,7 +25,7 @@
                 <thead>
                     <tr>
                         <th>編號</th>
-                        <th>商品圖片</th>
+                        <th>商品圖</th>
                         <th>商品名稱</th>
                         <th>商品價格</th>
                         <th>商品數量</th>
