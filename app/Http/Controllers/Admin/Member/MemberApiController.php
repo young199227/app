@@ -18,10 +18,10 @@ class MemberApiController extends Controller
 
             $row = DB::table('member')
                 ->where('Member_email', $req->member_email)
-                ->where('Member_password', $req->member_password)
+                // ->where('Member_password', $req->member_password)
                 ->first();
 
-            if ($row) {
+            if ($row && password_verify($req->member_password, $row->Member_password)) {
                 //如果是管理員的帳號改丟一個owner session給他
                 if ($row->Member_email == 'owner') {
                     session(['owner' => $row->Member_email]);
@@ -111,9 +111,13 @@ class MemberApiController extends Controller
 
             if (session()->get('email_session') == $req->email_session) {
 
+                // 把密碼弄進雜湊函數再新增進去
+                $pas = password_hash($req->member_password,PASSWORD_DEFAULT);
+
                 DB::table('member')->insert([
                     'Member_email'=>$req->member_email,
-                    'Member_password'=>$req->member_password
+                    // 'Member_password'=>$req->member_password
+                    'Member_password'=>$pas
                 ]);
 
                 return response()->json(['state' => true, 'message' => '註冊成功,請登入']);
@@ -137,15 +141,18 @@ class MemberApiController extends Controller
 
                 $row = DB::table('member')
                 ->where('Member_email',$see)
-                ->where('Member_password',$req->old_password)
+                // ->where('Member_password',$req->old_password)
                 ->first();
 
-                if($row){
+                if($row && password_verify($req->old_password, $row->Member_password)){
+                    
+                    // 把密碼弄進雜湊函數再新增進去
+                    $pas = password_hash($req->new_password,PASSWORD_DEFAULT);
 
                     DB::table('member')
                     ->where('Member_email',$see)
-                    ->where('Member_password',$req->old_password)
-                    ->update(['Member_password'=>$req->new_password]);
+                    // ->where('Member_password',$req->old_password)
+                    ->update(['Member_password'=>$pas]);
                     
                     return response()->json(['state' => true, 'message' => '修改成功,請重新登入']);
                     

@@ -191,34 +191,52 @@
         });
     });
 
+    var flag_pas = false;
 
     //送出註冊資料
     $("#member_sign_up").click(function() {
 
-        var dataJson = {};
-        dataJson["member_email"] = $("#member_email").val();
-        dataJson["email_session"] = $("#email_session_verify").val();
-        dataJson["member_password"] = $("#member_password").val();
-        // console.log(JSON.stringify(dataJson));
-        $.ajax({
-            type:"POST",
-            url:"/session/member/member_sign_up",
-            data:JSON.stringify(dataJson),
-            dataType:"json",
-            contentType: "application/json; charset=utf-8",
-            success:function(data){
-                // console.log(data);
-                if(data.state){
-                    alert(data.message);
-                    $(location).attr("href","/member/member_login");
-                }else{
-                    console.log(data);
-                }
-            },
-            error:function(){console.log("ajax失敗");}
-        });
+        if(flag_pas){
+
+            var dataJson = {};
+            dataJson["member_email"] = $("#member_email").val();
+            dataJson["email_session"] = $("#email_session_verify").val();
+            dataJson["member_password"] = $("#member_password").val();
+            // console.log(JSON.stringify(dataJson));
+            $.ajax({
+                type:"POST",
+                url:"/session/member/member_sign_up",
+                data:JSON.stringify(dataJson),
+                dataType:"json",
+                contentType: "application/json; charset=utf-8",
+                success:function(data){
+                    // console.log(data);
+                    if(data.state){
+                        alert(data.message);
+                        $(location).attr("href","/member/member_login");
+                    }else{
+                        console.log(data);
+                    }
+                },
+                error:function(){console.log("ajax失敗");}
+            });
+        }else{
+            alert("密碼規格不符！");
+        }
     });
 
+
+    // 監聽 密碼長度限制
+    $("#member_password").bind("input propetychange",function(){
+
+        if($("#member_password").val().length<6 || $("#member_password").val().length>12){
+            $("#error_pw").text("密碼長度須為6-12").css("color","red");
+            flag_pas = false ;
+        }else{
+            $("#error_pw").text("密碼長度OK").css("color","green");
+            flag_pas = true ;
+        }
+    });
 
 </script>
 

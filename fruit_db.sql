@@ -153,7 +153,7 @@ DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member` (
   `Member_id` int(11) NOT NULL COMMENT '會員ID',
   `Member_email` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '會員email',
-  `Member_password` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '會員密碼',
+  `Member_password` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '會員密碼',
   `Member_state` int(11) NOT NULL DEFAULT '1',
   `Member_session` int(11) DEFAULT NULL,
   `Member_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '會員創建時間'

@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 //map
 Route::get('/map',[TestController::class, 'map']);
 //測試頁面2
-Route::get('/test2', [TestController::class, 'test_index']);
+Route::post('/testpas', [TestController::class, 'pasw']);
 
 //測試頁面
 Route::get('/test', [TestController::class, 'test']);

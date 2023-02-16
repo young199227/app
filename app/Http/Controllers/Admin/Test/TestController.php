@@ -49,4 +49,21 @@ class TestController extends Controller
         return view('map');
     }
 
+    // 雜湊函數
+    public function pasw(Request $req)
+    {
+        //真正密碼
+        $pww = '123';
+        // 存在資料庫的密碼
+        $pwwadd = password_hash($pww,PASSWORD_DEFAULT);
+
+        //前面是輸入的密碼 比對
+        if(password_verify($req->password,$pwwadd))
+        {
+            echo "123";
+        }else{
+            echo "沒有";
+        }
+
+    }
 }
