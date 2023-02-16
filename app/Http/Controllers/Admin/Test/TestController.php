@@ -12,18 +12,12 @@ class TestController extends Controller
     //測試
     public function test(Request $req)
     {
-        $data = [
-            'title' => '你的神奇驗證碼如下',
-            'content' => '123456'
-        ];
-     
-        Mail::send('email', $data, function ($message) {
-            $message->from('youngsxz8929@gmail.com', '水果人ggyy');
-            $message->to('kakaove4468937@gmail.com');
-            $message->subject('水果驗證信!');
-        });
-     
-        return 'Email was sent successfully';
+
+        $member_count = DB::table('member')->selectRaw('count(*) AS Member_count')->first();
+
+        $goods_count = DB::table('goods')->selectRaw('count(*) AS Goods_count')->first();
+
+        return view('test',compact('member_count','goods_count'));
 
     }
 
