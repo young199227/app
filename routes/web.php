@@ -78,4 +78,6 @@ Route::group(["prefix" => "owner"], function () {
     Route::get('/owner_update_goods/{goods_id}', [OwnerController::class, 'owner_update_goods']);
     //後台owner_member(管理會員頁面)
     Route::get('/owner_member', [OwnerController::class, 'owner_member']);
+    //後台owner_count(管理統計圖)
+    Route::get('/owner_count', [OwnerController::class, 'owner_count']);
 });
