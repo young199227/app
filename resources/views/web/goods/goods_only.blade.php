@@ -52,7 +52,7 @@
 
             <div class="row">
                 <div class="col-12">
-                    <div class="show_img" id="goodshover" style="background-image:url({{$row_img_1->Goods_img}})">
+                    <div class="show_img" id="goodshover" style="background-image:url({{$row_img[0]->Goods_img}})">
                     </div>
                 </div>
                 <div class="col-12 d-inline-flex justify-content-center">

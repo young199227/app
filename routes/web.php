@@ -55,7 +55,7 @@ Route::group(["prefix" => "fruit"], function () {
     //商品列表
     Route::get('/goods_list', [GoodsController::class, 'goods_list']);
     //商品詳細
-    Route::get('/goods_only/{goods_id}', [GoodsController::class, 'test']);
+    Route::get('/goods_only/{goods_id}', [GoodsController::class, 'goods_only']);
 });
 
 //會員的group
