@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost:8889
--- 產生時間： 2023 年 02 月 15 日 07:47
+-- 產生時間： 2023 年 02 月 17 日 03:58
 -- 伺服器版本： 5.7.34
 -- PHP 版本： 8.0.8
 
@@ -164,9 +164,9 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`Member_id`, `Member_email`, `Member_password`, `Member_state`, `Member_session`, `Member_created_at`) VALUES
-(1, 'owner', '123456', 0, 0, '2022-12-14 14:03:39'),
-(2, 'demomap', '123456', 0, 0, '2022-12-14 14:03:39'),
-(3, '123', '123', 1, NULL, '2023-02-10 01:30:11');
+(1, 'owner', '$2y$10$EC2YPdD/xeQmg7c2qFTD8OOMPODulvOyLn7/NyYszvWKsSBP.zykK', 0, NULL, '2023-02-17 03:54:43'),
+(2, 'demomap', '$2y$10$phD8lJbo.BABWwaEzxeF2u.2L5GmJ4bWLQd3gufnUhMj5UG4IQK4S', 1, NULL, '2023-02-17 03:55:17'),
+(3, '123', '$2y$10$EJHNYSiv9qhVK4/HiDbdPeMnviommvsXRLCG2dBQSDc9JOeqt8hai', 1, NULL, '2023-02-17 03:55:48');
 
 -- --------------------------------------------------------
 
@@ -245,19 +245,19 @@ ALTER TABLE `oredr`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `goods`
 --
 ALTER TABLE `goods`
-  MODIFY `Goods_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品編號', AUTO_INCREMENT=10;
+  MODIFY `Goods_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品編號', AUTO_INCREMENT=33;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `goods_imges`
 --
 ALTER TABLE `goods_imges`
-  MODIFY `Goods_img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `Goods_img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `member`
 --
 ALTER TABLE `member`
-  MODIFY `Member_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '會員ID', AUTO_INCREMENT=5;
+  MODIFY `Member_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '會員ID', AUTO_INCREMENT=8;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `oredr`
