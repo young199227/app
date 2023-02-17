@@ -35,7 +35,7 @@
             <a href="/map">Map</a>
             @endif
           </div>
-          <div class="col-md-6 d-md-flex justify-content-end d-none">    
+          <div class="col-md-6 d-md-flex justify-content-end d-none">
             @if(Session::has('member'))
             <a href="/member">會員中心</a>
             <a href="/member">你好{{ Session('member') }}</a>
@@ -65,8 +65,8 @@
               <div class="col-md-6 col-9">
 
                 <div class="input-group mt-2 mb-2">
-                  <input type="text" class="form-control" placeholder="蘋果,香蕉,草莓..." aria-label="Recipient's username" aria-describedby="button-addon2">
-                  <button class="btn" type="button" id="button-addon2">搜尋</button>
+                  <input type="text" class="form-control" id="fruit_google_value" placeholder="蘋果,香蕉,草莓..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                  <button class="btn" type="button" id="fruit_google_goods">搜尋</button>
                 </div>
 
               </div>
@@ -166,21 +166,34 @@
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery-3.6.1.min.js"></script>
 <script>
+  //商品搜尋 按鈕版本
+  $("#fruit_google_goods").click(function() {
+    if ($("#fruit_google_value").val() !== "") {
+      $(location).attr("href", "/fruit/goods_google/" + $("#fruit_google_value").val());
+    }
+  });
+  //商品搜尋 Enter版本
+  $("#fruit_google_value").keypress(function() {
+    if (event.which == 13) {
+      if ($("#fruit_google_value").val() !== "") {
+        $(location).attr("href", "/fruit/goods_google/" + $("#fruit_google_value").val());
+      }
+    }
+  });
 
   //登入 按下按鈕member_login登入
   $("#member_login").click(function() {
     index_member_login();
   });
-  
   //#member_password 按下enter時登入
-  $("#member_password").keypress(function(){
-    if(event.which == 13){
+  $("#member_password").keypress(function() {
+    if (event.which == 13) {
       index_member_login();
     }
   });
 
   //index_member_login 
-  function index_member_login(){
+  function index_member_login() {
     var jsonData = {};
     jsonData["member_email"] = $("#member_email").val();
     jsonData["member_password"] = $("#member_password").val();
@@ -197,10 +210,10 @@
           // console.log(data);
           var session_data = data.data;
           //管理員帳號登入時傳到後臺首頁
-          if(session_data=='owner'){
-            $(location).attr("href","/owner");
+          if (session_data == 'owner') {
+            $(location).attr("href", "/owner");
 
-          }else{
+          } else {
             window.location.reload();
           }
         } else {
@@ -212,7 +225,6 @@
       }
     });
   }
-
 </script>
 <!-- script Blade 模板顯示-->
 @section('script')
