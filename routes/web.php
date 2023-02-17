@@ -52,18 +52,18 @@ Route::group(["prefix" => "fruit"], function () {
     Route::get('/', [GoodsController::class, 'fruit_index'])->name('fruit');
     //搜尋商品
     Route::get('/goods_google/{goods_name?}', [GoodsController::class, 'fruit_google_goods']);
-    //購物車
-    Route::get('/goods_car', [GoodsController::class, 'goods_car']);
     //商品列表
     Route::get('/goods_list', [GoodsController::class, 'goods_list']);
     //商品詳細
     Route::get('/goods_only/{goods_id}', [GoodsController::class, 'goods_only']);
+    //購物車
+    Route::get('/goods_car', [GoodsController::class, 'goods_car'])->middleware('check.member');
 });
 
 //會員的group
 Route::group(["prefix" => "member"],function(){
     //會員中心
-    Route::get('/', [MemberController::class, 'member_index']);
+    Route::get('/', [MemberController::class, 'member_index'])->middleware('check.member');
     //會員註冊頁面
     Route::get('/member_sign_up', [MemberController::class, 'member_sign_up']);
     //單獨的會員登入頁面
@@ -71,7 +71,8 @@ Route::group(["prefix" => "member"],function(){
 });
 
 //owner的group
-Route::group(["prefix" => "owner"], function () {
+//check.owner中間件判斷沒有owner session時回到首頁
+Route::group(["prefix" => "owner", "middleware" => "check.owner"], function () {
     //後台首頁(顯示所有商品)
     Route::get('/', [OwnerController::class, 'owner_index'])->name('owner');
     //後台owner_po_goods
