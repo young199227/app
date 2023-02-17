@@ -50,6 +50,8 @@ Route::get('/', [GoodsController::class, 'show_index']);
 Route::group(["prefix" => "fruit"], function () {
     //第二首頁
     Route::get('/', [GoodsController::class, 'fruit_index'])->name('fruit');
+    //搜尋商品
+    Route::get('/goods_google/{goods_name?}', [GoodsController::class, 'fruit_google_goods']);
     //購物車
     Route::get('/goods_car', [GoodsController::class, 'goods_car']);
     //商品列表
