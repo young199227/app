@@ -29,7 +29,7 @@
                     </div>
                     <div class="carousel-item">
                         <a href="/fruit/goods_list">
-                        <img src="/img/fruit_images/fruit4.jpg" class="d-block w-100" alt="...">
+                            <img src="/img/fruit_images/fruit4.jpg" class="d-block w-100" alt="...">
                         </a>
                         <div class="carousel-caption d-none d-md-block">
                             <h5>超大葡萄</h5>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="carousel-item">
                         <a href="/fruit/goods_list">
-                        <img src="/img/fruit_images/fruit5.jpg" class="d-block w-100" alt="...">
+                            <img src="/img/fruit_images/fruit5.jpg" class="d-block w-100" alt="...">
                         </a>
                         <div class="carousel-caption d-none d-md-block">
                             <h5>超厲害草莓</h5>
@@ -63,130 +63,83 @@
             <!-- <img src="/img/fruit_images/fruit001.jpg" width="100%" height="100%"> -->
         </div>
     </div>
-
+    <!-- 第一排 -->
     <div class="row mt-2 mb-3">
+
         <div class="col-md-3 mt-3">
-            <div class="shopee-box p-3 d-flex flex-column h-100">
-
-                <img src="/img/fruit_images/fruit23.png" alt="">
-                <a href="" class="mt-auto">
-                    <h3>橘子</h3>
-                </a>
-
-            </div>
+            <a href="/fruit/goods_google/橘子">
+                <div class="shopee-box p-3 d-flex flex-column h-100">
+                    <img src="/img/fruit_images/fruit23.png" alt="">
+                    <h3 class="mt-auto">橘子</h3>
+                </div>
+            </a>
         </div>
+
         <div class="col-md-3 mt-3">
-            <div class="shopee-box p-3 d-flex flex-column h-100">
-
-                <img src="/img/fruit_images/fruit37.png" alt="">
-                <a href="" class="mt-auto">
-                    <h3>柳橙</h3>
-                </a>
-
-            </div>
+            <a href="/fruit/goods_google/柳丁">
+                <div class="shopee-box p-3 d-flex flex-column h-100">
+                    <img src="/img/fruit_images/fruit37.png" alt="">
+                    <h3 class="mt-auto">柳丁</h3>
+                </div>
+            </a>
         </div>
+
         <div class="col-md-3 mt-3">
-            <div class="shopee-box p-3 d-flex flex-column h-100">
-
-                <img src="/img/fruit_images/fruit31.png" alt="">
-                <a href="" class="mt-auto">
-                    <h3>奇異果</h3>
-                </a>
-
-            </div>
+            <a href="/fruit/goods_google/奇異果">
+                <div class="shopee-box p-3 d-flex flex-column h-100">
+                    <img src="/img/fruit_images/fruit31.png" alt="">
+                    <h3 class="mt-auto">奇異果</h3>
+                </div>
+            </a>
         </div>
+
         <div class="col-md-3 mt-3">
-            <div class="shopee-box p-3 d-flex flex-column h-100">
-
-                <img src="/img/fruit_images/fruit30.png" alt="">
-                <a href="" class="mt-auto">
-                    <h3>草莓</h3>
-                </a>
-                <!-- <a href="#" target="_blank" class="bttn mt-auto">詳細</a> -->
-
-            </div>
+            <a href="/fruit/goods_google/草莓">
+                <div class="shopee-box p-3 d-flex flex-column h-100">
+                    <img src="/img/fruit_images/fruit30.png" alt="">
+                    <h3 class="mt-auto">草莓</h3>
+                </div>
+            </a>
         </div>
+        <!-- 第一排 -->
+        <!-- 第二排 -->
+
         <div class="col-md-3 mt-3">
-            <div class="shopee-box p-3 d-flex flex-column h-100">
-
-                <img src="/img/fruit_images/fruit23.png" alt="">
-                <a href="" class="mt-auto">
-                    <h3>橘子</h3>
-                </a>
-
-            </div>
+            <a href="/fruit/goods_google/蘋果">
+                <div class="shopee-box p-3 d-flex flex-column h-100">
+                    <img src="/img/fruit_images/fruit27.png" alt="">
+                    <h3 class="mt-auto">蘋果</h3>
+                </div>
+            </a>
         </div>
+
         <div class="col-md-3 mt-3">
-            <div class="shopee-box p-3 d-flex flex-column h-100">
-
-                <img src="/img/fruit_images/fruit37.png" alt="">
-                <a href="" class="mt-auto">
-                    <h3>柳橙</h3>
-                </a>
-
-            </div>
+            <a href="/fruit/goods_google/西瓜">
+                <div class="shopee-box p-3 d-flex flex-column h-100">
+                    <img src="/img/fruit_images/fruit14.jpg" alt="">
+                    <h3 class="mt-auto">西瓜</h3>
+                </div>
+            </a>
         </div>
+
         <div class="col-md-3 mt-3">
-            <div class="shopee-box p-3 d-flex flex-column h-100">
-
-                <img src="/img/fruit_images/fruit31.png" alt="">
-                <a href="" class="mt-auto">
-                    <h3>奇異果</h3>
-                </a>
-
-            </div>
+            <a href="/fruit/goods_google/葡萄">
+                <div class="shopee-box p-3 d-flex flex-column h-100">
+                    <img src="/img/fruit_images/fruit25.png" alt="">
+                    <h3 class="mt-auto">葡萄</h3>
+                </div>
+            </a>
         </div>
+
         <div class="col-md-3 mt-3">
-            <div class="shopee-box p-3 d-flex flex-column h-100">
-
-                <img src="/img/fruit_images/fruit30.png" alt="">
-                <a href="" class="mt-auto">
-                    <h3>草莓</h3>
-                </a>
-                <!-- <a href="#" target="_blank" class="bttn mt-auto">詳細</a> -->
-
-            </div>
+            <a href="/fruit/goods_google/蕃茄">
+                <div class="shopee-box p-3 d-flex flex-column h-100">
+                    <img src="/img/fruit_images/fruit48.png" alt="">
+                    <h3 class="mt-auto">蕃茄</h3>
+                </div>
+            </a>
         </div>
-        <div class="col-md-3 mt-3">
-            <div class="shopee-box p-3 d-flex flex-column h-100">
-
-                <img src="/img/fruit_images/fruit23.png" alt="">
-                <a href="" class="mt-auto">
-                    <h3>橘子</h3>
-                </a>
-
-            </div>
-        </div>
-        <div class="col-md-3 mt-3">
-            <div class="shopee-box p-3 d-flex flex-column h-100">
-
-                <img src="/img/fruit_images/fruit37.png" alt="">
-                <a href="" class="mt-auto">
-                    <h3>柳橙</h3>
-                </a>
-
-            </div>
-        </div>
-        <div class="col-md-3 mt-3">
-            <div class="shopee-box p-3 d-flex flex-column h-100">
-
-                <img src="/img/fruit_images/fruit31.png" alt="">
-                <a href="" class="mt-auto">
-                    <h3>奇異果</h3>
-                </a>
-
-            </div>
-        </div>
-        <div class="col-md-3 mt-3">
-            <div class="shopee-box p-3 d-flex flex-column h-100">
-
-                <img src="/img/fruit_images/fruit30.png" alt="">
-                <a href="" class="mt-auto">
-                    <h3>草莓</h3>
-                </a>
-
-            </div>
-        </div>
+        <!-- 第二排 -->
     </div>
 
 </div>

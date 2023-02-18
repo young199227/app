@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- 主機： localhost:8889
--- 產生時間： 2023 年 02 月 17 日 03:58
--- 伺服器版本： 5.7.34
--- PHP 版本： 8.0.8
+-- 主機： 127.0.0.1:3306
+-- 產生時間： 2023-02-18 03:32:52
+-- 伺服器版本： 5.7.40
+-- PHP 版本： 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 資料庫: `fruit_db`
+-- 資料庫： `fruit_db`
 --
 
 -- --------------------------------------------------------
@@ -28,15 +28,16 @@ SET time_zone = "+00:00";
 --
 
 DROP TABLE IF EXISTS `goods`;
-CREATE TABLE `goods` (
-  `Goods_id` int(11) NOT NULL COMMENT '商品編號',
+CREATE TABLE IF NOT EXISTS `goods` (
+  `Goods_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品編號',
   `Goods_name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '商品名稱',
   `Goods_money` int(11) NOT NULL COMMENT '商品價錢',
   `Goods_sum` int(11) NOT NULL COMMENT '商品數量',
   `Goods_area` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '商品產地',
   `Goods_detail` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '商品描述',
-  `Goods_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '商品創建時間'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `Goods_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '商品創建時間',
+  PRIMARY KEY (`Goods_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- 傾印資料表的資料 `goods`
@@ -80,10 +81,21 @@ INSERT INTO `goods` (`Goods_id`, `Goods_name`, `Goods_money`, `Goods_sum`, `Good
 --
 
 DROP TABLE IF EXISTS `goods_car`;
-CREATE TABLE `goods_car` (
+CREATE TABLE IF NOT EXISTS `goods_car` (
   `Member_id` int(11) NOT NULL,
-  `Goods_id` int(11) NOT NULL
+  `Goods_id` int(11) NOT NULL,
+  KEY `Goods_id` (`Goods_id`),
+  KEY `Member_id` (`Member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- 傾印資料表的資料 `goods_car`
+--
+
+INSERT INTO `goods_car` (`Member_id`, `Goods_id`) VALUES
+(3, 25),
+(3, 17),
+(3, 8);
 
 -- --------------------------------------------------------
 
@@ -92,11 +104,13 @@ CREATE TABLE `goods_car` (
 --
 
 DROP TABLE IF EXISTS `goods_imges`;
-CREATE TABLE `goods_imges` (
-  `Goods_img_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `goods_imges` (
+  `Goods_img_id` int(11) NOT NULL AUTO_INCREMENT,
   `Goods_id` int(11) NOT NULL COMMENT '商品編號',
-  `Goods_img` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '商品圖片'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `Goods_img` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '商品圖片',
+  PRIMARY KEY (`Goods_img_id`),
+  KEY `Goods_id` (`Goods_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- 傾印資料表的資料 `goods_imges`
@@ -150,14 +164,15 @@ INSERT INTO `goods_imges` (`Goods_img_id`, `Goods_id`, `Goods_img`) VALUES
 --
 
 DROP TABLE IF EXISTS `member`;
-CREATE TABLE `member` (
-  `Member_id` int(11) NOT NULL COMMENT '會員ID',
+CREATE TABLE IF NOT EXISTS `member` (
+  `Member_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '會員ID',
   `Member_email` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '會員email',
   `Member_password` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '會員密碼',
   `Member_state` int(11) NOT NULL DEFAULT '1',
   `Member_session` int(11) DEFAULT NULL,
-  `Member_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '會員創建時間'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `Member_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '會員創建時間',
+  PRIMARY KEY (`Member_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- 傾印資料表的資料 `member`
@@ -175,9 +190,11 @@ INSERT INTO `member` (`Member_id`, `Member_email`, `Member_password`, `Member_st
 --
 
 DROP TABLE IF EXISTS `order_content`;
-CREATE TABLE `order_content` (
+CREATE TABLE IF NOT EXISTS `order_content` (
   `Order_id` int(11) NOT NULL,
-  `Goods_id` int(11) NOT NULL
+  `Goods_id` int(11) NOT NULL,
+  KEY `Goods_id` (`Goods_id`),
+  KEY `Order_id` (`Order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -187,83 +204,13 @@ CREATE TABLE `order_content` (
 --
 
 DROP TABLE IF EXISTS `oredr`;
-CREATE TABLE `oredr` (
-  `Order_id` int(11) NOT NULL COMMENT '訂單ID',
+CREATE TABLE IF NOT EXISTS `oredr` (
+  `Order_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '訂單ID',
   `Member_id` int(11) NOT NULL COMMENT '會員ID',
-  `Order_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '訂單創建時間'
+  `Order_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '訂單創建時間',
+  PRIMARY KEY (`Order_id`),
+  KEY `Member_id` (`Member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- 已傾印資料表的索引
---
-
---
--- 資料表索引 `goods`
---
-ALTER TABLE `goods`
-  ADD PRIMARY KEY (`Goods_id`);
-
---
--- 資料表索引 `goods_car`
---
-ALTER TABLE `goods_car`
-  ADD PRIMARY KEY (`Member_id`,`Goods_id`),
-  ADD KEY `Goods_id` (`Goods_id`);
-
---
--- 資料表索引 `goods_imges`
---
-ALTER TABLE `goods_imges`
-  ADD PRIMARY KEY (`Goods_img_id`),
-  ADD KEY `Goods_id` (`Goods_id`);
-
---
--- 資料表索引 `member`
---
-ALTER TABLE `member`
-  ADD PRIMARY KEY (`Member_id`);
-
---
--- 資料表索引 `order_content`
---
-ALTER TABLE `order_content`
-  ADD PRIMARY KEY (`Order_id`,`Goods_id`),
-  ADD KEY `Goods_id` (`Goods_id`);
-
---
--- 資料表索引 `oredr`
---
-ALTER TABLE `oredr`
-  ADD PRIMARY KEY (`Order_id`),
-  ADD KEY `Member_id` (`Member_id`);
-
---
--- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
---
-
---
--- 使用資料表自動遞增(AUTO_INCREMENT) `goods`
---
-ALTER TABLE `goods`
-  MODIFY `Goods_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品編號', AUTO_INCREMENT=33;
-
---
--- 使用資料表自動遞增(AUTO_INCREMENT) `goods_imges`
---
-ALTER TABLE `goods_imges`
-  MODIFY `Goods_img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
-
---
--- 使用資料表自動遞增(AUTO_INCREMENT) `member`
---
-ALTER TABLE `member`
-  MODIFY `Member_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '會員ID', AUTO_INCREMENT=8;
-
---
--- 使用資料表自動遞增(AUTO_INCREMENT) `oredr`
---
-ALTER TABLE `oredr`
-  MODIFY `Order_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '訂單ID', AUTO_INCREMENT=7;
 
 --
 -- 已傾印資料表的限制式

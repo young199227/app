@@ -74,11 +74,12 @@
               <div class="col-md-3 d-none d-md-block">
                 <a href="/fruit/goods_car" class="text-light position-relative">
                   <ion-icon name="cart-outline" class="icon"></ion-icon>
-                <span class="position-absolute bottom-100 translate-middle badge rounded-pill bg-danger"
-                style="left:80%"><div id="goods_car_count">99</div>
-                <span class="visually-hidden">unread messages</span></span>
+                  <span class="position-absolute bottom-100 translate-middle badge rounded-pill bg-danger" style="left:80%">
+                    <div id="goods_car_count"></div>
+                    <span class="visually-hidden">unread messages</span>
+                  </span>
                 </a>
-                
+
               </div>
 
               <!-- RWD縮進 -->
@@ -172,9 +173,33 @@
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery-3.6.1.min.js"></script>
 <script>
-  //購物車數字
-  $("#goods_car_count").text("123");
+  //購物車商品數量計算
+  goods_car_count();
 
+  //購物車商品數量計算方法
+  function goods_car_count() {
+    dataJson = {};
+    dataJson["member_email"] = "{{ Session('member') }}";
+
+    $.ajax({
+      type: "POST",
+      url: "/api/goods_car/count",
+      data: JSON.stringify(dataJson),
+      dataType: "json",
+      contentType: "application/json; charset=utf-8",
+      success: function(data) {
+
+        if (data.length > 0) {
+          $("#goods_car_count").text(data.length);
+        } else {
+          $("#goods_car_count").text("0");
+        }
+      },
+      error: function() {
+        console.log("ajax失敗");
+      }
+    });
+  }
 
   //商品搜尋 按鈕版本
   $("#fruit_google_goods").click(function() {
