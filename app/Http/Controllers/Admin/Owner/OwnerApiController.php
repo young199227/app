@@ -119,15 +119,6 @@ class OwnerApiController extends Controller
         }
     }
 
-    //備案
-    public function test_insert()
-    {
-        $row = DB::table('goods_imges')->insert([
-            'Goods_id' => "27",
-            'Goods_img' => "123"
-        ]);
-    }
-
     // //圖片上傳
     // $image = $req->file('ggyy');
     // $filename = $image->getClientOriginalName();
