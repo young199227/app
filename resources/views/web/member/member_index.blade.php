@@ -33,7 +33,7 @@
             </div>
             
 
-            <h3 class="mt-5">更改密碼</h3>
+            <h3 class="mt-5 d-inline-block">更改密碼</h3><span>(6~12字)</span>
             
             <div class="row mt-4">
                 <div class="col-3 d-flex align-items-center justify-content-end">

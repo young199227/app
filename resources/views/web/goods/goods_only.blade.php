@@ -105,11 +105,19 @@
                     <div class="col-9">
                         <div class="row">
                             <div class="col-6">
-                                <div class="input-group">
+
+                                <select class="form-select" aria-label="Default select example" id="">
+                                    <option selected value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <!-- <div class="input-group">
                                     <button class="btn btn-dark">－</button>
                                     <input type="text" class="form-control" value="1" name="" oninput="value=value.replace(/[^\d]/g,'')">
                                     <button class="btn btn-dark">＋</button>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-6">
                                 <!-- Button trigger modal -->
