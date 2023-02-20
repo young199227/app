@@ -30,81 +30,81 @@
                     <input accept="image/*" type='file' id="fruit_imginp" style="width: 100%;" multiple />
                     <div class="imgrow" id="show_img">
                         <!-- 圖片顯示的地方 -->
-                    @foreach ($row_img as $goods)
-                        <div class="imgbox img-fluid">
-                            <img src="{{$goods->Goods_img}}" alt="">
-                        </div>
-                    @endforeach
+                    @for ($i = 0; $i < count($row_img); $i++) 
+                    <div class="imgbox img-fluid">
+                        <img src="{{ $row_img[$i]->Goods_img }}" alt="">
                     </div>
-                </div>
-            </div>
-
-            <!-- 商品名稱 -->
-            <div class="row mt-4">
-                <div class="col-3 d-flex align-items-center justify-content-end">
-                    <div class="">商品名稱：</div>
-                </div>
-                <div class="col-9">
-                    <input type="text" class="form-control inputtext" id="fruit_name" value="{{$row->Goods_name}}">
-                </div>
-            </div>
-
-            <!-- 商品價錢 -->
-            <div class="row mt-4">
-                <div class="col-3 d-flex align-items-center justify-content-end">
-                    <div class="">商品價錢：</div>
-                </div>
-                <div class="col-9 goodsPNW">
-                    <input type="number" class="form-control inputtext" min="1" max="100000" id="fruit_money" value="{{$row->Goods_money}}">
-                </div>
-            </div>
-
-            <!-- 商品數量 -->
-            <div class="row mt-4">
-                <div class="col-3 d-flex align-items-center justify-content-end">
-                    <div class="">商品數量(箱)：</div>
-                </div>
-                <div class="col-9 goodsPNW">
-                    <input type="number" class="form-control inputtext" id="fruit_sum" value="{{$row->Goods_sum}}">
-                </div>
-            </div>
-
-            <!-- 產地 -->
-            <div class="row mt-4">
-                <div class="col-3 d-flex align-items-center justify-content-end">
-                    <div class="">產地：</div>
-                </div>
-                <div class="col goodsPNW">
-                    <select class="form-select" aria-label="Default select example" id="fruit_city">
-                        <option selected value="{{ $part1 }}">{{ $part1 }}</option>
-                    </select>
-                </div>
-                <div class="col goodsPNW">
-                    <select class="form-select" aria-label="Default select example" id="fruit_area">
-                        <option selected value="{{ $part2 }}">{{ $part2 }}</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- 商品描述 -->
-            <div class="row mt-4">
-                <div class="col-3 d-flex align-items-center justify-content-end">
-                    <div class="">商品描述：</div>
-                </div>
-                <!-- Goods_detail -->
-                <div class="col-9">
-                    <textarea id="fruit_detail" class="goods_textarea" rows="6">{{$row->Goods_detail}}</textarea>
-                </div>
-            </div>
-
-            <!-- 更新按鈕 -->
-            <div class="row mt-4">
-                <div class="col-12 d-flex align-items-center justify-content-center">
-                    <div class="btn btn-outline-success" id="upd" onclick="update_goods(this)" data-goods_id="{{ $row->Goods_id}}">更新</div>
+                    @endfor
                 </div>
             </div>
         </div>
+
+        <!-- 商品名稱 -->
+        <div class="row mt-4">
+            <div class="col-3 d-flex align-items-center justify-content-end">
+                <div class="">商品名稱：</div>
+            </div>
+            <div class="col-9">
+                <input type="text" class="form-control inputtext" id="fruit_name" value="{{$row->Goods_name}}">
+            </div>
+        </div>
+
+        <!-- 商品價錢 -->
+        <div class="row mt-4">
+            <div class="col-3 d-flex align-items-center justify-content-end">
+                <div class="">商品價錢：</div>
+            </div>
+            <div class="col-9 goodsPNW">
+                <input type="number" class="form-control inputtext" min="1" max="100000" id="fruit_money" value="{{$row->Goods_money}}">
+            </div>
+        </div>
+
+        <!-- 商品數量 -->
+        <div class="row mt-4">
+            <div class="col-3 d-flex align-items-center justify-content-end">
+                <div class="">商品數量(箱)：</div>
+            </div>
+            <div class="col-9 goodsPNW">
+                <input type="number" class="form-control inputtext" id="fruit_sum" value="{{$row->Goods_sum}}">
+            </div>
+        </div>
+
+        <!-- 產地 -->
+        <div class="row mt-4">
+            <div class="col-3 d-flex align-items-center justify-content-end">
+                <div class="">產地：</div>
+            </div>
+            <div class="col goodsPNW">
+                <select class="form-select" aria-label="Default select example" id="fruit_city">
+                    <option selected value="{{ $part1 }}">{{ $part1 }}</option>
+                </select>
+            </div>
+            <div class="col goodsPNW">
+                <select class="form-select" aria-label="Default select example" id="fruit_area">
+                    <option selected value="{{ $part2 }}">{{ $part2 }}</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 商品描述 -->
+        <div class="row mt-4">
+            <div class="col-3 d-flex align-items-center justify-content-end">
+                <div class="">商品描述：</div>
+            </div>
+            <!-- Goods_detail -->
+            <div class="col-9">
+                <textarea id="fruit_detail" class="goods_textarea" rows="6">{{$row->Goods_detail}}</textarea>
+            </div>
+        </div>
+
+        <!-- 更新按鈕 -->
+        <div class="row mt-4">
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <div class="btn btn-outline-success" id="upd" onclick="update_goods(this)" data-goods_id="{{ $row->Goods_id}}">更新</div>
+            </div>
+        </div>
     </div>
+</div>
 </div>
 @endsection
 
@@ -205,11 +205,11 @@
             contentType: false,
             processData: false,
             success: function(data) {
-                if(data.state){
+                if (data.state) {
                     console.log(data.message);
-                    $(location).attr("href","/owner");
-                }else{
-                    alert (data.message);
+                    $(location).attr("href", "/owner");
+                } else {
+                    alert(data.message);
                 }
             },
             error: function() {

@@ -62,6 +62,7 @@
                 <!-- result_items showgoodsitem-->
 
                 @foreach ($row as $goods)
+                @if($goods->Goods_state!=0)
                 <div class="col-lg-3 mt-2">
                     <a href="/fruit/goods_only/{{$goods->Goods_id}}">
                         <div class="itemsbox">
@@ -84,6 +85,7 @@
                         </div>
                     </a>
                 </div>
+                @endif
                 @endforeach
 
             </div>

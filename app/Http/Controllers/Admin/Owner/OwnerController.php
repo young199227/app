@@ -16,7 +16,7 @@ class OwnerController extends Controller
         $row = DB::table('goods')
             ->select('*', DB::raw('(select Goods_img FROM goods_imges where Goods_id = a.Goods_id LIMIT 1) as Goods_imges'))
             ->from('goods as a')
-            ->paginate(5);
+            ->paginate(7);
 
 
         return view('web.owner.owner_index', compact('row'));

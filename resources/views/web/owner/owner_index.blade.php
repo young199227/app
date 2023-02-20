@@ -35,7 +35,11 @@
                 </thead>
                 <tbody>
                     @foreach($row as $goods)
+                    @if($goods->Goods_state==0)
+                    <tr id="goods_id{{ $goods->Goods_id}}" style="line-height: 80px; background-color:dimgrey">
+                        @else
                     <tr id="goods_id{{ $goods->Goods_id}}" style="line-height: 80px;">
+                        @endif
                         <td>{{ $goods->Goods_id}}</td>
                         <td class="imgbox"><img src="{{ $goods->Goods_imges}}" alt=""></td>
                         <td>{{ $goods->Goods_name}}</td>
@@ -44,7 +48,11 @@
                         <td>{{ $goods->Goods_created_at}}</td>
                         <td>
                             <a href="/owner/owner_update_goods/{{$goods->Goods_id}}"><button class="btn btn-outline-dark">修改</button></a>
-                            <button class="btn btn-danger ms-3" onclick="delete_goods(this)" data-goods_id="{{ $goods->Goods_id}}">刪除</button>
+                            @if($goods->Goods_state==0)
+                            <button class="btn btn-success ms-3" onclick="up_goods(this)" data-goods_id="{{ $goods->Goods_id}}">上架</button>
+                            @else
+                            <button class="btn btn-danger ms-3" onclick="delete_goods(this)" data-goods_id="{{ $goods->Goods_id}}">下架</button>
+                            @endif
                         </td>
                     </tr>
                     @endforeach
@@ -57,7 +65,7 @@
 <div class="row">
     <div class="col d-flex justify-content-center">
         <div class="">
-            {{ $row ->links() }} 
+            {{ $row ->links() }}
         </div>
     </div>
 </div>
@@ -67,32 +75,56 @@
 @section('script')
 @parent
 <script>
-    //ajax刪除商品
+    //ajax下架商品
     //delete_goods方法傳入按鈕自身html(this)改名(html)
     function delete_goods(html) {
 
-        if (confirm("確實要刪除嗎?")) {
+        dataJson = {};
+        dataJson["id"] = $(html).data("goods_id");
+        //console.log(JSON.stringify(dataJson));
+        $.ajax({
+            type: "post",
+            url: "/api/owner/delete_goods",
+            data: JSON.stringify(dataJson),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
 
-            dataJson = {};
-            dataJson["id"] = $(html).data("goods_id");
-            //console.log(JSON.stringify(dataJson));
-            $.ajax({
-                type: "post",
-                url: "/api/owner/delete_goods",
-                data: JSON.stringify(dataJson),
-                dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                success: function(data) {
-
-                    if (data.state) {
-                        $("#goods_id" + $(html).data("goods_id")).remove();
-                    }
-                },
-                error: function() {
-                    console.log("ajax失敗");
+                if (data.state) {
+                    // $("#goods_id" + $(html).data("goods_id")).css('background-color','dimgrey');
+                    window.location.reload();
                 }
-            });
-        }
+            },
+            error: function() {
+                console.log("ajax失敗");
+            }
+        });
+
+    }
+
+    //ajax上架商品
+    function up_goods(html){
+
+        dataJson = {};
+        dataJson["id"] = $(html).data("goods_id");
+        //console.log(JSON.stringify(dataJson));
+        $.ajax({
+            type: "post",
+            url: "/api/owner/up_goods",
+            data: JSON.stringify(dataJson),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+
+                if (data.state) {
+                    // $("#goods_id" + $(html).data("goods_id")).css('background-color','dimgrey');
+                    window.location.reload();
+                }
+            },
+            error: function() {
+                console.log("ajax失敗");
+            }
+        });
     }
 </script>
 @endsection

@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class GoodsApiController extends Controller
-{
+{   
+    //購物車數量(紅點)
     public function goods_car_count(Request $req)
     {   
         if($req->filled(['member_email'])){

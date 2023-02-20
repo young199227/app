@@ -26,8 +26,10 @@ Route::group(["prefix" => "owner"], function () {
     Route::post('/insert_goods', [OwnerApiController::class, 'insert_goods']);
     //後臺修改商品 owner修改商品
     Route::post('/update_goods', [OwnerApiController::class, 'update_goods']);
-    //後臺刪除商品 owner刪除商品
+    //後臺下架商品 owner下架商品
     Route::post('/delete_goods', [OwnerApiController::class, 'delete_goods']);
+    //後臺上架商品 owner上架商品
+    Route::post('/up_goods', [OwnerApiController::class, 'up_goods']);
 });
 
 //goods_car group

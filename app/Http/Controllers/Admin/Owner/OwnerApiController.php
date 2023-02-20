@@ -100,22 +100,34 @@ class OwnerApiController extends Controller
 
                 return response()->json(["state" => true, "message" => "更新成功"]);
             } else {
-                return response()->json(["state" => false, "message" => "更新失敗或資料一樣沒更新"]);
+                return response()->json(["state" => false, "message" => "資料一樣(文字&圖片都要修改),更新失敗"]);
             }
         } else {
             return response()->json(["state" => false, "message" => "缺少欄位或沒有值"]);
         }
     }
 
-    //刪除商品 http://127.0.0.1:8000/api/owner/delete_goods {"id":"1"}
+    //下架商品 http://127.0.0.1:8000/api/owner/delete_goods {"id":"1"}
     public function delete_goods(Request $req)
     {
-        $row = DB::table('goods')->where('Goods_id', $req->id)->delete();
+        $row = DB::table('goods')->where('Goods_id', $req->id)->update(['Goods_state'=>0]);
 
         if ($row) {
-            return response()->json(["state" => true, "message" => "刪除成功"]);
+            return response()->json(["state" => true, "message" => "下架成功"]);
         } else {
-            return response()->json(["state" => false, "message" => "刪除失敗"]);
+            return response()->json(["state" => false, "message" => "下架失敗"]);
+        }
+    }
+
+    //上架商品 http://127.0.0.1:8000/api/owner/up_goods {"id":"1"}
+    public function up_goods(Request $req){
+
+        $row = DB::table('goods')->where('Goods_id', $req->id)->update(['Goods_state'=>1]);
+
+        if ($row) {
+            return response()->json(["state" => true, "message" => "上架成功"]);
+        } else {
+            return response()->json(["state" => false, "message" => "上架失敗"]);
         }
     }
 
