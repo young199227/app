@@ -27,25 +27,55 @@
             </div>
             <div class="row mt-3">
 
-                <div class="col-md-4">
+                <div class="col-md-4 offset-2">
                     <div class="card">
                         <div class="card-body text-center w-100">
-                            <div class="fs-3">註冊會員</div>
-                            <div class="fs-4">{{ $row_member[0]->member_count }}</div>
+                            <div class="fs-3">會員總數</div>
+                            <div class="fs-4">{{ $member_count->Member_count }}</div>
                         </div>
                     </div>
                 </div>
 
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center w-100">
+                            <div class="fs-3">停權會員</div>
+                            <div class="fs-4">{{ $member_old_count->Member_count }}</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mt-3">
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center w-100">
+                            <div class="fs-3">商品總數</div>
+                            <div class="fs-4">{{$goods_up_count->Goods_count + $goods_old_count->Goods_count}}</div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body text-center w-100">
                             <div class="fs-3">上架商品</div>
-                            <div class="fs-4">{{ $row_goods[0]->goods_count }}</div>
+                            <div class="fs-4">{{ $goods_up_count->Goods_count }}</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center w-100">
+                            <div class="fs-3">下架商品</div>
+                            <div class="fs-4">{{ $goods_old_count->Goods_count }}</div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
 
         </div>

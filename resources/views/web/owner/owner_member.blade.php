@@ -27,7 +27,7 @@
                         <th>編號</th>
                         <th>會員信箱</th>
                         <th>創建日期</th>
-                        <th>操作</th>
+                        <th>目前狀態</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,8 +37,11 @@
                         <td>{{ $member->Member_email}}</td>
                         <td>{{ $member->Member_created_at}}</td>
                         <td>
-                            <a href=""><button class="btn btn-outline-dark">修改</button></a>
-                            <!-- <button class="btn btn-danger ms-3" onclick="delete_goods(this)" data-member_id="">刪除</button> -->
+                            @if( $member->Member_state==1 )
+                            <button class="btn btn-outline-danger ms-3" onclick="delete_member(this)" data-member_id="{{$member->Member_id}}">正常</button>
+                            @elseif( $member->Member_state==2 )
+                            <button class="btn btn-outline-success ms-3" onclick="up_member(this)" data-member_id="{{$member->Member_id}}">停權</button>
+                            @endif
                         </td>
                     </tr>
                     @endforeach
@@ -61,32 +64,56 @@
 @section('script')
 @parent
 <script>
-    //ajax刪除商品
-    //delete_goods方法傳入按鈕自身html(this)改名(html)
-    // function delete_goods(html) {
+    //ajax修改會員正常與停權
 
-    //     if (confirm("確實要刪除嗎?")) {
+    //delete_member 停權會員
+    function delete_member(html){
 
-    //         dataJson = {};
-    //         dataJson["id"] = $(html).data("goods_id");
-    //         //console.log(JSON.stringify(dataJson));
-    //         $.ajax({
-    //             type: "post",
-    //             url: "/api/owner/delete_goods",
-    //             data: JSON.stringify(dataJson),
-    //             dataType: "json",
-    //             contentType: "application/json; charset=utf-8",
-    //             success: function(data) {
+        dataJson = {};
+        dataJson["id"] = $(html).data("member_id");
+        console.log(JSON.stringify(dataJson));
+        $.ajax({
+            type: "post",
+            url: "/api/owner/delete_member",
+            data: JSON.stringify(dataJson),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
 
-    //                 if (data.state) {
-    //                     $("#goods_id" + $(html).data("goods_id")).remove();
-    //                 }
-    //             },
-    //             error: function() {
-    //                 console.log("ajax失敗");
-    //             }
-    //         });
-    //     }
-    // }
+                if (data.state) {
+                    // $("#goods_id" + $(html).data("goods_id")).css('background-color','dimgrey');
+                    window.location.reload();
+                }
+            },
+            error: function() {
+                console.log("ajax失敗");
+            }
+        });
+    }
+
+    //up_member 恢復會員
+    function up_member(html){
+
+        dataJson = {};
+        dataJson["id"] = $(html).data("member_id");
+        console.log(JSON.stringify(dataJson));
+        $.ajax({
+            type: "post",
+            url: "/api/owner/up_member",
+            data: JSON.stringify(dataJson),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+
+                if (data.state) {
+                    // $("#goods_id" + $(html).data("goods_id")).css('background-color','dimgrey');
+                    window.location.reload();
+                }
+            },
+            error: function() {
+                console.log("ajax失敗");
+            }
+        });
+    }
 </script>
 @endsection

@@ -58,16 +58,30 @@ class OwnerController extends Controller
     //後台管理統計圖 （顯示總數）
     public function owner_count()
     {
+
         // 註冊會員總數
-        $row_member = DB::table('member')
-        ->selectRaw('count(*) as member_count')
-        ->get();
+        $member_count = DB::table('member')
+            ->selectRaw('count(*) AS Member_count')
+            ->first();
+            
+        // 停權會員數量
+        $member_old_count = DB::table('member')
+            ->selectRaw('count(*) AS Member_count')
+            ->where('Member_state','=', 2)
+            ->first();
 
-        // 上架商品總數
-        $row_goods = DB::table('goods')
-        ->selectRaw('count(*) as goods_count')
-        ->get();
+        // 上下架商品數量
+        $goods_up_count = DB::table('goods')
+            ->selectRaw('count(*) AS Goods_count')
+            ->where('Goods_state', '=', 1)
+            ->first();
 
-        return view('web.owner.owner_count', compact('row_member','row_goods'));
+        $goods_old_count = DB::table('goods')
+            ->selectRaw('count(*) AS Goods_count')
+            ->where('Goods_state', '=', 0)
+            ->first();
+
+        return view('web.owner.owner_count', compact('member_count','member_old_count', 'goods_up_count', 'goods_old_count'));
+        
     }
 }

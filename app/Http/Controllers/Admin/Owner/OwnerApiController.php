@@ -131,6 +131,29 @@ class OwnerApiController extends Controller
         }
     }
 
+    // 停權會員 http://127.0.0.1:8000/api/owner/delete_member {"id":"2"}
+    public function delete_member(Request $req){
+
+        $row = DB::table('member')->where('Member_id', $req->id)->update(['Member_state'=>2]);
+
+        if ($row) {
+            return response()->json(["state" => true, "message" => "停權成功"]);
+        } else {
+            return response()->json(["state" => false, "message" => "停權失敗"]);
+        }
+    }
+
+    // 停權會員 http://127.0.0.1:8000/api/owner/up_member {"id":"2"}
+    public function up_member(Request $req){
+
+        $row = DB::table('member')->where('Member_id', $req->id)->update(['Member_state'=>1]);
+
+        if ($row) {
+            return response()->json(["state" => true, "message" => "恢復成功"]);
+        } else {
+            return response()->json(["state" => false, "message" => "恢復失敗"]);
+        }
+    }
     // //圖片上傳
     // $image = $req->file('ggyy');
     // $filename = $image->getClientOriginalName();
