@@ -14,7 +14,7 @@
     <div class="container-fluid">
         <div class="row mt-3">
 
-            <div class="col-md-6">
+            <div class="col-md-12 mb-3">
                 <div class="card h-100">
                     <div class="card-body d-flex align-items-center">
                         <i class="fa-regular fa-money-bill-1 fa-6x"></i>
@@ -26,13 +26,37 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card h-100">
                     <div class="card-body d-flex align-items-center">
                         <i class="fa-regular fa-money-bill-1 fa-6x"></i>
                         <div class="text-center w-100">
                             <div class="fs-4">商品數量</div>
-                            <h1 id="goods_count">{{$goods_count->Goods_count}}</h1>
+                            <h1 id="goods_count">{{$goods_up_count->Goods_count + $goods_old_count->Goods_count}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fa-regular fa-money-bill-1 fa-6x"></i>
+                        <div class="text-center w-100" style="color:red">
+                            <div class="fs-4">上架商品</div>
+                            <h1 id="goods_count">{{$goods_up_count->Goods_count}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex align-items-center">
+                        <i class="fa-regular fa-money-bill-1 fa-6x"></i>
+                        <div class="text-center w-100" style="color:green">
+                            <div class="fs-4">下架商品</div>
+                            <h1 id="goods_count">{{$goods_old_count->Goods_count}}</h1>
                         </div>
                     </div>
                 </div>
@@ -51,7 +75,7 @@
             </div>
 
             <div id="app">
-            <input type="text" class="form-control" v-model="text01">
+                <input type="text" class="form-control" v-model="text01">
                 @verbatim
                 <input type="text" class="form-control" v-model="text02">
                 {{text01}}
@@ -92,10 +116,10 @@
     new Chart($("#myPie"), {
         type: 'pie',
         data: {
-            labels: ['會員數', '水豚數量', '鴨子數量', '烏龜數量'],
+            labels: ['上架數量', '下架數量'],
             datasets: [{
-                label: '',
-                data: [ggyy, 10, 0, 10],
+                label: '數量',
+                data: ["{{$goods_up_count->Goods_count}}", "{{$goods_old_count->Goods_count}}"],
                 borderWidth: 0.5
             }]
         },
@@ -123,7 +147,6 @@
     };
 
     Vue.createApp(App).mount('#app');
-
 </script>
 
 </html>
