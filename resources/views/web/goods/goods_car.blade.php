@@ -33,7 +33,15 @@
                             <td class="imgbox"><img src="/img/fruit_images/fruit50.png" alt=""></td>
                             <td>abcefg</td>
                             <td>20000</td>
-                            <td>1</td>
+                            <td>
+                            <select class="w-50" aria-label="Default select example" id="">
+                                    <option selected value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
                             <td>
                                 <button class="btn btn-danger ms-3">刪除</button>
                             </td>
@@ -59,7 +67,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">詳細訂單</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">送出訂單</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -73,6 +81,7 @@
                         <input type="text" class="form-control" id="address" name="address">
                     </div>
                 </div>
+                
                 <div class="row mb-3 text-center">
                     <div class="col-2">
                         <label for="address" class="form-label col-form-label">地址</label>
@@ -81,6 +90,7 @@
                         <input type="text" class="form-control" id="address" name="address">
                     </div>
                 </div>
+
                 <div class="row mb-3 text-center">
                     <div class="col-2">
                         <label for="address" class="form-label col-form-label">電話</label>
@@ -90,8 +100,36 @@
                     </div>
                 </div>
 
+                <div class="row mt-3">
+                    <div class="col-4 d-flex justify-content-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                貨到付款
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                            <label class="form-check-label" for="flexRadioDisabled">
+                                ATM
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+                            <label class="form-check-label" for="flexRadioDisabled">
+                                visa
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 送出訂單＿確認物品部分 -->
-                <div class="h5 text-center mt-5">購買內容</div>
+                <div class="h5 text-center mt-4">購買內容</div>
+                <div class="text-danger text-center">總價格(0個商品) : $0</div>
                 <div class="shpbox" style="border: 2px solid rgb(228, 228, 228);">
 
                     <!-- 單一物品 -->
@@ -116,7 +154,7 @@
                 </div>
 
             </div>
-
+            <!-- 最後確認 -->
             <div class="modal-footer">
                 <input type="checkbox" id="check_ok">確認同意
                 <button type="button" class="btn btn-warning">送出</button>
