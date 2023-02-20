@@ -24,20 +24,18 @@
         <div class="col-3 mt-4 d-none d-lg-block d-flex justify-content-center">
             <div class="category">
                 <ul>
-                    <strong>大分類大分類大</strong>
-                    <li><a href="#">小分類1</a></li>
-                    <li><a href="#">小分類2</a></li>
-                    <li><a href="#">小分類3</a></li>
-
-                    <strong>大分類2</strong>
-                    <li><a href="#">小分類1</a></li>
-                    <li><a href="#">小分類2</a></li>
-                    <li><a href="#">小分類3</a></li>
-
-                    <strong>大分類3</strong>
-                    <li><a href="#">小分類1</a></li>
-                    <li><a href="#">小分類2</a></li>
-                    <li><a href="#">小分類3</a></li>
+                    <strong>價錢分類</strong>
+                    <li><a href="/fruit/goods_list/1000">1000元↑</a></li>
+                    <li><a href="/fruit/goods_list/599">500~999元</a></li>
+                    <li class="mb-3"><a href="/fruit/goods_list/500">500元↓</a></li>
+                    
+                    <strong>水果大分類</strong>
+                    <li ><a href="/fruit/goods_google/蘋果">蘋果</a></li>
+                    <li ><a href="/fruit/goods_google/西瓜">西瓜</a></li>
+                    <li ><a href="/fruit/goods_google/葡萄">葡萄</a></li>
+                    <li ><a href="/fruit/goods_google/蕃茄">蕃茄</a></li>
+                    <li ><a href="/fruit/goods_google/草莓">草莓</a></li>
+                    <li ><a href="/fruit/goods_google/橘子">橘子</a></li>
                 </ul>
             </div>
         </div>
@@ -47,9 +45,8 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="d-inline-block">篩選</div>
-                        <div class="btn sorttext">綜合排行</div>
-                        <div class="btn sorttext">最新</div>
-                        <div class="btn sorttext">最熱銷</div>
+                        <a href="/fruit/goods_list"><div class="btn sorttext">綜合排行</div></a>
+                        <a href="/fruit/goods_list/new"><div class="btn sorttext">最新</div></a>
                     </div>
                     <div class="col-6">
 

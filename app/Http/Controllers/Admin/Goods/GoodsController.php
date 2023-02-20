@@ -45,17 +45,6 @@ class GoodsController extends Controller
         return view('web.goods.goods_car');
     }
 
-    //商品列表
-    public function goods_list()
-    {
-        $row = DB::table('goods')
-            ->select('*', DB::raw('(select Goods_img FROM goods_imges where Goods_id = a.Goods_id LIMIT 1) as Goods_imges'))
-            ->from('goods as a')
-            ->get();
-
-        return view('web.goods.goods_list', compact('row'));
-    }
-
     //商品詳細
     public function goods_only(Request $req, $goods_id)
     {
@@ -70,5 +59,65 @@ class GoodsController extends Controller
         } else {
             return view('web.goods.goods_only', compact('row'));
         }
+    }
+
+    //商品列表
+    public function goods_list()
+    {
+        $row = DB::table('goods')
+            ->select('*', DB::raw('(select Goods_img FROM goods_imges where Goods_id = a.Goods_id LIMIT 1) as Goods_imges'))
+            ->from('goods as a')
+            ->get();
+
+        return view('web.goods.goods_list', compact('row'));
+    }
+
+    //商品列表 新到舊
+    public function goods_list_new()
+    {
+        $row = DB::table('goods')
+            ->select('*', DB::raw('(select Goods_img FROM goods_imges where Goods_id = a.Goods_id LIMIT 1) as Goods_imges'))
+            ->from('goods as a')
+            ->orderBy('Goods_id', 'desc')
+            ->get();
+
+        return view('web.goods.goods_list', compact('row'));
+    }
+
+    //商品列表 500內
+    public function goods_list_500()
+    {
+        $row = DB::table('goods')
+            ->select('*', DB::raw('(select Goods_img FROM goods_imges where Goods_id = a.Goods_id LIMIT 1) as Goods_imges'))
+            ->from('goods as a')
+            ->where('Goods_money', '<', 500)
+            ->get();
+
+        return view('web.goods.goods_list', compact('row'));
+    }
+
+    //商品列表 500~999
+    public function goods_list_599()
+    {
+        $row = DB::table('goods')
+            ->select('*', DB::raw('(select Goods_img FROM goods_imges where Goods_id = a.Goods_id LIMIT 1) as Goods_imges'))
+            ->from('goods as a')
+            ->where('Goods_money', '>=', 500)
+            ->where('Goods_money', '<', 1000)
+            ->get();
+
+        return view('web.goods.goods_list', compact('row'));
+    }
+
+    //商品列表 1000以上
+    public function goods_list_1000()
+    {
+        $row = DB::table('goods')
+            ->select('*', DB::raw('(select Goods_img FROM goods_imges where Goods_id = a.Goods_id LIMIT 1) as Goods_imges'))
+            ->from('goods as a')
+            ->where('Goods_money', '>=', 1000)
+            ->get();
+
+        return view('web.goods.goods_list', compact('row'));
     }
 }

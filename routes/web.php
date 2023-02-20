@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //map
-Route::get('/map',[TestController::class, 'map']);
+Route::get('/map', [TestController::class, 'map']);
 //測試頁面2
 Route::post('/testpas', [TestController::class, 'pasw']);
 
@@ -28,17 +28,17 @@ Route::get('/test1', [TestController::class, 'test1']);
 Route::get('/test2', [TestController::class, 'test2']);
 
 //處理session的group (因為aip.php不能分發seeion)
-Route::group(["prefix" => "session"],function(){
+Route::group(["prefix" => "session"], function () {
     //會員登入 
-    Route::post('/member/long',[MemberApiController::class,'member_long']);
+    Route::post('/member/long', [MemberApiController::class, 'member_long']);
     //會員登出
-    Route::get('/member/logout',[MemberApiController::class,'member_logout']);
+    Route::get('/member/logout', [MemberApiController::class, 'member_logout']);
     //會員註冊頁面 發送認證email
-    Route::post('/member/email_session',[MemberApiController::class,'email_session']);
+    Route::post('/member/email_session', [MemberApiController::class, 'email_session']);
     //會員註冊頁面 認證email_session
-    Route::post('/member/email_session_verify',[MemberApiController::class,'email_session_verify']);
+    Route::post('/member/email_session_verify', [MemberApiController::class, 'email_session_verify']);
     //會員註冊
-    Route::post('/member/member_sign_up',[MemberApiController::class,'member_sign_up']);
+    Route::post('/member/member_sign_up', [MemberApiController::class, 'member_sign_up']);
     //會員更改密碼
     Route::post('/member/updata_password', [MemberApiController::class, 'updata_password']);
 });
@@ -52,16 +52,24 @@ Route::group(["prefix" => "fruit"], function () {
     Route::get('/', [GoodsController::class, 'fruit_index'])->name('fruit');
     //搜尋商品
     Route::get('/goods_google/{goods_name?}', [GoodsController::class, 'fruit_google_goods']);
-    //商品列表
-    Route::get('/goods_list', [GoodsController::class, 'goods_list']);
     //商品詳細
     Route::get('/goods_only/{goods_id}', [GoodsController::class, 'goods_only']);
     //購物車
     Route::get('/goods_car', [GoodsController::class, 'goods_car'])->middleware('check.member');
+    //商品列表 
+    Route::get('/goods_list', [GoodsController::class, 'goods_list']);
+    //商品列表 新到舊
+    Route::get('/goods_list/new', [GoodsController::class, 'goods_list_new']);
+    //商品列表 500內
+    Route::get('/goods_list/500', [GoodsController::class, 'goods_list_500']);
+    //商品列表 500~999
+    Route::get('/goods_list/599', [GoodsController::class, 'goods_list_599']);
+    //商品列表 1000以上
+    Route::get('/goods_list/1000', [GoodsController::class, 'goods_list_1000']);
 });
 
 //會員的group
-Route::group(["prefix" => "member"],function(){
+Route::group(["prefix" => "member"], function () {
     //會員中心
     Route::get('/', [MemberController::class, 'member_index'])->middleware('check.member');
     //會員註冊頁面

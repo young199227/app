@@ -22,13 +22,9 @@ class TestController extends Controller
 
     public function test1(Request $req)
     {
-        $row = DB::table('member')
-            ->join('goods_car', 'member.Member_id', '=', 'goods_car.Member_id')
-            ->select('goods_car.*')
-            ->where('member.Member_email', '=', $req->member_email)
-            ->get();
+        $goodsList = DB::table('goods')->get();
 
-        return $row;
+        return $goodsList;
     }
 
     public function test2(Request $req)
