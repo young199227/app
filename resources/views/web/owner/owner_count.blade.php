@@ -78,6 +78,13 @@
                 
             </div>
 
+
+            <div class="row mt-3">
+                <div class="col-6">
+                    <canvas id="memberChart"></canvas>
+                </div>
+                <div class="col-6"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -86,7 +93,30 @@
 
 @section('script')
 @parent
+<script src="/js/chart.js"></script>
 <script>
+
+    var M_Count = "{{$member_count->Member_count}}" ; 
+    var M_old_Count = "{{ $member_old_count->Member_count }}" ;
+
+    new Chart($("#memberChart"), {
+        type: 'bar',
+        data: {
+            labels: ['會員總數', '停權會員',],
+            datasets: [{
+                label: '會員數量',
+                data: [M_Count, M_old_Count],
+                borderWidth: 0.5
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 
 </script>
 @endsection
