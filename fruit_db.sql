@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1:3306
--- 產生時間： 2023-02-20 05:28:33
+-- 產生時間： 2023-02-23 08:13:24
 -- 伺服器版本： 5.7.40
 -- PHP 版本： 8.0.26
 
@@ -38,14 +38,14 @@ CREATE TABLE IF NOT EXISTS `goods` (
   `Goods_state` int(11) NOT NULL DEFAULT '1',
   `Goods_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '商品創建時間',
   PRIMARY KEY (`Goods_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- 傾印資料表的資料 `goods`
 --
 
 INSERT INTO `goods` (`Goods_id`, `Goods_name`, `Goods_money`, `Goods_sum`, `Goods_area`, `Goods_detail`, `Goods_state`, `Goods_created_at`) VALUES
-(4, '蘋果', 177, 99, '南投縣仁愛鄉', '蘋果很好吃', 1, '2023-02-14 23:10:22'),
+(4, '蘋果', 500, 99, '南投縣仁愛鄉', '蘋果很好吃', 0, '2023-02-14 23:10:22'),
 (5, '葡萄', 3780, 99, '雲林縣古坑鄉', '葡萄很好吃', 1, '2023-02-14 23:18:05'),
 (6, '草莓', 666, 99, '苗栗縣大湖鄉', '草莓很好吃', 1, '2023-02-14 23:23:23'),
 (7, '奇異果', 888, 99, '新竹縣五峰鄉', '奇異果健康', 1, '2023-02-14 23:34:19'),
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `goods_car` (
   `Goods_car_id` int(11) NOT NULL AUTO_INCREMENT,
   `Member_id` int(11) NOT NULL,
   `Goods_id` int(11) NOT NULL,
-  `Goods_sum` int(11) DEFAULT NULL,
+  `Goods_count` int(11) DEFAULT NULL,
   PRIMARY KEY (`Goods_car_id`),
   KEY `Goods_id` (`Goods_id`),
   KEY `Member_id` (`Member_id`)
@@ -96,8 +96,8 @@ CREATE TABLE IF NOT EXISTS `goods_car` (
 -- 傾印資料表的資料 `goods_car`
 --
 
-INSERT INTO `goods_car` (`Goods_car_id`, `Member_id`, `Goods_id`, `Goods_sum`) VALUES
-(1, 3, 25, 1),
+INSERT INTO `goods_car` (`Goods_car_id`, `Member_id`, `Goods_id`, `Goods_count`) VALUES
+(1, 3, 25, 2),
 (2, 3, 17, 1),
 (3, 3, 8, 1);
 

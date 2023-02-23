@@ -22,30 +22,33 @@
                             <th>編號</th>
                             <th>商品圖片</th>
                             <th>商品名稱</th>
-                            <th>商品價格</th>
                             <th>商品數量</th>
+                            <th>商品價格</th>
                             <th>操作</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($row as $goods)
                         <tr style="line-height: 80px;">
-                            <td>12314</td>
-                            <td class="imgbox"><img src="/img/fruit_images/fruit50.png" alt=""></td>
-                            <td>abcefg</td>
-                            <td>20000</td>
+                            <td>{{$goods->Goods_id}}</td>
+                            <td class="imgbox"><img src="{{$goods->Goods_img}}" alt=""></td>
+                            <td>{{$goods->Goods_name}}</td>
                             <td>
-                            <select class="w-50" aria-label="Default select example" id="">
-                                    <option selected value="1">1</option>
+                                <select class="w-50" aria-label="Default select example" id="">
+                                    <option selected disabled value="{{$goods->Goods_count}}">{{$goods->Goods_count}}</option>
+                                    <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
                                 </select>
                             </td>
+                            <td>{{$goods->Goods_money * $goods->Goods_count}}</td>
                             <td>
                                 <button class="btn btn-danger ms-3">刪除</button>
                             </td>
                         </tr>
+                        @endforeach
 
                     </tbody>
                 </table>
@@ -81,7 +84,7 @@
                         <input type="text" class="form-control" id="address" name="address">
                     </div>
                 </div>
-                
+
                 <div class="row mb-3 text-center">
                     <div class="col-2">
                         <label for="address" class="form-label col-form-label">地址</label>
@@ -167,6 +170,6 @@
 @section('script')
 @parent
 <script>
-    
+
 </script>
 @endsection

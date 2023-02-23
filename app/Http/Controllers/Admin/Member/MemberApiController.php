@@ -30,6 +30,7 @@ class MemberApiController extends Controller
                     session(['demomap' => $row->Member_email]);
                 }
                 session(['member' => $row->Member_email]);
+                session(['member_id' => $row->Member_id]);
 
                 return response()->json(['state' => true, 'message' => '登入成功', 'data' => $row->Member_email]);
             } else {

@@ -39,10 +39,19 @@ class GoodsController extends Controller
     }
 
     //購物車
-    public function goods_car()
+    public function goods_car(Request $req)
     {
+        $member_id = $req->session()->get('member_id');
 
-        return view('web.goods.goods_car');
+        $row = DB::table('goods_car AS a')
+            ->select('a.Goods_count','b.*', DB::raw('(SELECT goods_img FROM goods_imges WHERE goods_id = b.goods_id LIMIT 1) as Goods_img'))
+            ->join('goods AS b', 'a.Goods_id', '=', 'b.Goods_id')
+            ->where('a.Member_id', '=', 3)
+            ->get();
+
+        // return $row;
+
+        return view('web.goods.goods_car', compact('row'));
     }
 
     //商品詳細
