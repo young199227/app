@@ -34,10 +34,10 @@ class MemberApiController extends Controller
 
                 return response()->json(['state' => true, 'message' => '登入成功', 'data' => $row->Member_email]);
             } else {
-                return response()->json(['state' => false, 'message' => '登入失敗']);
+                return response()->json(['state' => false, 'message' => '帳號或密碼錯誤']);
             }
         } else {
-            return response()->json(['state' => false, 'message' => '缺少欄位或空值']);
+            return response()->json(['state' => false, 'message' => '帳號或密碼錯誤']);
         }
     }
 

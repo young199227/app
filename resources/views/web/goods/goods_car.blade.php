@@ -31,7 +31,7 @@
                         @foreach($row as $goods)
                         <tr style="line-height: 80px;">
                             <td>{{$goods->Goods_id}}</td>
-                            <td class="imgbox"><img src="{{$goods->Goods_img}}" alt=""></td>
+                            <td class="imgbox"><img src="{{$goods->Goods_img}}" onerror="this.onerror=null;this.src='/img/img_Prepare.png';"></td>
                             <td>{{$goods->Goods_name}}</td>
                             <td>
                                 <select class="w-50" aria-label="Default select example" id="car_goods_count" data-member_id="{{$goods->Member_id}}" data-goods_id="{{$goods->Goods_id}}" data-goods_money="{{$goods->Goods_money}}">
@@ -45,7 +45,7 @@
                             </td>
                             <td id="car_goods_money{{$goods->Goods_id}}">{{$goods->Goods_money * $goods->Goods_count}}</td>
                             <td>
-                                <button class="btn btn-danger ms-3">刪除</button>
+                                <button class="btn btn-danger ms-3" id="car_goods_delete" data-member_id="{{$goods->Member_id}}" data-goods_id="{{$goods->Goods_id}}">刪除</button>
                             </td>
                         </tr>
                         @endforeach
@@ -63,7 +63,7 @@
             $goods_car_toto = 0;
             for ($i = 0; $i < count($row); $i++) { $goods_car_toto +=$row[$i]->Goods_money * $row[$i]->Goods_count;}
                 @endphp
-                <span class="">總金額: $<span id="goods_car_toto">{{$goods_car_toto}}</span></span>
+                <span class="fs-5">總金額: $<span id="goods_car_toto">{{$goods_car_toto}}</span></span>
                 <!-- 算出購物車內商品總價 -->
 
                 <button class="btn btn-warning" style="width:150px" data-bs-toggle="modal" data-bs-target="#exampleModal">去買單</button>
@@ -179,27 +179,63 @@
 <script>
     //商品數量變動後改單個商品價錢+總價錢
     $("td #car_goods_count").bind('input propertychange', function() {
+
         //總價的變數
         var goods_car_toto = 0;
+        //儲存$("td #car_goods_count")讓他可以在ajax裡面作用
+        var count_html = $(this);
 
         var dataJson = {};
         dataJson['member_id'] = $(this).data('member_id');
         dataJson['goods_id'] = $(this).data('goods_id');
         dataJson['goods_count'] = $(this).val();
+        // console.log(JSON.stringify(dataJson));
+        $.ajax({
+            type: "POST",
+            url: "/api/goods_car/count_update",
+            data: JSON.stringify(dataJson),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
 
-        console.log(JSON.stringify(dataJson));
-
-        //修改後的單個商品總價錢更改
-        $("#car_goods_money" + $(this).data('goods_id')).text($(this).val() * $(this).data('goods_money'));
-
-        // 使用each()方法遍歷所有car_goods_money開頭的元素 text相加變成goods_car_toto
-        $('[id^="car_goods_money"]').each(function() {
-            goods_car_toto += parseInt($(this).text());
+                if (data.state) {
+                    //修改後的單個商品總價錢更改
+                    $("#car_goods_money" + count_html.data('goods_id')).text(count_html.val() * count_html.data('goods_money'));
+                    // 使用each()方法遍歷所有car_goods_money開頭的元素 text相加變成goods_car_toto
+                    $('[id^="car_goods_money"]').each(function() {
+                        goods_car_toto += parseInt($(this).text());
+                    });
+                    //修改後的總價錢更改
+                    $("#goods_car_toto").text(goods_car_toto);
+                }
+            },
+            error: function() {
+                console.log("ajax失敗");
+            }
         });
+    });
+    //刪除購物車內的商品
+    $("td #car_goods_delete").click(function(){
+        var dataJson = {};
+        dataJson['member_id'] = $(this).data('member_id');
+        dataJson['goods_id'] = $(this).data('goods_id');
+        // console.log(JSON.stringify(dataJson));
+        $.ajax({
+            type: "POST",
+            url: "/api/goods_car/delete",
+            data: JSON.stringify(dataJson),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
 
-        //修改後的總價錢更改
-        $("#goods_car_toto").text(goods_car_toto);
-
+                if (data.state) {
+                    window.location.reload();
+                }
+            },
+            error: function() {
+                console.log("ajax失敗");
+            }
+        });
     });
 </script>
 @endsection

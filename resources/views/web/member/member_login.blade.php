@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="/css/mycolor.css">
     <link rel="stylesheet" href="/css/fruit.css">
     <style>
-
         body {
             background-color: rgb(255, 253, 232);
         }
@@ -114,9 +113,18 @@
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery-3.6.1.min.js"></script>
 <script>
-
+    //按按鈕登入
     $("#member_login").click(function() {
-
+        member_login_login()
+    });
+    //按Enter登入
+    $("#member_password").keypress(function() {
+        if (event.which == 13) {
+            member_login_login()
+        }
+    });
+    //會員登入頁面的登入方法
+    function member_login_login(){
         var jsonData = {};
         jsonData["member_email"] = $("#member_email").val();
         jsonData["member_password"] = $("#member_password").val();
@@ -131,17 +139,16 @@
 
                 if (data.state) {
                     // console.log(data);
-                    $(location).attr("href","/fruit");
+                    $(location).attr("href", "/fruit");
                 } else {
-                    $("#member_email_error").text(data.message + "帳號或密碼錯誤").css("color", "red");
+                    $("#error_em").text(data.message).css("color", "red");
                 }
             },
             error: function() {
                 console.log("ajax失敗");
             }
         });
-    });
-
+    }
 </script>
 
 </html>
