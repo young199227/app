@@ -38,7 +38,11 @@ Route::group(["prefix" => "owner"], function () {
 
 //goods_car group
 Route::group(["prefix"=>"goods_car"],function(){
-    //購物車商品數量
+    //至頂購物車商品數量(紅點)
     Route::post('/count', [GoodsApiController::class, 'goods_car_count']);
+    //購物車商品數量更改
+    Route::post('/count_update', [GoodsApiController::class, 'goods_car_count_update']);
+    //購物車商品刪除
+    Route::post('/delete', [GoodsApiController::class, 'goods_car_delete']);
 });
 

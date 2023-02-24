@@ -34,7 +34,7 @@
                             <td class="imgbox"><img src="{{$goods->Goods_img}}" alt=""></td>
                             <td>{{$goods->Goods_name}}</td>
                             <td>
-                                <select class="w-50" aria-label="Default select example" id="">
+                                <select class="w-50" aria-label="Default select example" id="car_goods_count" data-member_id="{{$goods->Member_id}}" data-goods_id="{{$goods->Goods_id}}" data-goods_money="{{$goods->Goods_money}}">
                                     <option selected disabled value="{{$goods->Goods_count}}">{{$goods->Goods_count}}</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -43,7 +43,7 @@
                                     <option value="5">5</option>
                                 </select>
                             </td>
-                            <td>{{$goods->Goods_money * $goods->Goods_count}}</td>
+                            <td id="car_goods_money{{$goods->Goods_id}}">{{$goods->Goods_money * $goods->Goods_count}}</td>
                             <td>
                                 <button class="btn btn-danger ms-3">刪除</button>
                             </td>
@@ -58,8 +58,15 @@
     </div>
     <div class="row">
         <div class="col-12 text-end">
-            <span class="">總金額(0個商品) : $0</span>
-            <button class="btn btn-warning" style="width:150px" data-bs-toggle="modal" data-bs-target="#exampleModal">去買單</button>
+            <!-- 算出購物車內商品總價 -->
+            @php
+            $goods_car_toto = 0;
+            for ($i = 0; $i < count($row); $i++) { $goods_car_toto +=$row[$i]->Goods_money * $row[$i]->Goods_count;}
+                @endphp
+                <span class="">總金額: $<span id="goods_car_toto">{{$goods_car_toto}}</span></span>
+                <!-- 算出購物車內商品總價 -->
+
+                <button class="btn btn-warning" style="width:150px" data-bs-toggle="modal" data-bs-target="#exampleModal">去買單</button>
         </div>
     </div>
 </div>
@@ -81,7 +88,7 @@
                         <label for="address" class="form-label col-form-label">收件人</label>
                     </div>
                     <div class="col-9">
-                        <input type="text" class="form-control" id="address" name="address">
+                        <input type="text" class="form-control" id="addres" name="address">
                     </div>
                 </div>
 
@@ -99,7 +106,7 @@
                         <label for="address" class="form-label col-form-label">電話</label>
                     </div>
                     <div class="col-9">
-                        <input type="text" class="form-control" id="address" name="address">
+                        <input type="text" class="form-control" id="addresss" name="address">
                     </div>
                 </div>
 
@@ -170,6 +177,29 @@
 @section('script')
 @parent
 <script>
+    //商品數量變動後改單個商品價錢+總價錢
+    $("td #car_goods_count").bind('input propertychange', function() {
+        //總價的變數
+        var goods_car_toto = 0;
 
+        var dataJson = {};
+        dataJson['member_id'] = $(this).data('member_id');
+        dataJson['goods_id'] = $(this).data('goods_id');
+        dataJson['goods_count'] = $(this).val();
+
+        console.log(JSON.stringify(dataJson));
+
+        //修改後的單個商品總價錢更改
+        $("#car_goods_money" + $(this).data('goods_id')).text($(this).val() * $(this).data('goods_money'));
+
+        // 使用each()方法遍歷所有car_goods_money開頭的元素 text相加變成goods_car_toto
+        $('[id^="car_goods_money"]').each(function() {
+            goods_car_toto += parseInt($(this).text());
+        });
+
+        //修改後的總價錢更改
+        $("#goods_car_toto").text(goods_car_toto);
+
+    });
 </script>
 @endsection
