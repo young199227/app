@@ -36,7 +36,6 @@
                         <li><a class="dropdown-item" href="/fruit"></a></li>
                         <li><a class="dropdown-item" href="/fruit">測試</a></li>
                         <li><a class="dropdown-item" href="/fruit">測試2</a></li>
-                        <li><a class="dropdown-item" href="/fruit">測試3</a></li>
                     </ul>
                 </div>
 
@@ -62,7 +61,7 @@
                             <div class="col-md-12 d-flex justify-content-end ">
                                 <div class="rightNav">
                                     <ul>
-                                        <li><a href="/member">你好,{{ Session('member') }}</a></li>
+                                        <li class="d-none d-md-inline-block"><a href="/member">你好,{{ Session('member') }}</a></li>
                                         <li><a href="/session/member/logout">登出</a></li>
                                         <span class="d-none d-md-inline-block">
                                             <li><a href="/fruit"><img src="/img/tree.png" class="logo "></a></li>

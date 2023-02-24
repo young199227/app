@@ -1,6 +1,5 @@
-
 body {
-    background-color: #ffecec;
+    background-color: #22222222;
 }
 
 /* 置頂導覽列 */
@@ -67,7 +66,7 @@ body {
 /* 內容物 左邊列排 */
 .main .aside {
     position: fixed;
-    background-color: rgb(97, 146, 109);
+    background-color: #61926d;
     float: left;
     margin-top: 3em;
     width: 15em;
@@ -101,27 +100,11 @@ body {
 
 /* 右面新增大框放裏東西 */
 .main .article .ownerbox {
-    background-color: #f4f5f5;
-    color: #123456;
-    width: 90%;
+    background-color: #ffffff;
+    color: #403426;
     padding: 20px;
     margin: 30px;
     border-radius: 15px;
-}
-
-/* 商品圖片限制 */
-.main .article .ownerbox .imgbox {
-    width: 80px;
-    height: 80px;
-    border: 1px solid var(--grey01);
-    background-color: #fff;
-    margin: 0px 10px 10px 0px;
-}
-
-/* 商品圖片橫向排列 */
-.main .article .ownerbox .imgrow {
-    display: flex;
-    flex-wrap: wrap;
 }
 
 /* 商品圖片等比例縮放 */
@@ -131,13 +114,6 @@ body {
     object-fit: contain;
 }
 
-/* 價錢＆數量 的 寬度 */
-.main .article .goodsPNW {
-    width: 150px;
-}
-
-
-
 /* 商品敘述框框 */
 .main .article .goods_textarea {
     border-radius: 10px;
@@ -146,13 +122,6 @@ body {
     padding: 15px;
 
 }
-
-/* 頁尾 */
-/* .footer {
-    background-color: #ccc;
-    text-align: center;
-    font-size: 2em;
-} */
 
 @media screen and (max-width:768px) {
 
@@ -185,14 +154,85 @@ body {
         display: none;
     }
 
-    /* 價錢＆數量 的 寬度 */
-    .main .article .goodsPNW {
-        width: 70%;
+    /* 表格RWD */
+    .table-rwd thead {
+        display: none;
     }
+
+    .table-rwd tbody tr {
+        display: block;
+        border: 2px solid #ced4da;
+        margin: 10px;
+        overflow: hidden;
+    }
+
+    .table-rwd tbody tr td {
+        display: block;
+        float: left;
+    }
+
+    .table-rwd tbody tr td::before {
+        content: attr(data-th)"：";
+        color: #1b2d47;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+    /* 商品圖片橫向排列  poup = 上傳、修改頁面 */
+    .main .article .poup .ownerbox .imgrow {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    /* 商品圖片限制  poup = 上傳、修改頁面 */
+    .main .article .poup .ownerbox .imgbox {
+        width: 70px;
+        border: 1px solid #ced4da;
+        background-color: #fff;
+        margin: 0px 10px 10px 0px;
+        border-radius: 10px;
+    }
+
 }
 
 @media screen and (min-width:768px) {
     .article {
         margin-left: 15em;
     }
+
+    table tbody tr {
+        line-height: 80px;
+    }
+    
+    /* 商品圖片橫向排列  poup = 上傳、修改頁面 */
+    .main .article .poup .ownerbox .imgrow {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    /* 商品圖片限制  poup = 上傳、修改頁面 */
+    .main .article .poup .ownerbox .imgbox {
+        width: 80px;
+        height: 80px;
+        border: 1px solid #ced4da;
+        background-color: #fff;
+        margin: 0px 10px 10px 0px;
+        border-radius: 10px;
+    }
+
+    /* 商品圖片限制  管理商品 表格圖片限制 */
+    .main .article .ownerbox .imgbox {
+        width: 80px;
+        height: 80px;
+        border: 1px solid #ced4da;
+        background-color: #fff;
+        margin: 0px 10px 10px 0px;
+        border-radius: 10px;
+    }
+
+    /* 價錢＆數量 的 寬度 */
+    .main .article .goodsPNW {
+        width: 150px;
+    }
+
 }

@@ -24,10 +24,10 @@
             <h3>個人資訊</h3>
 
             <div class="row mt-4">
-                <div class="col-3 d-flex align-items-center justify-content-end">
+                <div class="col-md-3 col-5 d-flex align-items-center justify-content-end">
                     <div class="">註冊信箱：</div>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6 col-7">
                     <input type="text" class="form-control inputtext" id="" value="{{ Session('member') }}" disabled>
                 </div>
             </div>
@@ -36,32 +36,32 @@
             <h3 class="mt-5 d-inline-block">更改密碼</h3><span>(6~12字)</span>
             
             <div class="row mt-4">
-                <div class="col-3 d-flex align-items-center justify-content-end">
+                <div class="col-md-3 col-5 d-flex align-items-center justify-content-end">
                     <div class="">舊密碼：</div>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6 col-7">
                     <input type="password" class="form-control inputtext" id="old_password">
                 </div>
             </div>
             <div class="row mt-4">
-                <div class="col-3 d-flex align-items-center justify-content-end">
+                <div class="col-md-3 col-5 d-flex align-items-center justify-content-end">
                     <div class="">新密碼：</div>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6 col-7">
                     <input type="password" class="form-control inputtext" id="new_password">
                 </div>
             </div>
             <div class="row mt-4">
-                <div class="col-3 d-flex align-items-center justify-content-end">
+                <div class="col-md-3 col-5 d-flex align-items-center justify-content-end">
                     <div class="">確認密碼：</div>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6 col-7">
                     <input type="password" class="form-control inputtext" id="re_new_password">
                 </div>
             </div>
 
             <div class="row mt-4">
-                <div class="col-9 d-flex align-items-center justify-content-end">
+                <div class="col-md-9 col-12 d-flex align-items-center justify-content-end">
                     <div class="form-text" id="err_text"></div>
                     <button class="btn btn-success" id="password_btn">修改密碼</button>
                 </div>
@@ -114,7 +114,7 @@
 
 
         }else{
-            $("#err_text").text("新密碼 與 確認密碼 必須一致！").css("color","red");
+            $("#err_text").text("新、確認密碼必須一致！").css("color","red");
         }
     });
 </script>

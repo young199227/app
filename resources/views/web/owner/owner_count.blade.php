@@ -27,7 +27,7 @@
             </div>
             <div class="row mt-3">
 
-                <div class="col-md-4 offset-2">
+                <div class="col-md-4 offset-md-2">
                     <div class="card">
                         <div class="card-body text-center w-100">
                             <div class="fs-3">會員總數</div>
@@ -80,10 +80,10 @@
 
 
             <div class="row mt-3">
-                <div class="col-6">
+                <div class="col-md-6">
                     <canvas id="memberChart"></canvas>
                 </div>
-                <div class="col-6"></div>
+                <div class="col-md-6"></div>
             </div>
         </div>
     </div>

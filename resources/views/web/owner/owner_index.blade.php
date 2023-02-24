@@ -21,7 +21,7 @@
     <div class="col-12">
         <div class="ownerbox">
 
-            <table class="table text-center">
+            <table class="table text-center table-rwd">
                 <thead>
                     <tr>
                         <th>編號</th>
@@ -36,17 +36,17 @@
                 <tbody>
                     @foreach($row as $goods)
                     @if($goods->Goods_state==0)
-                    <tr id="goods_id{{ $goods->Goods_id}}" style="line-height: 80px; background-color:dimgrey">
+                    <tr id="goods_id{{ $goods->Goods_id}}" style="background-color:#aaaaaa">
                         @else
-                    <tr id="goods_id{{ $goods->Goods_id}}" style="line-height: 80px;">
+                    <tr id="goods_id{{ $goods->Goods_id}}" >
                         @endif
-                        <td>{{ $goods->Goods_id}}</td>
-                        <td class="imgbox"><img src="{{ $goods->Goods_imges}}" alt=""></td>
-                        <td>{{ $goods->Goods_name}}</td>
-                        <td>{{ $goods->Goods_money}}</td>
-                        <td>{{ $goods->Goods_sum}}</td>
-                        <td>{{ $goods->Goods_created_at}}</td>
-                        <td>
+                        <td data-th="編號">{{ $goods->Goods_id}}</td>
+                        <td data-th="商品圖" class="imgbox"><img src="{{ $goods->Goods_imges}}" alt=""></td>
+                        <td data-th="商品名稱">{{ $goods->Goods_name}}</td>
+                        <td data-th="商品價格">{{ $goods->Goods_money}}</td>
+                        <td data-th="商品數量">{{ $goods->Goods_sum}}</td>
+                        <td data-th="刊登日期">{{ $goods->Goods_created_at}}</td>
+                        <td data-th="操作">
                             <a href="/owner/owner_update_goods/{{$goods->Goods_id}}"><button class="btn btn-outline-dark">修改</button></a>
                             @if($goods->Goods_state==0)
                             <button class="btn btn-success ms-3" onclick="up_goods(this)" data-goods_id="{{ $goods->Goods_id}}">上架</button>

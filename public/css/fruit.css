@@ -1,4 +1,8 @@
 
+body{
+    background-color: #fffde8;
+}
+
 /* 把所有a標籤的底線去除 */
 a{
     text-decoration:none;
@@ -61,26 +65,16 @@ a{
     font-size: 2em;
 }
 
-
-body{
-    background-color: rgb(255, 253, 232);
-}
-
-/* .advertise-box{
-    height: 500px;
-} */
-
 .main .shopee-box{
     background-color: var(--grey01);
     text-align: center;
     font-weight: bolder;
     color: var(--brown02);
     border-radius: 15px;
-    /* transition: 0.5s ease-in-out; */
 }
 
 .main .shopee-box:hover {
-    background-color: var(--orange01);
+    background-color: #f5d6d6;
 }
 
 .main .shopee-box:hover .bttn {

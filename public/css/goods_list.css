@@ -1,4 +1,8 @@
 
+body {
+    background-color: #fbf6e5;
+}
+
 /* 置頂導覽列 */
 .header {
     background-color: #449440;
@@ -38,6 +42,7 @@
     }
 }
 
+
 /* 搜尋框按鈕 */
 .navigation button {
     background-color: #b8fcbe;
@@ -57,13 +62,9 @@
     font-size: 2em;
 }
 
-body {
-    background-color: #ffecec;
-}
-
 /* 左分類表 #大小分類 */
 .main .category {
-    background-color: #ced4da;
+    background-color: var(--grey01);
     border-radius: 15px;
     text-align: center;
 }
@@ -91,10 +92,13 @@ body {
     font-size: 20px;
 }
 
+.main .category ul li a:hover {
+    color: #ffa537;
+}
 
 /* 右上 #篩選/綜合排行/最新 */
 .main .sort {
-    background-color: #ced4da;
+    background-color: var(--grey01);
     padding: 15px;
     border-radius: 10px;
 }
@@ -120,12 +124,12 @@ body {
 }
 
 .main .itemsbox {
-    background-color: #c5eace;
+    background-color: var(--grey01);
     border-radius: 10px;
 }
 
 .main .itemsbox:hover {
-    background-color: rgb(245, 214, 214);
+    background-color: #f5d6d6;
 }
 
 /* 商品圖片限制 */
@@ -140,14 +144,13 @@ body {
     height: 100%;
     object-fit: contain;
 }
+
 /* 商品文字 */
 .main .itemsbox span {
     font-size: 1.2em;
     padding: 15px;
     color:#123456;
 }
-
-
 
 /* 頁尾 */
 .footer {

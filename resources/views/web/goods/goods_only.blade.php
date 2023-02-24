@@ -75,34 +75,34 @@
             </div>
 
         </div>
-        <div class="col-md-4 d-flex justify-content-center align-items-center">
+        <div class="col-md-4 col-12 d-flex justify-content-center align-items-center">
 
-            <div class="textbox">
+            <div class="textbox w-100 mt-3">
                 <div class="h1 text-center">{{ $row->Goods_name }}</div>
 
                 <div class="row mt-4">
-                    <div class="col-3 d-flex align-items-center justify-content-end">
+                    <div class="col-mt-3 col-4 d-flex align-items-center justify-content-end">
                         <div class="">價錢：</div>
                     </div>
-                    <div class="col-9">
+                    <div class="col-mt-9 col-8">
                         <div class="">{{ $row->Goods_money }}元</div>
                     </div>
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-3 d-flex align-items-center justify-content-end">
+                    <div class="col-mt-3 col-4 d-flex align-items-center justify-content-end">
                         <div class="">產地：</div>
                     </div>
-                    <div class="col-9">
+                    <div class="col-mt-9 col-8">
                         <div class="">{{ $row->Goods_area }}</div>
                     </div>
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-3 d-flex align-items-center justify-content-end">
+                    <div class="col-mt-3 col-4 d-flex align-items-center justify-content-end">
                         <div class="">數量：</div>
                     </div>
-                    <div class="col-9">
+                    <div class="col-mt-9 col-8">
                         <div class="row">
                             <div class="col-6">
 
@@ -113,11 +113,6 @@
                                     <option value="4">4</option>
                                     <option value="5">5</option>
                                 </select>
-                                <!-- <div class="input-group">
-                                    <button class="btn btn-dark">－</button>
-                                    <input type="text" class="form-control" value="1" name="" oninput="value=value.replace(/[^\d]/g,'')">
-                                    <button class="btn btn-dark">＋</button>
-                                </div> -->
                             </div>
                             <div class="col-6">
                                 <!-- Button trigger modal -->
@@ -145,15 +140,15 @@
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-3 d-flex align-items-center justify-content-end">
+                    <div class="col-mt-3 col-4 d-flex align-items-center justify-content-end">
                         <div class="">描述：</div>
                     </div>
-                    <div class="col-9">
+                    <div class="col-mt-9 col-8">
                         <div class="">{{ $row->Goods_detail }}</div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="mt-4 d-inline-flex justify-content-evenly">
+                    <div class="mt-4 mb-4 d-inline-flex justify-content-evenly">
                         <a href="/fruit/goods_car"><button class="btn btn-success">加入購物車</button></a>
                         <a href="/fruit/goods_car"><button class="btn btn-success">直接購買</button></a>
                     </div>

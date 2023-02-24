@@ -18,15 +18,15 @@
 @section('main')
 @parent
 <div class="row">
-    <div class="col-12">
+    <div class="col-12 poup">
         <div class="ownerbox">
             <h1>修改商品 No.{{ $row->Goods_id}}</h1>
             <!-- 商品圖片 -->
             <div class="row mt-4">
-                <div class="col-3 d-flex align-items-center justify-content-end">
+                <div class="col-md-3 col-5 mt-md-0 mt-3 d-flex align-items-center justify-content-end">
                     <div class="">商品圖片：</div>
                 </div>
-                <div class="col-9">
+                <div class="col-md-9 col-12 mt-md-0 mt-3">
                     <input accept="image/*" type='file' id="fruit_imginp" style="width: 100%;" multiple />
                     <div class="imgrow" id="show_img">
                         <!-- 圖片顯示的地方 -->
@@ -41,45 +41,45 @@
 
         <!-- 商品名稱 -->
         <div class="row mt-4">
-            <div class="col-3 d-flex align-items-center justify-content-end">
+            <div class="col-md-3 col-5 d-flex align-items-center justify-content-end">
                 <div class="">商品名稱：</div>
             </div>
-            <div class="col-9">
+            <div class="col-md-9 col-7">
                 <input type="text" class="form-control inputtext" id="fruit_name" value="{{$row->Goods_name}}">
             </div>
         </div>
 
         <!-- 商品價錢 -->
         <div class="row mt-4">
-            <div class="col-3 d-flex align-items-center justify-content-end">
+            <div class="col-md-3 col-5 d-flex align-items-center justify-content-end">
                 <div class="">商品價錢：</div>
             </div>
-            <div class="col-9 goodsPNW">
+            <div class="col-md-9 col-7 goodsPNW">
                 <input type="number" class="form-control inputtext" min="1" max="100000" id="fruit_money" value="{{$row->Goods_money}}">
             </div>
         </div>
 
         <!-- 商品數量 -->
         <div class="row mt-4">
-            <div class="col-3 d-flex align-items-center justify-content-end">
+            <div class="col-md-3 col-7 d-flex align-items-center justify-content-end">
                 <div class="">商品數量(箱)：</div>
             </div>
-            <div class="col-9 goodsPNW">
+            <div class="col-md-9 col-5 goodsPNW">
                 <input type="number" class="form-control inputtext" id="fruit_sum" value="{{$row->Goods_sum}}">
             </div>
         </div>
 
         <!-- 產地 -->
         <div class="row mt-4">
-            <div class="col-3 d-flex align-items-center justify-content-end">
+            <div class="col-md-3 col-4 d-flex align-items-center justify-content-end">
                 <div class="">產地：</div>
             </div>
-            <div class="col goodsPNW">
+            <div class="col-4 goodsPNW">
                 <select class="form-select" aria-label="Default select example" id="fruit_city">
                     <option selected value="{{ $part1 }}">{{ $part1 }}</option>
                 </select>
             </div>
-            <div class="col goodsPNW">
+            <div class="col-4 goodsPNW">
                 <select class="form-select" aria-label="Default select example" id="fruit_area">
                     <option selected value="{{ $part2 }}">{{ $part2 }}</option>
                 </select>
@@ -88,11 +88,11 @@
 
         <!-- 商品描述 -->
         <div class="row mt-4">
-            <div class="col-3 d-flex align-items-center justify-content-end">
+            <div class="col-md-3 col-5 d-flex align-items-center justify-content-end">
                 <div class="">商品描述：</div>
             </div>
             <!-- Goods_detail -->
-            <div class="col-9">
+            <div class="col-md-9 col-12 mt-md-0 mt-3">
                 <textarea id="fruit_detail" class="goods_textarea" rows="6">{{$row->Goods_detail}}</textarea>
             </div>
         </div>

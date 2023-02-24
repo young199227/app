@@ -21,7 +21,7 @@
     <div class="col-12">
         <div class="ownerbox">
 
-            <table class="table text-center">
+            <table class="table text-center table-rwd">
                 <thead>
                     <tr>
                         <th>編號</th>
@@ -32,11 +32,11 @@
                 </thead>
                 <tbody>
                     @foreach($row as $member)
-                    <tr id="member_id{{ $member->Member_id}}" style="line-height: 80px;">
-                        <td>{{ $member->Member_id}}</td>
-                        <td>{{ $member->Member_email}}</td>
-                        <td>{{ $member->Member_created_at}}</td>
-                        <td>
+                    <tr id="member_id{{ $member->Member_id}}">
+                        <td data-th="編號">{{ $member->Member_id}}</td>
+                        <td data-th="會員信箱">{{ $member->Member_email}}</td>
+                        <td data-th="創建日期">{{ $member->Member_created_at}}</td>
+                        <td data-th="目前狀態">
                             @if( $member->Member_state==1 )
                             <button class="btn btn-outline-danger ms-3" onclick="delete_member(this)" data-member_id="{{$member->Member_id}}">正常</button>
                             @elseif( $member->Member_state==2 )
