@@ -207,14 +207,14 @@
   //商品搜尋 按鈕版本
   $("#fruit_google_goods").click(function() {
     if ($("#fruit_google_value").val() !== "") {
-      $(location).attr("href", "/fruit/goods_google/" + $("#fruit_google_value").val());
+      $(location).attr("href", "/fruit/goods_google/" + $("#fruit_google_value").val().replace(/\//g, ''));
     }
   });
   //商品搜尋 Enter版本
   $("#fruit_google_value").keypress(function() {
     if (event.which == 13) {
       if ($("#fruit_google_value").val() !== "") {
-        $(location).attr("href", "/fruit/goods_google/" + $("#fruit_google_value").val());
+        $(location).attr("href", "/fruit/goods_google/" + $("#fruit_google_value").val().replace(/\//g, ''));
       }
     }
   });
