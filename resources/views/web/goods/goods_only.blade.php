@@ -52,24 +52,24 @@
 
             <div class="row">
                 <div class="col-12">
-                <!-- 商品沒有圖片時就用img_Prepare.png代替 -->
-                @if(isset($row_img))
+                    <!-- 商品沒有圖片時就用img_Prepare.png代替 -->
+                    @if(isset($row_img))
                     <div class="show_img" id="goodshover" style="background-image:url({{$row_img[0]->Goods_img}})">
                     </div>
-                @else
-                <div class="show_img" id="goodshover" style="background-image:url(/img/img_Prepare.png)">
+                    @else
+                    <div class="show_img" id="goodshover" style="background-image:url(/img/img_Prepare.png)">
                     </div>
-                @endif
+                    @endif
                 </div>
                 <div class="col-12 d-inline-flex justify-content-center">
                     <div class="row overflow-auto flex-nowrap">
-                    <!-- 商品有圖片資料才會foreach -->
-                    @if(isset($row_img))
-                    @foreach ($row_img as $goods)
-                        <div class="imgbox" id="ho" ><img id="goodshover2"src="{{$goods->Goods_img}}" alt="">
+                        <!-- 商品有圖片資料才會foreach -->
+                        @if(isset($row_img))
+                        @foreach ($row_img as $goods)
+                        <div class="imgbox" id="ho"><img id="goodshover2" src="{{$goods->Goods_img}}" alt="">
                         </div>
-                    @endforeach
-                    @endif
+                        @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
@@ -106,7 +106,7 @@
                         <div class="row">
                             <div class="col-6">
 
-                                <select class="form-select" aria-label="Default select example" id="">
+                                <select class="form-select" aria-label="Default select example" id="goods_count">
                                     <option selected value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -149,8 +149,8 @@
                 </div>
                 <div class="row">
                     <div class="mt-4 mb-4 d-inline-flex justify-content-evenly">
-                        <a href="/fruit/goods_car"><button class="btn btn-success">加入購物車</button></a>
-                        <a href="/fruit/goods_car"><button class="btn btn-success">直接購買</button></a>
+                        <button class="btn btn-success" data-member_id="{{ Session('member_id') }}" data-goods_id="{{ $row->Goods_id }}" id="goods_car_add">加入購物車</button>
+                        <button class="btn btn-success">直接購買</button>
                     </div>
                 </div>
             </div>
@@ -162,14 +162,18 @@
 @section('script')
 @parent
 <script>
-    $(function() {
-        
+    //滑鼠移動到圖片 更換顯示大圖
+    $("#ho #goodshover2").hover(function() {
+        var T0 = $(this).attr("src");
+        $("#goodshover").css('background-image', 'url("' + T0 + '")');
+    });
 
-        $("#ho #goodshover2").hover(function(){
-            var T0 = $(this).attr("src");
-            $("#goodshover").css('background-image', 'url("'+T0+'")');
-        });
+    //把商品加入購物車
+    $("#goods_car_add").click(function(){
 
+        console.log($(this).data('member_id'));
+        console.log($(this).data('goods_id'));
+        console.log($("#goods_count").val());
     });
 </script>
 @endsection
