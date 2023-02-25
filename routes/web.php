@@ -44,8 +44,7 @@ Route::group(["prefix" => "session"], function () {
     Route::post('/member/updata_password', [MemberApiController::class, 'updata_password']);
 
     //商品頁面加入購物車
-    Route::post('/goods_car/add', [GoodsApiController::class, 'goods_car_add']);
-    //商品頁面直接購買
+    Route::post('/goods_car/add', [GoodsApiController::class, 'goods_car_add'])->middleware('check.member');
 });
 
 //首頁(展示頁面)

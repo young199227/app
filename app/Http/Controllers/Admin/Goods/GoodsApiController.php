@@ -62,7 +62,7 @@ class GoodsApiController extends Controller
     //http://127.0.0.1:8000/session/goods_car/add
     //{"member_id":3,"goods_id":25,"goods_count":1}
     public function goods_car_add(Request $req)
-    {
+    {   
         //先過濾欄位跟空值
         if ($req->filled(['member_id', 'goods_id', 'goods_count'])) {
             

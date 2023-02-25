@@ -213,7 +213,7 @@
                 }
             },
             error: function() {
-                console.log("ajax失敗");
+                $(location).attr("href", "/member/member_login");
             }
         });
     });
@@ -286,7 +286,7 @@
                 }
             },
             error: function() {
-                console.log("ajax失敗");
+                $(location).attr("href", "/member/member_login");
             }
         });
     });
