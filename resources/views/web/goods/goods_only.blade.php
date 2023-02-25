@@ -150,7 +150,7 @@
                 <div class="row">
                     <div class="mt-4 mb-4 d-inline-flex justify-content-evenly">
                         <button class="btn btn-success" data-member_id="{{ Session('member_id') }}" data-goods_id="{{ $row->Goods_id }}" id="goods_car_add">加入購物車</button>
-                        <button class="btn btn-success">直接購買</button>
+                        <button class="btn btn-success" id="goods_car_add_buy">直接購買</button>
                     </div>
                 </div>
             </div>
@@ -161,6 +161,7 @@
 
 @section('script')
 @parent
+<script src="/js/sweetalert2.js"></script>
 <script>
     //滑鼠移動到圖片 更換顯示大圖
     $("#ho #goodshover2").hover(function() {
@@ -169,11 +170,125 @@
     });
 
     //把商品加入購物車
-    $("#goods_car_add").click(function(){
+    $("#goods_car_add").click(function() {
 
-        console.log($(this).data('member_id'));
-        console.log($(this).data('goods_id'));
-        console.log($("#goods_count").val());
+        dataJson = {};
+
+        dataJson['member_id'] = $(this).data('member_id');
+        dataJson['goods_id'] = $(this).data('goods_id');
+        dataJson['goods_count'] = $("#goods_count").val();
+        // console.log(JSON.stringify(dataJson));
+        $.ajax({
+            type: "POST",
+            url: "/session/goods_car/add",
+            data: JSON.stringify(dataJson),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                if (data.state) {
+                    if (data.message == "購物車增加新商品") {
+                        //置頂購物車紅點+1(購物車內多一項新商品時)
+                        $("#goods_car_count").text(parseInt($("#goods_car_count").text()) + 1);
+                        Swal.fire({
+                            icon: 'success',
+                            title: '購物車有新東西囉',
+                        })
+                    }
+                    if (data.message == "購物車內容最多5樣喔") {
+                        //購物車滿了警告
+                        Swal.fire({
+                            icon: 'error',
+                            title: '1項商品最多5箱喔',
+                            text: '購物車內同樣商品已有5箱',
+                        })
+                    }
+                    if (data.message == "同樣商品數量增加") {
+                        //購物車物品增加
+                        Swal.fire({
+                            icon: 'success',
+                            title: '商品數量已增加',
+                            text: '現在商品有' + data.goods_count + '箱',
+                        })
+                    }
+                }
+            },
+            error: function() {
+                console.log("ajax失敗");
+            }
+        });
+    });
+
+    //直接購買
+    $("#goods_car_add_buy").click(function() {
+
+        dataJson = {};
+
+        dataJson['member_id'] = $("#goods_car_add").data('member_id');
+        dataJson['goods_id'] = $("#goods_car_add").data('goods_id');
+        dataJson['goods_count'] = $("#goods_count").val();
+        // console.log(JSON.stringify(dataJson));
+        $.ajax({
+            type: "POST",
+            url: "/session/goods_car/add",
+            data: JSON.stringify(dataJson),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                if (data.state) {
+                    if (data.message == "購物車增加新商品") {
+                        //置頂購物車紅點+1(購物車內多一項新商品時)
+                        $("#goods_car_count").text(parseInt($("#goods_car_count").text()) + 1);
+                        Swal.fire({
+                            icon: 'success',
+                            title: '轉跳中',
+                            timer: 2500,
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading()
+                            }
+                        })
+                        setTimeout(function() {
+                            $(location).attr("href", "/fruit/goods_car");
+                        }, 2500);
+                    }
+                    if (data.message == "購物車內容最多5樣喔") {
+                        //購物車滿了警告
+                        Swal.fire({
+                            icon: 'success',
+                            title: '轉跳中',
+                            text: '購物車內同樣商品已有5箱',
+                            timer: 2500,
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading()
+                            }
+                        })
+                        setTimeout(function() {
+                            $(location).attr("href", "/fruit/goods_car");
+                        }, 2500);
+                    }
+                    if (data.message == "同樣商品數量增加") {
+                        //購物車物品增加
+                        Swal.fire({
+                            icon: 'success',
+                            title: '轉跳中',
+                            text: '現在商品有' + data.goods_count + '箱',
+                            timer: 2500,
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading()
+                            }
+                        })
+                        setTimeout(function() {
+                            $(location).attr("href", "/fruit/goods_car");
+                        }, 2500);
+                    }
+                }
+            },
+            error: function() {
+                console.log("ajax失敗");
+            }
+        });
     });
 </script>
 @endsection

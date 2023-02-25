@@ -58,7 +58,7 @@ class GoodsApiController extends Controller
             return response()->json(['state' => false, 'message' => '缺少欄位或值']);
         }
     }
-    //新增購物車商品 //購物車限制: 1.同種商品最多5個 2.不能有相同商品
+    //新增購物車商品  購物車限制: 1.同種商品最多5個 2.不能有相同商品
     //http://127.0.0.1:8000/session/goods_car/add
     //{"member_id":3,"goods_id":25,"goods_count":1}
     public function goods_car_add(Request $req)
@@ -81,9 +81,10 @@ class GoodsApiController extends Controller
                     'Goods_id' => $req->goods_id,
                     'Goods_count' => $req->goods_count,
                 ]);
-                return response()->json(['state' => true, 'message' => '新增成功']);
+                //<<--更改message文字的話goods_only.blade.php ajax if的判斷要改!!!-->>
+                return response()->json(['state' => true, 'message' => '購物車增加新商品']);
 
-                //有相同商品時繼續往下執行
+            //有相同商品時繼續往下執行
             } else {
 
                 //當購物車相同商品超過5或等於5樣時 sql更新成只有5樣
@@ -93,7 +94,7 @@ class GoodsApiController extends Controller
                         ->where('Member_id', $req->member_id)
                         ->where('Goods_id', $req->goods_id)
                         ->update(['Goods_count' => 5]);
-
+                    //<<--更改message文字的話goods_only.blade.php ajax if的判斷要改!!!-->>
                     return response()->json(['state' => true, 'message' => '購物車內容最多5樣喔']);
                 }
                 
@@ -102,8 +103,8 @@ class GoodsApiController extends Controller
                     ->where('Member_id', $req->member_id)
                     ->where('Goods_id', $req->goods_id)
                     ->update(['Goods_count' => $row->Goods_count+$req->goods_count]);
-
-                return response()->json(['state' => true, 'message' => '新增成功']);
+                //<<--更改message文字的話goods_only.blade.php ajax if的判斷要改!!!-->>
+                return response()->json(['state' => true, 'message' => '同樣商品數量增加','goods_count'=>$row->Goods_count+$req->goods_count]);
             }
         } else {
             return response()->json(['state' => false, 'message' => '缺少欄位或值']);
