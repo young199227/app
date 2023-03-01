@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1:3306
--- 產生時間： 2023-02-23 08:13:24
+-- 產生時間： 2023-03-01 03:48:47
 -- 伺服器版本： 5.7.40
 -- PHP 版本： 8.0.26
 
@@ -198,10 +198,11 @@ CREATE TABLE IF NOT EXISTS `order_content` (
   `Order_content_id` int(11) NOT NULL AUTO_INCREMENT,
   `Order_id` int(11) NOT NULL,
   `Goods_id` int(11) NOT NULL,
+  `Order_goods_count` int(11) DEFAULT NULL,
   PRIMARY KEY (`Order_content_id`),
   KEY `Goods_id` (`Goods_id`),
   KEY `Order_id` (`Order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -213,10 +214,15 @@ DROP TABLE IF EXISTS `oredr`;
 CREATE TABLE IF NOT EXISTS `oredr` (
   `Order_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '訂單ID',
   `Member_id` int(11) NOT NULL COMMENT '會員ID',
+  `Member_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Member_phone` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Member_area` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Order_money` int(11) DEFAULT NULL,
+  `Order_state` int(11) NOT NULL DEFAULT '1',
   `Order_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '訂單創建時間',
   PRIMARY KEY (`Order_id`),
   KEY `Member_id` (`Member_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- 已傾印資料表的限制式
