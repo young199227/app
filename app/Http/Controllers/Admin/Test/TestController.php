@@ -43,6 +43,17 @@ class TestController extends Controller
 
         return view('map');
     }
+    //vue
+    public function vue()
+    {
+
+        if (!session()->has('demomap')) {
+            return redirect()->route('fruit');
+        }
+
+        return view('vue');
+    }
+
 
     // 雜湊函數
     public function pasw(Request $req)

@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 */
 //map
 Route::get('/map', [TestController::class, 'map']);
+//vue
+Route::get('/vue', [TestController::class, 'vue']);
 //測試頁面2
 Route::post('/testpas', [TestController::class, 'pasw']);
 

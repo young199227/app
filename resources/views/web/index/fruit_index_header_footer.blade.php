@@ -36,6 +36,7 @@
             @endif
             @if(Session::has('demomap'))
             <a href="/map">Map</a>
+            <a href="/vue">vue</a>
             @endif
           </div>
           <div class="col-md-6 d-md-flex justify-content-end d-none">
