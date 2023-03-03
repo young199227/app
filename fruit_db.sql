@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1:3306
--- 產生時間： 2023-03-01 03:48:47
+-- 產生時間： 2023-03-03 07:46:04
 -- 伺服器版本： 5.7.40
 -- PHP 版本： 8.0.26
 
@@ -90,16 +90,16 @@ CREATE TABLE IF NOT EXISTS `goods_car` (
   PRIMARY KEY (`Goods_car_id`),
   KEY `Goods_id` (`Goods_id`),
   KEY `Member_id` (`Member_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- 傾印資料表的資料 `goods_car`
 --
 
 INSERT INTO `goods_car` (`Goods_car_id`, `Member_id`, `Goods_id`, `Goods_count`) VALUES
-(1, 3, 25, 2),
-(2, 3, 17, 1),
-(3, 3, 8, 1);
+(1, 3, 25, 4),
+(2, 3, 17, 5),
+(4, 3, 8, 3);
 
 -- --------------------------------------------------------
 
@@ -190,6 +190,26 @@ INSERT INTO `member` (`Member_id`, `Member_email`, `Member_password`, `Member_st
 -- --------------------------------------------------------
 
 --
+-- 資料表結構 `order`
+--
+
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE IF NOT EXISTS `order` (
+  `Order_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '訂單ID',
+  `Member_id` int(11) NOT NULL COMMENT '會員ID',
+  `Member_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Member_phone` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Member_area` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Order_money` int(11) DEFAULT NULL,
+  `Order_state` int(11) NOT NULL DEFAULT '1',
+  `Order_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '訂單創建時間',
+  PRIMARY KEY (`Order_id`),
+  KEY `Member_id` (`Member_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- 資料表結構 `order_content`
 --
 
@@ -202,27 +222,7 @@ CREATE TABLE IF NOT EXISTS `order_content` (
   PRIMARY KEY (`Order_content_id`),
   KEY `Goods_id` (`Goods_id`),
   KEY `Order_id` (`Order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- 資料表結構 `oredr`
---
-
-DROP TABLE IF EXISTS `oredr`;
-CREATE TABLE IF NOT EXISTS `oredr` (
-  `Order_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '訂單ID',
-  `Member_id` int(11) NOT NULL COMMENT '會員ID',
-  `Member_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Member_phone` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Member_area` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Order_money` int(11) DEFAULT NULL,
-  `Order_state` int(11) NOT NULL DEFAULT '1',
-  `Order_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '訂單創建時間',
-  PRIMARY KEY (`Order_id`),
-  KEY `Member_id` (`Member_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- 已傾印資料表的限制式
@@ -242,17 +242,17 @@ ALTER TABLE `goods_imges`
   ADD CONSTRAINT `goods_imges_ibfk_1` FOREIGN KEY (`Goods_id`) REFERENCES `goods` (`Goods_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- 資料表的限制式 `order`
+--
+ALTER TABLE `order`
+  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`Member_id`) REFERENCES `member` (`Member_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- 資料表的限制式 `order_content`
 --
 ALTER TABLE `order_content`
-  ADD CONSTRAINT `order_content_ibfk_1` FOREIGN KEY (`Order_id`) REFERENCES `oredr` (`Order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `order_content_ibfk_1` FOREIGN KEY (`Order_id`) REFERENCES `order` (`Order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `order_content_ibfk_2` FOREIGN KEY (`Goods_id`) REFERENCES `goods` (`Goods_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- 資料表的限制式 `oredr`
---
-ALTER TABLE `oredr`
-  ADD CONSTRAINT `oredr_ibfk_1` FOREIGN KEY (`Member_id`) REFERENCES `member` (`Member_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

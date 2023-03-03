@@ -45,5 +45,10 @@ Route::group(["prefix"=>"goods_car"],function(){
     //購物車商品刪除
     Route::post('/delete', [GoodsApiController::class, 'goods_car_delete']);
     //商品頁面加入購物車 寫在web.php session的group裡面(因為api.php無法處理session)
+
+    //購物車頁面按下去買單撈出購物車內容
+    Route::post('/goods_car_list', [GoodsApiController::class, 'goods_car_list']);
+    //購物車 新增訂單
+    Route::post('/add_order', [GoodsApiController::class, 'add_order']);
 });
 
