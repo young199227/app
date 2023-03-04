@@ -49,9 +49,14 @@ class GoodsController extends Controller
             ->where('a.Member_id', '=', $member_id)
             ->get();
 
-        // return $row;
+        //判斷$row有沒有資料 沒有的話只傳視圖
+        if ($row->isNotEmpty()) {
 
-        return view('web.goods.goods_car', compact('row'));
+            return view('web.goods.goods_car', compact('row'));
+
+        }else{
+            return view('web.goods.goods_car');
+        }
     }
 
     //商品詳細

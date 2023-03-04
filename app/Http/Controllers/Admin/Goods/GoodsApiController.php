@@ -158,6 +158,9 @@ class GoodsApiController extends Controller
                         'Order_goods_count' => $row[$i]->Goods_count
                     ]);
                 }
+
+                //新增訂單後清空購物車
+                DB::table('goods_car')->where('Member_id',$req->member_id)->delete();
             });
 
             return response()->json(['state' => true, 'message' => '成功購買!']);

@@ -28,6 +28,9 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if(empty($row))
+
+                        @else
                         @foreach($row as $goods)
                         <tr style="line-height: 80px;">
                             <td>{{$goods->Goods_id}}</td>
@@ -49,7 +52,7 @@
                             </td>
                         </tr>
                         @endforeach
-
+                        @endif
                     </tbody>
                 </table>
 
@@ -59,11 +62,15 @@
     <div class="row">
         <div class="col-12 text-end">
             <!-- 算出購物車內商品總價 -->
+            @if(empty($row))
+            <span class="fs-5">總金額: $<span id="goods_car_toto">0</span></span>
+            @else
             @php
             $goods_car_toto = 0;
             for ($i = 0; $i < count($row); $i++) { $goods_car_toto +=$row[$i]->Goods_money * $row[$i]->Goods_count;}
                 @endphp
                 <span class="fs-5">總金額: $<span id="goods_car_toto">{{$goods_car_toto}}</span></span>
+                @endif
                 <!-- 算出購物車內商品總價 -->
 
                 <button class="btn btn-warning" style="width:150px" data-bs-toggle="modal" data-bs-target="#exampleModal" id="checkout">去買單</button>
@@ -72,7 +79,10 @@
 </div>
 </div>
 <!-- 藏一下會員ID -->
+@if(empty($row))
+@else
 <span class="d-none" id="car_member_id">{{$row[0]->Member_id}}</span>
+@endif
 <!-- 藏一下會員ID -->
 
 <!-- Modal -->
