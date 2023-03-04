@@ -34,8 +34,8 @@
                     <button class="navaside d-md-none btn" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/fruit"></a></li>
-                        <li><a class="dropdown-item" href="/fruit">測試</a></li>
-                        <li><a class="dropdown-item" href="/fruit">測試2</a></li>
+                        <li><a class="dropdown-item" href="/member">個人資訊☁️</a></li>
+                        <li><a class="dropdown-item" href="/member/member_order">訂單➤</a></li>
                     </ul>
                 </div>
 
@@ -88,7 +88,7 @@
                         <ul>
                             <li><a href=""></a></li>
                             <li><a href="/member">個人資訊☁️</a></li>
-                            <li><a href="">訂單➤</a></li>
+                            <li><a href="/member/member_order">訂單➤</a></li>
                             <li><a href="">訊息☺</a></li>
                         </ul>
                     </div>
