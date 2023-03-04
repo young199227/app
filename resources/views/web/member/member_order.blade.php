@@ -25,49 +25,69 @@
 
             <!-- 訂單內容 -->
             <div id="">
-
+            @if(empty($row))
+            <!-- 沒訂單時顯示 -->
+            <div class="text-center">
+                <img src="/img/GIF/27.gif" alt="">
+                <p class="h4 mt-3">這裡空空如也～沒有任何訂單！</p>
+                <a href="/fruit" class="text-danger h5">點我去看商品！</a>
+            </div>
+            @else
+            <!-- 有訂單時顯示 -->
+            @foreach ($row as $Order)
+            <!-- 使用 loop 變數來取得目前迴圈的索引值，並利用 $row[$loop->index - 1] 取得上一筆資料。-->
+            <!-- 使用 if 判斷如果這是第一筆資料，或者這筆資料的 Order ID（訂單編號） 跟上一筆不同，就顯示訂單資訊  -->
+            @if($loop->first || $Order->Order_id != $row[$loop->index - 1]->Order_id)
             <p>
                 <div class="row" style="border: 1px solid #ced4da;padding: 15px;border-radius: 10px;">
                     <div class="col-5">
-                        <a class="text-decoration-none text-black" data-bs-toggle="collapse" href="#collex" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        <div class="h3">訂單編號：{{ $row[0]->Order_id }} </div>
-                            <p>總金額：{{ $row[0]->Order_money }}</p>
-                            <p>訂單創建時間：{{ $row[0]->Order_created_at }}</p>
+                        <a class="text-decoration-none text-black" data-bs-toggle="collapse" href="#collex{{ $Order->Order_id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <div class="h3 text-danger"><i class="fa-solid fa-burger"></i> 訂單編號：{{ $Order->Order_id }} </div>
+                            <p>總金額：{{ $Order->Order_money }}</p>
+                            <p>訂單創建時間：{{ $Order->Order_created_at }}</p>
                         </a>
                     </div>
                     <div class="col-5">
-                        <p>收件人：{{ $row[0]->Member_name }}</p>
-                        <p>電話：{{ $row[0]->Member_phone }}</p>
-                        <p>地址：{{ $row[0]->Member_area }}</p>
+                        <p>收件人：{{ $Order->Member_name }}</p>
+                        <p>電話：{{ $Order->Member_phone }}</p>
+                        <p>地址：{{ $Order->Member_area }}</p>
                     </div>
-                    <div class="col-2">
+                    @if ($Order->Order_state == 1)
+                    <div class="col-2 text-center">
                         狀態
+                        <p class="h3 text-success mt-4">進行中</p>
+                    @elseif ($Order->Order_state == 2)
+                    <div class="col-2 text-center">
+                        狀態
+                        <p class="h3 text-secondary mt-4">已完成</p>
+                    @elseif ($Order->Order_state == 0)
+                    <div class="col-2 text-center">
+                        狀態
+                        <p class="h3 test-danger mt-4">已取消</p>
+                    @endif
                     </div>
                 </div>
             </p>
-            <div class="collapse" id="collex">
+            <div class="collapse" id="collex{{ $Order->Order_id }}">
                 <div class="card card-body">
                     <div class="row">
                         <div class="h3">購物內容</div>
+            @endif
                         <div class="col">
-                            <div class="imgbox"><img src="{{ $row[0]->Goods_img }}" alt=""></div>
-                            <p>商品名稱：{{ $row[0]->Goods_name }}</p>
-                            <p>商品數量：{{ $row[0]->Order_goods_count }}</p>
+                            <div class="imgbox"><img src="{{ $Order->Goods_img }}" alt=""></div>
+                            <p>商品名稱：{{ $Order->Goods_name }}</p>
+                            <p>商品數量：{{ $Order->Order_goods_count }}</p>
                         </div>
-                        <div class="col">
-                            <div class="imgbox"><img src="{{ $row[1]->Goods_img }}" alt=""></div>
-                            <p>商品名稱：{{ $row[1]->Goods_name }}</p>
-                            <p>商品數量：{{ $row[1]->Order_goods_count }}</p>
-                        </div>
-                        <div class="col">
-                            <div class="imgbox"><img src="{{ $row[2]->Goods_img }}" alt=""></div>
-                            <p>商品名稱：{{ $row[2]->Goods_name }}</p>
-                            <p>商品數量：{{ $row[2]->Order_goods_count }}</p>
-                        </div>
+                        <!-- 如果這是最後一筆資料，或者這筆資料的 Order ID（訂單編號） 跟下一筆不同，就結束訂單區塊 -->
+                        @if ($loop->last || $Order->Order_id !== $row[$loop->index + 1]->Order_id)
                     </div>
                 </div>
             </div>
-
+            @endif
+        <!-- 訂單迴圈結束 -->
+        @endforeach
+    <!-- 顯示訂單結束 -->
+    @endif
             </div>
         </div>
     </div>
@@ -84,6 +104,5 @@
 @section('script')
 @parent
 <script>
-
 </script>
 @endsection

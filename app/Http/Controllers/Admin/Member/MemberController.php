@@ -39,7 +39,14 @@ class MemberController extends Controller
         ->get();
 
         // return $row;
-        
-        return view('web.member.member_order', compact('row'));
+
+        //判斷$row有沒有資料 沒有的話只傳視圖
+        if ($row->isNotEmpty()) {
+
+            return view('web.member.member_order', compact('row'));
+
+        }else{
+            return view('web.member.member_order');
+        }
     }
 }

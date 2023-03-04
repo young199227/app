@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/mycolor.css">
     <link rel="stylesheet" href="/css/owner.css">
+    <link rel="stylesheet" href="/css/all.min.css">
     <!-- link Blade 模板顯示-->
     @section('link')
     @show
