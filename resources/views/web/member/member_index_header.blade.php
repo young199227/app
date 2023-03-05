@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/css/mycolor.css">
     <link rel="stylesheet" href="/css/owner.css">
     <link rel="stylesheet" href="/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
     <!-- link Blade 模板顯示-->
     @section('link')
     @show
@@ -36,7 +37,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/fruit"></a></li>
                         <li><a class="dropdown-item" href="/member">個人資訊☁️</a></li>
-                        <li><a class="dropdown-item" href="/member/member_order">訂單➤</a></li>
+                        <li><a class="dropdown-item" href="/member/member_order">訂單資訊➤</a></li>
                     </ul>
                 </div>
 
@@ -107,6 +108,7 @@
 </body>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery-3.6.1.min.js"></script>
 

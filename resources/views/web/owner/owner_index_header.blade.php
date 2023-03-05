@@ -38,6 +38,7 @@
                         <li><a class="dropdown-item" href="/owner/owner_po_goods">上架商品<i class="fa-regular fa-circle-up fs-5"></i></a></li>
                         <li><a class="dropdown-item" href="/owner">管理商品<i class="fa-regular fa-face-smile fs-5"></i></a></li>
                         <li><a class="dropdown-item" href="/owner/owner_member">管理會員<i class="fa-solid fa-cloud fs-5"></i></a></li>
+                        <li><a class="dropdown-item" href="/owner/owner_order">管理訂單<i class="fa-solid fa-cloud fs-5"></i></a></li>
                         <li><a class="dropdown-item" href="/owner/owner_count">統計圖<i class="fa-solid fa-list fs-5"></i></a></li>
                     </ul>
                 </div>
@@ -92,8 +93,8 @@
                             <li><a href="/owner/owner_po_goods">上架商品<i class="fa-regular fa-circle-up fs-5"></i></a></li>
                             <li><a href="/owner">管理商品<i class="fa-regular fa-face-smile fs-5"></i></a></li>
                             <li><a href="/owner/owner_member">管理會員<i class="fa-solid fa-cloud fs-5"></i></a></li>
+                            <li><a href="/owner/owner_order">管理訂單<i class="fa-solid fa-truck-fast fs-5"></i></a></li>
                             <li><a href="/owner/owner_count">統計圖<i class="fa-solid fa-list fs-5"></i></a></li>
-                            <li><a href="">訂單<i class="fa-solid fa-truck-fast fs-5"></i></a></li>
                             <li><a href="">上架廣告</a></li>
                             <li><a href="">管理廣告</a></li>
                             <li><a href="">私<i class="fa-regular fa-face-smile fs-5"></i></a></li>

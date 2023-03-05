@@ -99,4 +99,6 @@ Route::group(["prefix" => "owner", "middleware" => "check.owner"], function () {
     Route::get('/owner_member', [OwnerController::class, 'owner_member']);
     //後台owner_count(管理統計圖)
     Route::get('/owner_count', [OwnerController::class, 'owner_count']);
+    //後台owner_order(管理訂單)
+    Route::get('/owner_order', [OwnerController::class, 'owner_order']);
 });

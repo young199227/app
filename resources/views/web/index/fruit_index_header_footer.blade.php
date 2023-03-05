@@ -256,7 +256,7 @@
             window.location.reload();
           }
         } else {
-          $("#member_email_error").text(data.message + "帳號或密碼錯誤").css("color", "red");
+          $("#member_email_error").text("帳號或密碼錯誤").css("color", "red");
         }
       },
       error: function() {

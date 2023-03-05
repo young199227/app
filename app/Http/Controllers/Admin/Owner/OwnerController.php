@@ -58,7 +58,6 @@ class OwnerController extends Controller
     //後台管理統計圖 （顯示總數）
     public function owner_count()
     {
-
         // 註冊會員總數
         $member_count = DB::table('member')
             ->selectRaw('count(*) AS Member_count')
@@ -83,5 +82,12 @@ class OwnerController extends Controller
 
         return view('web.owner.owner_count', compact('member_count','member_old_count', 'goods_up_count', 'goods_old_count'));
         
+    }
+
+    //後台管理訂單頁面（顯示所有訂單）
+    public function owner_order()
+    {
+        
+        return view('web.owner.owner_order');
     }
 }

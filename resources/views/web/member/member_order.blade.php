@@ -30,7 +30,7 @@
             <div class="text-center">
                 <img src="/img/GIF/27.gif" alt="">
                 <p class="h4 mt-3">這裡空空如也～沒有任何訂單！</p>
-                <a href="/fruit" class="text-danger h5">點我去看商品！</a>
+                <a href="/fruit/goods_list" class="text-danger h5">點我去看商品！</a>
             </div>
             @else
             <!-- 有訂單時顯示 -->
@@ -73,7 +73,7 @@
                     <div class="row">
                         <div class="h3">購物內容</div>
             @endif
-                        <div class="col">
+                        <div class="col-3">
                             <div class="imgbox"><img src="{{ $Order->Goods_img }}" alt=""></div>
                             <p>商品名稱：{{ $Order->Goods_name }}</p>
                             <p>商品數量：{{ $Order->Order_goods_count }}</p>

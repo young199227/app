@@ -154,6 +154,22 @@ class OwnerApiController extends Controller
             return response()->json(["state" => false, "message" => "恢復失敗"]);
         }
     }
+
+    // 撈取訂單資料 http://127.0.0.1:8000/api/owner/read_order
+    public function read_order(){
+
+        $row = DB::table('order AS a')
+        ->select('a.*','b.*','c.Goods_name', DB::raw('(SELECT goods_img FROM goods_imges WHERE Goods_id = b.Goods_id LIMIT 1) as Goods_img'))
+        ->join('order_content AS b', 'a.Order_id', '=', 'b.Order_id')
+        ->join('goods AS c','b.Goods_id','=','c.Goods_id')
+        ->get();
+
+        if ($row) {
+            return response()->json(["state" => true, "message" => "讀取成功",json_decode($row)]);
+        } else {
+            return response()->json(["state" => false, "message" => "讀取失敗"]);
+        }
+    }
     // //圖片上傳
     // $image = $req->file('ggyy');
     // $filename = $image->getClientOriginalName();

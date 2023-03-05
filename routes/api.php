@@ -34,6 +34,8 @@ Route::group(["prefix" => "owner"], function () {
     Route::post('/delete_member',[OwnerApiController::class, 'delete_member']);
     //後臺正常會員
     Route::post('/up_member',[OwnerApiController::class, 'up_member']);
+    //後臺管理訂單 owner撈取訂單資料
+    Route::get('/read_order',[OwnerApiController::class, 'read_order']);
 });
 
 //goods_car group

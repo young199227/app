@@ -76,7 +76,7 @@
     <div class="main">
         <div class="container ">
             <div class="row d-flex justify-content-center mt-4">
-                <div class="col-md-6 mt-3">
+                <div class="col-lg-6 col-md-8 col-12 mt-3">
                     <!-- 登入框 -->
                     <div class="card">
 

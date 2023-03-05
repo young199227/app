@@ -29,7 +29,11 @@
                     </thead>
                     <tbody>
                         @if(empty($row))
-
+                                <div class="text-center mb-5 mt-3">
+                                    <img src="/img/GIF/27.gif" alt="">
+                                    <p class="h4 mt-3">這裡空空如也～沒有任何商品！</p>
+                                    <a href="/fruit/goods_list" class="text-danger h5">點我去看商品！</a>
+                                </div>
                         @else
                         @foreach($row as $goods)
                         <tr style="line-height: 80px;">
@@ -238,6 +242,7 @@
             }
         });
     });
+
     //刪除購物車內的商品
     $("td #car_goods_delete").click(function() {
         var dataJson = {};
@@ -352,7 +357,7 @@
                             }
                         })
                         setTimeout(function() {
-                            $(location).attr("href", "/member");
+                            $(location).attr("href", "/member/member_order");
                         }, 2500);
                     },
                     error: function() {
