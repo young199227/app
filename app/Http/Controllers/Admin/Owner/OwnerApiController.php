@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class OwnerApiController extends Controller
-{   
+{
     //新增商品 http://127.0.0.1:8000/api/owner/insert_goods
     //{"goods_name":"蘋果","goods_money":"100","goods_sum":"1","goods_area":"南投","goods_detail":"超級好吃喔"} 
     public function insert_goods(Request $req)
@@ -39,18 +39,17 @@ class OwnerApiController extends Controller
 
                     $image = $img_array[$i];
                     $imageType = explode(".", $image->getClientOriginalName());
-                    $imageName = $id->Goods_id.'_'.$i.'.'.$imageType[1];
+                    $imageName = $id->Goods_id . '_' . $i . '.' . $imageType[1];
                     Storage::disk('publicFruit')->put($imageName, file_get_contents($image->getRealPath()));
 
                     //把圖片名稱存到資料庫
                     $row = DB::table('goods_imges')->insert([
                         'Goods_id' => $id->Goods_id,
-                        'Goods_img' => '/storage/images/'.$imageName
+                        'Goods_img' => '/storage/images/' . $imageName
                     ]);
                 }
 
                 return response()->json(["state" => true, "message" => "新增成功"]);
-
             } else {
                 return response()->json(["state" => false, "message" => "新增失敗資料庫問題"]);
             }
@@ -88,13 +87,13 @@ class OwnerApiController extends Controller
 
                     $image = $img_array[$i];
                     $imageType = explode(".", $image->getClientOriginalName());
-                    $imageName = $req->goods_id.'_'.$i.'.'.$imageType[1];
+                    $imageName = $req->goods_id . '_' . $i . '.' . $imageType[1];
                     Storage::disk('publicFruit')->put($imageName, file_get_contents($image->getRealPath()));
 
                     //把圖片名稱存到資料庫
                     $row = DB::table('goods_imges')->insert([
                         'Goods_id' => $req->goods_id,
-                        'Goods_img' => '/storage/images/'.$imageName
+                        'Goods_img' => '/storage/images/' . $imageName
                     ]);
                 }
 
@@ -110,7 +109,7 @@ class OwnerApiController extends Controller
     //下架商品 http://127.0.0.1:8000/api/owner/delete_goods {"id":"1"}
     public function delete_goods(Request $req)
     {
-        $row = DB::table('goods')->where('Goods_id', $req->id)->update(['Goods_state'=>0]);
+        $row = DB::table('goods')->where('Goods_id', $req->id)->update(['Goods_state' => 0]);
 
         if ($row) {
             return response()->json(["state" => true, "message" => "下架成功"]);
@@ -120,9 +119,10 @@ class OwnerApiController extends Controller
     }
 
     //上架商品 http://127.0.0.1:8000/api/owner/up_goods {"id":"1"}
-    public function up_goods(Request $req){
+    public function up_goods(Request $req)
+    {
 
-        $row = DB::table('goods')->where('Goods_id', $req->id)->update(['Goods_state'=>1]);
+        $row = DB::table('goods')->where('Goods_id', $req->id)->update(['Goods_state' => 1]);
 
         if ($row) {
             return response()->json(["state" => true, "message" => "上架成功"]);
@@ -132,9 +132,10 @@ class OwnerApiController extends Controller
     }
 
     // 停權會員 http://127.0.0.1:8000/api/owner/delete_member {"id":"2"}
-    public function delete_member(Request $req){
+    public function delete_member(Request $req)
+    {
 
-        $row = DB::table('member')->where('Member_id', $req->id)->update(['Member_state'=>2]);
+        $row = DB::table('member')->where('Member_id', $req->id)->update(['Member_state' => 2]);
 
         if ($row) {
             return response()->json(["state" => true, "message" => "停權成功"]);
@@ -144,9 +145,10 @@ class OwnerApiController extends Controller
     }
 
     // 停權會員 http://127.0.0.1:8000/api/owner/up_member {"id":"2"}
-    public function up_member(Request $req){
+    public function up_member(Request $req)
+    {
 
-        $row = DB::table('member')->where('Member_id', $req->id)->update(['Member_state'=>1]);
+        $row = DB::table('member')->where('Member_id', $req->id)->update(['Member_state' => 1]);
 
         if ($row) {
             return response()->json(["state" => true, "message" => "恢復成功"]);
@@ -156,20 +158,43 @@ class OwnerApiController extends Controller
     }
 
     // 撈取訂單資料 http://127.0.0.1:8000/api/owner/read_order
-    public function read_order(){
+    public function read_order(Request $req)
+    {
 
-        $row = DB::table('order AS a')
-        ->select('a.*','b.*','c.Goods_name', DB::raw('(SELECT goods_img FROM goods_imges WHERE Goods_id = b.Goods_id LIMIT 1) as Goods_img'))
-        ->join('order_content AS b', 'a.Order_id', '=', 'b.Order_id')
-        ->join('goods AS c','b.Goods_id','=','c.Goods_id')
-        ->get();
+        if ($req->filled(['order_state'])) {
+
+            $row = DB::table('order AS a')
+                ->select('a.*', 'b.*', 'c.Goods_name', DB::raw('(SELECT goods_img FROM goods_imges WHERE Goods_id = b.Goods_id LIMIT 1) as Goods_img'))
+                ->join('order_content AS b', 'a.Order_id', '=', 'b.Order_id')
+                ->join('goods AS c', 'b.Goods_id', '=', 'c.Goods_id')
+                ->where('a.Order_state', $req->order_state)
+                ->get();
+
+            if ($row) {
+                return response()->json(["state" => true, "message" => "讀取成功", "data" => json_decode($row)]);
+            } else {
+                return response()->json(["state" => false, "message" => "讀取失敗"]);
+            }
+
+        } else {
+            return response()->json(["state" => false, "message" => "缺少欄位或值"]);
+        }
+    }
+
+    // 撈取未處理訂單數量(紅點) http://127.0.0.1:8000/api/owner/unprocessed_order_count
+    public function unprocessed_order_count()
+    {
+
+        $row = DB::table('order')->where('Order_state', 1)->get();
 
         if ($row) {
-            return response()->json(["state" => true, "message" => "讀取成功",json_decode($row)]);
+            return response()->json(["state" => true, "message" => "讀取成功", "data" => count($row)]);
         } else {
             return response()->json(["state" => false, "message" => "讀取失敗"]);
         }
     }
+
+    //unprocessed_order_count
     // //圖片上傳
     // $image = $req->file('ggyy');
     // $filename = $image->getClientOriginalName();

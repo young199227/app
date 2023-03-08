@@ -35,7 +35,9 @@ Route::group(["prefix" => "owner"], function () {
     //後臺正常會員
     Route::post('/up_member',[OwnerApiController::class, 'up_member']);
     //後臺管理訂單 owner撈取訂單資料
-    Route::get('/read_order',[OwnerApiController::class, 'read_order']);
+    Route::post('/read_order',[OwnerApiController::class, 'read_order']);
+    //後臺管理訂單 owner撈取未處理訂單數量(紅點)
+    Route::get('/unprocessed_order_count',[OwnerApiController::class, 'unprocessed_order_count']);
 });
 
 //goods_car group
