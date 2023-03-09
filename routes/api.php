@@ -30,14 +30,20 @@ Route::group(["prefix" => "owner"], function () {
     Route::post('/delete_goods', [OwnerApiController::class, 'delete_goods']);
     //後臺上架商品 owner上架商品
     Route::post('/up_goods', [OwnerApiController::class, 'up_goods']);
-    //後臺停權會員
+    //後臺管理會員 owner停權會員
     Route::post('/delete_member',[OwnerApiController::class, 'delete_member']);
-    //後臺正常會員
+    //後臺管理會員 owner正常會員
     Route::post('/up_member',[OwnerApiController::class, 'up_member']);
     //後臺管理訂單 owner撈取訂單資料
     Route::post('/read_order',[OwnerApiController::class, 'read_order']);
     //後臺管理訂單 owner撈取未處理訂單數量(紅點)
     Route::get('/unprocessed_order_count',[OwnerApiController::class, 'unprocessed_order_count']);
+    //後臺統計統整 撈取會員統計
+    Route::get('/read_member_count',[OwnerApiController::class, 'read_member_count']);
+    //後臺統計統整 撈取商品統計
+    Route::get('/read_goods_count',[OwnerApiController::class, 'read_goods_count']);
+    //後臺統計統整 撈取訂單統計
+    Route::get('/read_order_count',[OwnerApiController::class, 'read_order_count']);
 });
 
 //goods_car group

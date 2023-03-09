@@ -99,7 +99,7 @@
                                         <span class="visually-hidden">unread messages</span>
                                         </span>
                                     </i></a></li>
-                            <li><a href="/owner/owner_count">統計圖<i class="fa-solid fa-list fs-5"></i></a></li>
+                            <li><a href="/owner/owner_count">數量統計<i class="fa-solid fa-list fs-5"></i></a></li>
                             <li><a href="">上架廣告</a></li>
                             <li><a href="">管理廣告</a></li>
                             <li><a href="">私<i class="fa-regular fa-face-smile fs-5"></i></a></li>

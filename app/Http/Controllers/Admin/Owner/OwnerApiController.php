@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class OwnerApiController extends Controller
-{
+{   
     //新增商品 http://127.0.0.1:8000/api/owner/insert_goods
     //{"goods_name":"蘋果","goods_money":"100","goods_sum":"1","goods_area":"南投","goods_detail":"超級好吃喔"} 
     public function insert_goods(Request $req)
@@ -39,17 +39,18 @@ class OwnerApiController extends Controller
 
                     $image = $img_array[$i];
                     $imageType = explode(".", $image->getClientOriginalName());
-                    $imageName = $id->Goods_id . '_' . $i . '.' . $imageType[1];
+                    $imageName = $id->Goods_id.'_'.$i.'.'.$imageType[1];
                     Storage::disk('publicFruit')->put($imageName, file_get_contents($image->getRealPath()));
 
                     //把圖片名稱存到資料庫
                     $row = DB::table('goods_imges')->insert([
                         'Goods_id' => $id->Goods_id,
-                        'Goods_img' => '/storage/images/' . $imageName
+                        'Goods_img' => '/storage/images/'.$imageName
                     ]);
                 }
 
                 return response()->json(["state" => true, "message" => "新增成功"]);
+
             } else {
                 return response()->json(["state" => false, "message" => "新增失敗資料庫問題"]);
             }
@@ -144,7 +145,7 @@ class OwnerApiController extends Controller
         }
     }
 
-    // 停權會員 http://127.0.0.1:8000/api/owner/up_member {"id":"2"}
+    // 恢復會員 http://127.0.0.1:8000/api/owner/up_member {"id":"2"}
     public function up_member(Request $req)
     {
 
@@ -194,7 +195,48 @@ class OwnerApiController extends Controller
         }
     }
 
-    //unprocessed_order_count
+    // 撈取會員統計資料
+    public function read_member_count(){
+        
+        $member_count = DB::table('member')
+        ->select('Member_created_at','Member_id','Member_state')
+        ->get();
+
+        if ($member_count) {
+            return response()->json(["state" => true, "message" => "讀取成功","data"=>json_decode($member_count)]);
+        } else {
+            return response()->json(["state" => false, "message" => "讀取失敗"]);
+        }
+    }
+
+    // 撈取商品統計資料
+    public function read_goods_count(){
+        
+        $goods_count = DB::table('goods')
+        ->select('Goods_created_at','Goods_id','Goods_state')
+        ->get();
+
+        if ($goods_count) {
+            return response()->json(["state" => true, "message" => "讀取成功","data"=>json_decode($goods_count)]);
+        } else {
+            return response()->json(["state" => false, "message" => "讀取失敗"]);
+        }
+    }
+
+    // 撈取訂單統計資料 state=1進行中 state=2已完成 state=0已取消
+    public function read_order_count(){
+        
+        $order_count = DB::table('order')
+        ->select('*')
+        ->get();
+
+        if ($order_count) {
+            return response()->json(["state" => true, "message" => "讀取成功","data"=>json_decode($order_count)]);
+        } else {
+            return response()->json(["state" => false, "message" => "讀取失敗"]);
+        }
+    }
+
     // //圖片上傳
     // $image = $req->file('ggyy');
     // $filename = $image->getClientOriginalName();
