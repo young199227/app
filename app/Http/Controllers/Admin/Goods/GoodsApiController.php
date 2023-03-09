@@ -119,7 +119,7 @@ class GoodsApiController extends Controller
             $row = DB::table('goods_car AS a')
                 ->select('a.*', 'b.*', DB::raw('(SELECT goods_img FROM goods_imges WHERE goods_id = b.goods_id LIMIT 1) as Goods_img'))
                 ->join('goods AS b', 'a.Goods_id', '=', 'b.Goods_id')
-                ->where('a.Member_id', '=', 3)
+                ->where('a.Member_id', '=', $req->member_id)
                 ->get();
 
             return $row;

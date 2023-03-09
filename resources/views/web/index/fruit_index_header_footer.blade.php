@@ -42,7 +42,7 @@
           <div class="col-md-6 d-md-flex justify-content-end d-none">
             @if(Session::has('member'))
             <a href="/member">會員中心</a>
-            <a href="/member">你好{{ Session('member') }}</a>
+            <a href="/member">你好{{ explode('@', Session('member'))[0] }}</a>
             <a href="/session/member/logout">登出</a>
             @else
             <a href="https://www.google.com.tw/" target="_blank">幫助中心</a>
