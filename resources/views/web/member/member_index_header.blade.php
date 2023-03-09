@@ -91,7 +91,6 @@
                             <li><a href=""></a></li>
                             <li><a href="/member">個人資訊☁️</a></li>
                             <li><a href="/member/member_order">訂單➤</a></li>
-                            <li><a href="">訊息☺</a></li>
                         </ul>
                     </div>
                 </div>

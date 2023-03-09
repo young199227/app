@@ -15,10 +15,12 @@
         padding: 15px;
         border-radius: 10px;
     }
+
     .color_btn {
         background-color: #61926d;
         color: #fff;
     }
+
     .color_btn:hover {
         background-color: #7EB68C;
         color: #fff;
@@ -32,15 +34,15 @@
 <div class="row">
     <div class="col-12">
 
-                <div class="col-12 bg_btn m-3 ">
-                    <span class="me-3 ms-3">分類</span>
-                    <button class="btn color_btn" id="member_list">會員</button>
-                    <button class="btn color_btn" id="goods_list">商品</button>
-                    <button class="btn color_btn" id="order_list">訂單</button>
-                </div>
-                
+        <div class="col-12 bg_btn m-3 ">
+            <span class="me-3 ms-3">分類</span>
+            <button class="btn color_btn" id="member_list">會員</button>
+            <button class="btn color_btn" id="goods_list">商品</button>
+            <button class="btn color_btn" id="order_list">訂單</button>
+        </div>
+
         <div class="ownerbox">
-            
+
             <div class="row mb-3">
                 <div class="col-12 text-center">
                     <div class="fs-2">數量統計</div>
@@ -110,7 +112,7 @@
 
             <div class="row mt-3">
                 <div class="col-md-6">
-                    <!-- <canvas id="memberChart"></canvas> -->
+
                 </div>
                 <div class="col-md-6"></div>
             </div>
@@ -124,28 +126,6 @@
 @parent
 <script src="/js/chart.js"></script>
 <script>
-    // var M_Count = member_count ; 
-    // var M_bad_Count = member_bad_count ;
-
-    // new Chart($("#memberChart"), {
-    //     type: 'bar',
-    //     data: {
-    //         labels: ['會員總數', '停權會員',],
-    //         datasets: [{
-    //             label: '會員數量',
-    //             data: [M_Count, M_bad_Count],
-    //             borderWidth: 0.5
-    //         }]
-    //     },
-    //     options: {
-    //         scales: {
-    //             y: {
-    //                 beginAtZero: true
-    //             }
-    //         }
-    //     }
-    // });
-
     //會員資料 撈取 & 處理
     var member_count = 0; //總數
     var member_bad_count = 0; //停權會員數
@@ -185,7 +165,6 @@
                         '</div>' +
                         '</div>' +
                         '</div>' +
-
                         '<div class="col-md-4">' +
                         '<div class="card">' +
                         '<div class="card-body text-center w-100">' +
@@ -196,7 +175,37 @@
                         '</div>'
 
                     )
+                    // 建立canvas元素並設定id及class屬性
+                    var member_chart = $("<canvas>").attr("id", "myChart");
+                    // 將canvas元素加入到一個div元素中
+                    var member_c = $("<div>").append(member_chart);
+                    // 修改div元素的class屬性
+                    member_c.addClass("col-6 offset-3");
+                    $("#show_member").append(member_c);
 
+                    var ctx = member_chart[0].getContext("2d");
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['會員總數', '停權會員'],
+                            datasets: [{
+                                label: '# of member',
+                                data: [member_count, member_bad_count],
+                                backgroundColor: [
+                                    '#1D6A96', //藍色
+                                    '#ff8eb3', //粉色
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
                 }
 
             },
@@ -270,7 +279,38 @@
                         '</div>'
                     )
 
-                    // 防止疊加
+                    // 建立canvas元素並設定id及class屬性
+                    var goods_chart = $("<canvas>").attr("id", "myChart");
+                    // 將canvas元素加入到一個div元素中
+                    var goods_c = $("<div>").append(goods_chart);
+                    // 修改div元素的class屬性
+                    goods_c.addClass("col-6 offset-3");
+                    $("#show_goods").append(goods_c);
+
+                    var ctx = goods_chart[0].getContext("2d");
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['商品總數', '上架商品', '下架商品'],
+                            datasets: [{
+                                label: '# of goods',
+                                data: [goods_count, goods_up_count, goods_bad_count],
+                                backgroundColor: [
+                                    '#1D6A96', //藍色
+                                    '#B7D6BF', //綠色
+                                    '#ff8eb3', //粉色
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
                 }
 
             },
@@ -360,6 +400,39 @@
                         '</div>'
                     )
 
+                    // 建立canvas元素並設定id及class屬性
+                    var order_chart = $("<canvas>").attr("id", "myChart");
+                    // 將canvas元素加入到一個div元素中
+                    var order_c = $("<div>").append(order_chart);
+                    // 修改div元素的class屬性
+                    order_c.addClass("col-6 offset-3");
+                    $("#show_order").append(order_c);
+
+                    var ctx = order_chart[0].getContext("2d");
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['訂單總數', '進行中訂單', '已完成訂單', '被取消訂單'],
+                            datasets: [{
+                                label: '# of order',
+                                data: [order_count, order_go_count, order_ok_count, order_cancel_count],
+                                backgroundColor: [
+                                    '#1D6A96', //藍色
+                                    '#ff8eb3', //粉色
+                                    '#B7D6BF', //綠色
+                                    '#c2c3be' //灰色
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
                 }
 
             },

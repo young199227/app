@@ -11,6 +11,12 @@
 @parent
 <style>
 
+    .swal2-title {
+        color:#403426;
+    }
+    .swal2-popup {
+        background:#fff;
+    }
 </style>
 @endsection
 <!-- 把內容插入到index_header_footer的section('main')位置 -->
@@ -101,8 +107,18 @@
                 contentType: "application/json; charset=utf-8",
                 success:function(data){
                     if(data.state){
-                        alert("修改成功，請重新登入！");
-                        $(location).attr("href","/session/member/logout");
+                        Swal.fire({
+                            icon: 'success',
+                            title: '修改成功，請重新登入！',
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading()
+                            }
+                        })
+                        setTimeout(function() {
+                            $(location).attr("href","/session/member/logout");
+                        }, 1500);
                     }else{
                         alert(data.message);
                     }
