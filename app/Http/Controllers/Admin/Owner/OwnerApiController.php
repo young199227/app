@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class OwnerApiController extends Controller
-{   
+{
     //新增商品 http://127.0.0.1:8000/api/owner/insert_goods
     //{"goods_name":"蘋果","goods_money":"100","goods_sum":"1","goods_area":"南投","goods_detail":"超級好吃喔"} 
     public function insert_goods(Request $req)
@@ -39,18 +39,17 @@ class OwnerApiController extends Controller
 
                     $image = $img_array[$i];
                     $imageType = explode(".", $image->getClientOriginalName());
-                    $imageName = $id->Goods_id.'_'.$i.'.'.$imageType[1];
+                    $imageName = $id->Goods_id . '_' . $i . '.' . $imageType[1];
                     Storage::disk('publicFruit')->put($imageName, file_get_contents($image->getRealPath()));
 
                     //把圖片名稱存到資料庫
                     $row = DB::table('goods_imges')->insert([
                         'Goods_id' => $id->Goods_id,
-                        'Goods_img' => '/storage/images/'.$imageName
+                        'Goods_img' => '/storage/images/' . $imageName
                     ]);
                 }
 
                 return response()->json(["state" => true, "message" => "新增成功"]);
-
             } else {
                 return response()->json(["state" => false, "message" => "新增失敗資料庫問題"]);
             }
@@ -76,6 +75,12 @@ class OwnerApiController extends Controller
 
             if ($row) {
 
+                //如果圖片沒有值(使用者沒上傳圖片)
+                //圖片就不會改動
+                if($req->file('ggyy00')==""&&$req->file('ggyy01')==""&&$req->file('ggyy02')==""&&$req->file('ggyy03')==""&&$req->file('ggyy04')==""&&$req->file('ggyy05')==""){
+                    return response()->json(["state" => true, "message" => "更新成功"]);
+                }
+
                 //把$req圖片名稱存到$img_array
                 $img_array = array($req->file('ggyy00'), $req->file('ggyy01'), $req->file('ggyy02'), $req->file('ggyy03'), $req->file('ggyy04'), $req->file('ggyy05'));
                 //array_filter刪除陣列空值
@@ -100,7 +105,7 @@ class OwnerApiController extends Controller
 
                 return response()->json(["state" => true, "message" => "更新成功"]);
             } else {
-                return response()->json(["state" => false, "message" => "資料一樣(文字&圖片都要修改),更新失敗"]);
+                return response()->json(["state" => false, "message" => "資料無變動,修改失敗"]);
             }
         } else {
             return response()->json(["state" => false, "message" => "缺少欄位或沒有值"]);
@@ -176,7 +181,23 @@ class OwnerApiController extends Controller
             } else {
                 return response()->json(["state" => false, "message" => "讀取失敗"]);
             }
+        } else {
+            return response()->json(["state" => false, "message" => "缺少欄位或值"]);
+        }
+    }
 
+    // 修改訂單資料 http://127.0.0.1:8000/api/owner/update_order
+    public function update_order(Request $req)
+    {
+        if ($req->filled(['order_id','order_state'])) {
+
+            DB::table('order')
+            ->where('Order_id',$req->order_id)
+            ->update([
+                'Order_state'=>$req->order_state
+            ]);
+
+            return response()->json(["state" => true, "message" => "修改成功"]);
         } else {
             return response()->json(["state" => false, "message" => "缺少欄位或值"]);
         }
@@ -196,42 +217,45 @@ class OwnerApiController extends Controller
     }
 
     // 撈取會員統計資料
-    public function read_member_count(){
-        
+    public function read_member_count()
+    {
+
         $member_count = DB::table('member')
-        ->select('Member_created_at','Member_id','Member_state')
-        ->get();
+            ->select('Member_created_at', 'Member_id', 'Member_state')
+            ->get();
 
         if ($member_count) {
-            return response()->json(["state" => true, "message" => "讀取成功","data"=>json_decode($member_count)]);
+            return response()->json(["state" => true, "message" => "讀取成功", "data" => json_decode($member_count)]);
         } else {
             return response()->json(["state" => false, "message" => "讀取失敗"]);
         }
     }
 
     // 撈取商品統計資料
-    public function read_goods_count(){
-        
+    public function read_goods_count()
+    {
+
         $goods_count = DB::table('goods')
-        ->select('Goods_created_at','Goods_id','Goods_state')
-        ->get();
+            ->select('Goods_created_at', 'Goods_id', 'Goods_state')
+            ->get();
 
         if ($goods_count) {
-            return response()->json(["state" => true, "message" => "讀取成功","data"=>json_decode($goods_count)]);
+            return response()->json(["state" => true, "message" => "讀取成功", "data" => json_decode($goods_count)]);
         } else {
             return response()->json(["state" => false, "message" => "讀取失敗"]);
         }
     }
 
     // 撈取訂單統計資料 state=1進行中 state=2已完成 state=0已取消
-    public function read_order_count(){
-        
+    public function read_order_count()
+    {
+
         $order_count = DB::table('order')
-        ->select('*')
-        ->get();
+            ->select('*')
+            ->get();
 
         if ($order_count) {
-            return response()->json(["state" => true, "message" => "讀取成功","data"=>json_decode($order_count)]);
+            return response()->json(["state" => true, "message" => "讀取成功", "data" => json_decode($order_count)]);
         } else {
             return response()->json(["state" => false, "message" => "讀取失敗"]);
         }

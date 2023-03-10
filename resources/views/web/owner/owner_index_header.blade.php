@@ -93,10 +93,10 @@
                             <li><a href="/owner/owner_po_goods">上架商品<i class="fa-regular fa-circle-up fs-5"></i></a></li>
                             <li><a href="/owner">管理商品<i class="fa-regular fa-face-smile fs-5"></i></a></li>
                             <li><a href="/owner/owner_member">管理會員<i class="fa-solid fa-cloud fs-5"></i></a></li>
-                            <li><a href="/owner/owner_order"class="position-relative">管理訂單
+                            <li><a href="/owner/owner_order" class="position-relative">管理訂單
                                     <i class="fa-solid fa-truck-fast fs-5">
                                         <span class="position-absolute top-20 start-1000 translate-middle badge rounded-pill bg-danger p-2" id="unprocessed_order_count">
-                                        <span class="visually-hidden">unread messages</span>
+                                            <span class="visually-hidden">unread messages</span>
                                         </span>
                                     </i></a></li>
                             <li><a href="/owner/owner_count">數量統計<i class="fa-solid fa-list fs-5"></i></a></li>
@@ -120,21 +120,26 @@
 <script src="/js/jquery-3.6.1.min.js"></script>
 
 <script>
-
-    $.ajax({
-        type:"GET",
-        url:"/api/owner/unprocessed_order_count",
-        dataType:"json",
-        success:function(data){
-            if(data.state){
-                $("#unprocessed_order_count").text(data.data+"");
-            }else{
-                console.log("讀取失敗");
+    //進入頁面後先讀取未處理訂單數量
+    order_count_ajax();
+    //顯示未處理的訂單數量方法(紅點)
+    function order_count_ajax() {
+        $.ajax({
+            type: "GET",
+            url: "/api/owner/unprocessed_order_count",
+            dataType: "json",
+            success: function(data) {
+                if (data.state) {
+                    $("#unprocessed_order_count").text(data.data + "");
+                } else {
+                    console.log("讀取失敗");
+                }
+            },
+            error: function() {
+                console.log("ajax失敗");
             }
-        },
-        error:function(){console.log("ajax失敗");}
-    });
-
+        });
+    }
 </script>
 <!-- script Blade 模板顯示-->
 @section('script')
