@@ -31,6 +31,7 @@
             <a href="/">水豚</a>
             <a href="/">烏龜</a>
             <a href="/">鯊鯊</a>
+            <a href="/Fruit_World">簡介</a>
             @if(Session::has('owner'))
             <a href="/owner">密室</a>
             @endif

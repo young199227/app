@@ -14,6 +14,12 @@ class GoodsController extends Controller
         return view('web.index.show_index');
     }
 
+    //首頁(展示頁面)
+    public function Fruit_World()
+    {
+        return view('web.index.fruit_world');
+    }
+
     //第二首頁
     public function fruit_index()
     {

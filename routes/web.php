@@ -49,6 +49,10 @@ Route::group(["prefix" => "session"], function () {
     Route::post('/goods_car/add', [GoodsApiController::class, 'goods_car_add'])->middleware('check.member');
 });
 
+
+//關於專題fruit world
+Route::get('/Fruit_World', [GoodsController::class, 'Fruit_World']);
+
 //首頁(展示頁面)
 Route::get('/', [GoodsController::class, 'show_index']);
 
