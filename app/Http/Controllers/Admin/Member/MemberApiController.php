@@ -56,6 +56,14 @@ class MemberApiController extends Controller
     public function email_session(Request $req)
     {
         if ($req->filled('member_email')) {
+
+            // //查詢輸入的email是否已註冊
+            $row = DB::table('member')->where('Member_email',$req->member_email)->first();
+            //如果已註冊就return false
+            if($row!=""){
+                return response()->json(['state' => false, 'message' => 'email已註冊']);
+            }
+
             //儲存$req的email
             $to_email = $req->member_email;
 

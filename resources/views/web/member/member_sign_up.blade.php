@@ -46,10 +46,11 @@
         }
 
         .swal2-title {
-            color:#403426;
+            color: #403426;
         }
+
         .swal2-popup {
-            background:#fff;
+            background: #fff;
         }
     </style>
 </head>
@@ -99,7 +100,7 @@
                                 <input type="email" class="form-control" id="member_email" placeholder="輸入信箱">
                                 <button id="member_email_session" class="btn btn-outline-secondary">發送驗證信</button>
                             </div>
-                            <div class="form-text" id="error_em"></div>
+                            <div class="form-text" id="error_email"></div>
                         </div>
 
                         <div class="mb-5 d-none email_verify">
@@ -137,47 +138,61 @@
     //發送驗證信按鈕
     $("#member_email_session").click(function() {
 
-        if($("#member_email").val()!=""){
-
-            //重新發送時間設定 300s
-            var stop_time = 300;
-            //改變發送驗證信按鈕 文字
-            $("#member_email_session").text(stop_time+"s");
-            //顯示驗證框框
-            $(".email_verify").removeClass("d-none");
-            //鎖定框框
-            $("#member_email,#member_email_session").attr('disabled', true);
-
-            //每1秒鐘重複執行1次
-            var timer = setInterval(function(){
-                stop_time--;
-                $("#member_email_session").text(stop_time+"s");
-
-                //時間為0的時候停止
-                if(stop_time==0){
-                    clearInterval(timer);
-
-                    $("#member_email,#member_email_session").attr('disabled', false);
-                    $("#member_email_session").text("發送驗證信");
-                }
-            },1000);
+        if ($("#member_email").val() != "") {
 
             var dataJson = {};
             dataJson["member_email"] = $("#member_email").val();
             // console.log(JSON.stringify(dataJson));
             $.ajax({
-                type:"POST",
-                url:"/session/member/email_session",
-                data:JSON.stringify(dataJson),
-                dataType:"json",
+                type: "POST",
+                url: "/session/member/email_session",
+                data: JSON.stringify(dataJson),
+                dataType: "json",
                 contentType: "application/json; charset=utf-8",
-                success:function(data){
-                    console.log(data);
+                success: function(data) {
+                    
+                    //信箱丟去後端 判斷是否已註冊
+                    if (data.state) {
+                        //成功時error_email提醒刪除
+                        $("#error_email").text("");
+
+                        //重新發送時間設定 300s
+                        var stop_time = 300;
+                        //改變發送驗證信按鈕 文字
+                        $("#member_email_session").text(stop_time + "s");
+                        //顯示驗證框框
+                        $(".email_verify").removeClass("d-none");
+                        //鎖定框框
+                        $("#member_email,#member_email_session").attr('disabled', true);
+
+                        //每1秒鐘重複執行1次
+                        var timer = setInterval(function() {
+                            stop_time--;
+                            $("#member_email_session").text(stop_time + "s");
+
+                            //時間為0的時候停止
+                            if (stop_time == 0) {
+                                clearInterval(timer);
+
+                                $("#member_email,#member_email_session").attr('disabled', false);
+                                $("#member_email_session").text("發送驗證信");
+                            }
+                        }, 1000);
+
+                        
+
+                    } else {
+                        //信箱已註冊提示
+                        $("#error_email").text(data.message).css("color","red");
+                    }
+
                 },
-                error:function(){console.log("ajax失敗");}
+                error: function() {
+                    console.log("ajax失敗");
+                }
             });
 
-        }else{
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: '請填寫信箱！',
@@ -189,28 +204,30 @@
     var flag_eml = false;
 
     //驗證email驗證碼
-    $("#email_session_check").click(function(){
+    $("#email_session_check").click(function() {
 
         var dataJson = {};
         dataJson["email_session"] = $("#email_session_verify").val();
         // console.log(JSON.stringify(dataJson));
         $.ajax({
-            type:"POST",
-            url:"/session/member/email_session_verify",
-            data:JSON.stringify(dataJson),
-            dataType:"json",
+            type: "POST",
+            url: "/session/member/email_session_verify",
+            data: JSON.stringify(dataJson),
+            dataType: "json",
             contentType: "application/json; charset=utf-8",
-            success:function(data){
+            success: function(data) {
                 // console.log(data);
-                if(data.state){
-                    $("#email_session_check").css("color","green").text("認證成功");
+                if (data.state) {
+                    $("#email_session_check").css("color", "green").text("認證成功");
                     flag_eml = true;
-                }else{
-                    $("#email_session_check").css("color","red").text("認證失敗");
+                } else {
+                    $("#email_session_check").css("color", "red").text("認證失敗");
                     flag_eml = false;
                 }
             },
-            error:function(){console.log("ajax失敗");}
+            error: function() {
+                console.log("ajax失敗");
+            }
         });
     });
 
@@ -219,9 +236,9 @@
     //送出註冊資料
     $("#member_sign_up").click(function() {
 
-        if(flag_eml){
+        if (flag_eml) {
 
-            if(flag_pas){
+            if (flag_pas) {
 
                 var dataJson = {};
                 dataJson["member_email"] = $("#member_email").val();
@@ -229,14 +246,14 @@
                 dataJson["member_password"] = $("#member_password").val();
                 // console.log(JSON.stringify(dataJson));
                 $.ajax({
-                    type:"POST",
-                    url:"/session/member/member_sign_up",
-                    data:JSON.stringify(dataJson),
-                    dataType:"json",
+                    type: "POST",
+                    url: "/session/member/member_sign_up",
+                    data: JSON.stringify(dataJson),
+                    dataType: "json",
                     contentType: "application/json; charset=utf-8",
-                    success:function(data){
+                    success: function(data) {
                         // console.log(data);
-                        if(data.state){
+                        if (data.state) {
                             Swal.fire({
                                 icon: 'success',
                                 title: '註冊成功，請登入！',
@@ -247,43 +264,44 @@
                                 }
                             })
                             setTimeout(function() {
-                                $(location).attr("href","/member/member_login");
+                                $(location).attr("href", "/member/member_login");
                             }, 2000);
-                        }else{
+                        } else {
                             console.log(data);
                         }
                     },
-                    error:function(){console.log("ajax失敗");}
+                    error: function() {
+                        console.log("ajax失敗");
+                    }
                 });
-            }else{
+            } else {
                 Swal.fire({
                     icon: 'error',
                     title: '密碼規格不符！',
                 })
             }
 
-        }else{
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: '請完成信箱驗證！',
             })
         }
-        
+
     });
 
 
     // 監聽 密碼長度限制
-    $("#member_password").bind("input propetychange",function(){
+    $("#member_password").bind("input propetychange", function() {
 
-        if($("#member_password").val().length<6 || $("#member_password").val().length>12){
-            $("#error_pw").text("密碼長度須為6-12").css("color","red");
-            flag_pas = false ;
-        }else{
-            $("#error_pw").text("密碼長度OK").css("color","green");
-            flag_pas = true ;
+        if ($("#member_password").val().length < 6 || $("#member_password").val().length > 12) {
+            $("#error_pw").text("密碼長度須為6-12").css("color", "red");
+            flag_pas = false;
+        } else {
+            $("#error_pw").text("密碼長度OK").css("color", "green");
+            flag_pas = true;
         }
     });
-
 </script>
 
 </html>

@@ -95,12 +95,21 @@
                     選單
                   </button>
                   <ul class="dropdown-menu">
+                    @if(Session::has('member'))
+                    <li>
+                      <a class="dropdown-item" href="/member">會員中心</a>
+                    </li>
+                    <li>
+                    <a class="dropdown-item" href="/session/member/logout">登出</a>
+                    </li>
+                    @else
                     <li>
                       <a class="dropdown-item" href="/member_sign_up">會員註冊 </a>
                     </li>
                     <li>
                       <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#login_modal" href="">會員登入</a>
                     </li>
+                    @endif
                   </ul>
                 </div>
 
