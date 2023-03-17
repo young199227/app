@@ -33,8 +33,8 @@
         }
 
         .footer {
-            height:150px;
-            background-color:withe;
+            height: 150px;
+            background-color: withe;
             background-image: url(/img/flower.png);
         }
     </style>
@@ -74,8 +74,20 @@
                     <p class="mt-4">快速測試請使用以下二組帳號<br>網站管理者－帳號：owner 密碼：123456<br>內建會員－帳號：123 密碼：123456</p>
                     <p class="mt-4">下面是網站詳細內容</p>
 
-                    <hr class="mt-5">
+                    <hr class="mt-2">
 
+                </div>
+            </div>
+
+            <!-- 簡介 -->
+            <div class="row mt-3">
+                <div class="col-6 offset-3">
+
+                    <p class="fs-3 fw-bold">ER Model</p>
+
+                    <img src="/img/ER關聯圖.png" class="" >
+
+                    <hr class="mt-5">
                 </div>
             </div>
 
@@ -140,7 +152,7 @@
         </div>
     </div>
 
-        <div class="footer mt-5"></div>
+    <div class="footer mt-5"></div>
 
 
 </body>
@@ -151,4 +163,3 @@
 </script>
 
 </html>
-
