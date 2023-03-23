@@ -6,16 +6,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Goods;
 
 class TestController extends Controller
 {
     //測試
     public function test(Request $req)
     {
+        // $row = DB::table('goods')->all();
 
-
-
-        return view('test');
+        return view('test.vueTest');
     }
 
     public function test1(Request $req)
@@ -41,7 +41,7 @@ class TestController extends Controller
             return redirect()->route('fruit');
         }
 
-        return view('map');
+        return view('test.map');
     }
     //vue
     public function vue()
@@ -51,7 +51,7 @@ class TestController extends Controller
             return redirect()->route('fruit');
         }
 
-        return view('vue');
+        return view('test.vue');
     }
 
 
