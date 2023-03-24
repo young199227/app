@@ -160,12 +160,23 @@ class GoodsApiController extends Controller
                 }
 
                 //新增訂單後清空購物車
-                DB::table('goods_car')->where('Member_id',$req->member_id)->delete();
+                DB::table('goods_car')->where('Member_id', $req->member_id)->delete();
             });
 
             return response()->json(['state' => true, 'message' => '成功購買!']);
         } else {
             return response()->json(['state' => false, 'message' => '缺少欄位或值']);
         }
+    }
+
+    //商品列表api
+    public function goods_list_api()
+    {
+        $row = DB::table('goods')
+            ->select('*', DB::raw('(select Goods_img FROM goods_imges where Goods_id = a.Goods_id LIMIT 1) as Goods_imges'))
+            ->from('goods as a')
+            ->get();
+
+        return $row;
     }
 }

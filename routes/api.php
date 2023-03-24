@@ -63,3 +63,6 @@ Route::group(["prefix" => "goods_car"], function () {
     //購物車 新增訂單
     Route::post('/add_order', [GoodsApiController::class, 'add_order']);
 });
+
+//撈取商品api(含一張圖片)
+Route::get('/goods_list_api', [GoodsApiController::class, 'goods_list_api']);
