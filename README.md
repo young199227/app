@@ -6,11 +6,11 @@
 <div class="">專題網址：<a href="http://43.206.108.197/">http://43.206.108.197/</a></div>
 <div class="mt-2">GitHub：<a href="https://github.com/young199227/app">https://github.com/young199227/app</a></div>
 
-***
+---
 <br>
 
 **專題簡介**
----  
+<br>
 
 <p>這是一個在LAMP環境下寫的水果購物網站專題(Linux + Apache + MySQL + PHP)</p>  
 
@@ -21,17 +21,17 @@
 <p>下面是網站詳細內容</p>
 <br>
 
-***
+---
 
 **ER Model**
----
+<br>
 
 <p><img src="https://raw.githubusercontent.com/young199227/app/main/public/img/ER%E9%97%9C%E8%81%AF%E5%9C%96.png" width="704px"></p>
 <br>
 
-***
-**網站頁面簡介**
 ---
+**網站頁面簡介**
+<br>
 
 1. 形象頁面（引導進入網站）
 2. 商場首頁（輪播圖、多樣分類）
@@ -44,9 +44,9 @@
 
 <br>
 
-***
-**三種使用者簡介**
 ---
+**三種使用者簡介**
+<br>
 <br>
 
 ### **非會員**
@@ -78,10 +78,9 @@
 
 
 <br>
-
-***
-**設定事項說明**
 ---
+**設定事項說明**
+<br>
 
 1. 於項目的根目錄新增一個 .env 設定（SQL等等...）
 
