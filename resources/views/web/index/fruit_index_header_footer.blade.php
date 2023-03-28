@@ -171,8 +171,8 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-12 mt-1">
-          @2023-2-1~現在
+        <div class="col-12 mt-1" id="time">
+          
         </div>
       </div>
     </div>
@@ -274,6 +274,13 @@
       }
     });
   }
+
+  var DateTime = new Date();
+
+  var formattedDate = DateTime.toLocaleDateString( {year: '2-digit', month: '2-digit', day: '2-digit' });
+
+  $("#time").text("@2023/02/01～"+formattedDate);
+
 </script>
 <!-- script Blade 模板顯示-->
 @section('script')

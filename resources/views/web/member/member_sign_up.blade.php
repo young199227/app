@@ -156,8 +156,8 @@
                         //成功時error_email提醒刪除
                         $("#error_email").text("");
 
-                        //重新發送時間設定 300s
-                        var stop_time = 300;
+                        //重新發送時間設定 60s
+                        var stop_time = 60;
                         //改變發送驗證信按鈕 文字
                         $("#member_email_session").text(stop_time + "s");
                         //顯示驗證框框
