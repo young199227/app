@@ -1,15 +1,14 @@
 <p align="center"><img src="https://raw.githubusercontent.com/young199227/app/main/public/img/tree.png" height="150px"></p>
 
- **Fruit World**
-===
+ # **Fruit World**
 
 <div class="">專題網址：<a href="http://43.206.108.197/">http://43.206.108.197/</a></div>
 <div class="mt-2">GitHub：<a href="https://github.com/young199227/app">https://github.com/young199227/app</a></div>
 
----
+<br>
 <br>
 
-**專題簡介**
+# **專題簡介**
 <br>
 
 <p>這是一個在LAMP環境下寫的水果購物網站專題(Linux + Apache + MySQL + PHP)</p>  
@@ -19,18 +18,17 @@
 <p>快速測試請使用以下二組帳號<br>網站管理者－帳號：owner 密碼：123456<br>內建會員－帳號：123 密碼：123456</p>  
 
 <p>下面是網站詳細內容</p>
+
+<br>
 <br>
 
----
-
-**ER Model**
+# **ER Model**
 <br>
 
 <p><img src="https://raw.githubusercontent.com/young199227/app/main/public/img/ER%E9%97%9C%E8%81%AF%E5%9C%96.png" width="704px"></p>
 <br>
 
----
-**網站頁面簡介**
+# **網站頁面簡介**
 <br>
 
 1. 形象頁面（引導進入網站）
@@ -43,10 +41,9 @@
 8. 後台頁面（網站管理者專屬）
 
 <br>
-
----
-**三種使用者簡介**
 <br>
+
+# **三種使用者簡介**
 <br>
 
 ### **非會員**
@@ -78,36 +75,41 @@
 
 
 <br>
----
-**設定事項說明**
+<br>
+
+# **設定事項說明**
 <br>
 
 1. 於項目的根目錄新增一個 .env 設定（SQL等等...）
 
     DB_CONNECTION設定時注意環境 /config/database.php (不同的sql 還有"mac!!!")
 
-    新設定一個 APP_KEY  指令：php artisan key:generate
+    新設定一個 APP_KEY  指令：
+    
+        php artisan key:generate
 
-2. 使用終端機到項目的根目錄，輸入指令：composer install
+2. 使用終端機到項目的根目錄，輸入指令：
+
+        composer install
 
     此命令將在項目根目錄中創建 vendor 目錄，並下載和安裝 Laravel 及其相依套件的所有依賴項。
 
 3. 上傳檔案的路徑設定/config/filesystems.php
-
-    指令：php artisan storage:link
+        
+        php artisan storage:link
 
 4. session api.php的路由是不能設定的 
 
 5. 寄email設定.env
 
-    MAIL_MAILER=smtp <br>
-    MAIL_HOST=smtp.gmail.com <br>
-    MAIL_PORT=587 <br>
-    MAIL_USERNAME=ggyy的email <br>
-    MAIL_PASSWORD=nomfxpftiuvgoihx <br>
-    MAIL_ENCRYPTION=tls <br>
-    MAIL_FROM_ADDRESS=null <br>
-    MAIL_FROM_NAME="${APP_NAME}"
+        MAIL_MAILER=smtp
+        MAIL_HOST=smtp.gmail.com
+        MAIL_PORT=587
+        MAIL_USERNAME=ggyy的email
+        MAIL_PASSWORD=nomfxpftiuvgoihx
+        MAIL_ENCRYPTION=tls
+        MAIL_FROM_ADDRESS=null
+        MAIL_FROM_NAME="${APP_NAME}"
 
 
 
