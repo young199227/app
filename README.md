@@ -11,6 +11,8 @@
 # **專題簡介**
 <br>
 
+<p>由職訓局雲端技術應用班(台中)第二期劉冠亞.林佳敏共同製作</p>
+
 <p>這是一個在LAMP環境下寫的水果購物網站專題(Linux + Apache + MySQL + PHP)</p>  
 
 <p>使用了laravel框架,架設在aws雲端(網址ip問題是因為沒錢買網域QQ)</p>  
@@ -75,41 +77,6 @@
 
 
 <br>
-<br>
-
-# **設定事項說明**
-<br>
-
-1. 於項目的根目錄新增一個 .env 設定（SQL等等...）
-
-    DB_CONNECTION設定時注意環境 /config/database.php (不同的sql 還有"mac!!!")
-
-    新設定一個 APP_KEY  指令：
-    
-        php artisan key:generate
-
-2. 使用終端機到項目的根目錄，輸入指令：
-
-        composer install
-
-    此命令將在項目根目錄中創建 vendor 目錄，並下載和安裝 Laravel 及其相依套件的所有依賴項。
-
-3. 上傳檔案的路徑設定/config/filesystems.php
-        
-        php artisan storage:link
-
-4. session api.php的路由是不能設定的 
-
-5. 寄email設定.env
-
-        MAIL_MAILER=smtp
-        MAIL_HOST=smtp.gmail.com
-        MAIL_PORT=587
-        MAIL_USERNAME=ggyy的email
-        MAIL_PASSWORD=nomfxpftiuvgoihx
-        MAIL_ENCRYPTION=tls
-        MAIL_FROM_ADDRESS=null
-        MAIL_FROM_NAME="${APP_NAME}"
 
 
 

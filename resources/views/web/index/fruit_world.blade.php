@@ -69,6 +69,7 @@
 
                     <p class="fs-3 fw-bold">專題簡介</p>
 
+                    <p class="mt-2">由職訓局雲端技術應用班(台中)第二期劉冠亞.林佳敏共同製作</p>
                     <p class="mt-2">這是一個在LAMP環境下寫的水果購物網站專題(Linux + Apache + MySQL + PHP)</p>
                     <p class="mt-2">使用了laravel框架,架設在aws雲端(網址ip問題是因為沒錢買網域QQ)</p>
                     <p class="mt-4">快速測試請使用以下二組帳號<br>網站管理者－帳號：owner 密碼：123456<br>內建會員－帳號：123 密碼：123456</p>
