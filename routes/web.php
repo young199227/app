@@ -27,7 +27,7 @@ Route::post('/testpas', [TestController::class, 'pasw']);
 
 //測試頁面
 Route::get('/test', [TestController::class, 'test']);
-Route::get('/test1', [TestController::class, 'test1']);
+Route::post('/test1', [TestController::class, 'test1']);
 Route::get('/test2', [TestController::class, 'test2']);
 
 //處理session的group (因為aip.php不能分發seeion)

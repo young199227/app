@@ -20,9 +20,12 @@ class TestController extends Controller
 
     public function test1(Request $req)
     {
-        $goodsList = DB::table('goods')->get();
+        DB::table('member')->insert([
+            'Member_email'=>$req->member_email,
+            'Member_password'=>$req->member_password
+        ]);
 
-        return $goodsList;
+        return response()->json(["state"=>true,'message'=>'新增成功']);
     }
 
     public function test2(Request $req)
