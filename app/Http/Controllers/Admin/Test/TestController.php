@@ -30,11 +30,18 @@ class TestController extends Controller
 
     public function test2(Request $req)
     {
-        //判斷這個session是不是==123
-        if (session()->get('email_session') == 'dhNwdr') {
-            echo '==';
-        }
+        $row = DB::table('goods')
+        // ->select('*', DB::raw('(SELECT goods_img FROM goods_imges WHERE goods_id = b.goods_id LIMIT 1) as Goods_img'))
+        ->where('Goods_id', '=', $req->goods_id)
+        ->get();
+
+        return $row;
     }
+
+    // //判斷這個session是不是==123
+    // if (session()->get('email_session') == 'dhNwdr') {
+    //     echo '==';
+    // }
 
     //map
     public function map()

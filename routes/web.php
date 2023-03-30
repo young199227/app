@@ -28,7 +28,7 @@ Route::post('/testpas', [TestController::class, 'pasw']);
 //測試頁面
 Route::get('/test', [TestController::class, 'test']);
 Route::post('/test1', [TestController::class, 'test1']);
-Route::get('/test2', [TestController::class, 'test2']);
+Route::post('/test2', [TestController::class, 'test2']);
 
 //處理session的group (因為aip.php不能分發seeion)
 Route::group(["prefix" => "session"], function () {
