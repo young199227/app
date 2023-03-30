@@ -56,7 +56,7 @@
                     <div class="fs-1 fw-bold">Fruit World</div>
                     <hr>
 
-                    <div class="">專題網址：<a href="http://43.206.108.197/">http://43.206.108.197/</a></div>
+                    <div class="">專題網址：<a href="http://fruit.ddns.net/">http://fruit.ddns.net/</a></div>
                     <div class="mt-2">GitHub：<a href="https://github.com/young199227/app">https://github.com/young199227/app</a></div>
                     <hr>
 
@@ -71,7 +71,7 @@
 
                     <p class="mt-2">由職訓局雲端技術應用班(台中)第二期劉冠亞.林佳敏共同製作</p>
                     <p class="mt-2">這是一個在LAMP環境下寫的水果購物網站專題(Linux + Apache + MySQL + PHP)</p>
-                    <p class="mt-2">使用了laravel框架,架設在aws雲端(網址ip問題是因為沒錢買網域QQ)</p>
+                    <p class="mt-2">使用了laravel框架,架設在aws雲端.</p>
                     <p class="mt-4">快速測試請使用以下二組帳號<br>網站管理者－帳號：owner 密碼：123456<br>內建會員－帳號：123 密碼：123456</p>
                     <p class="mt-4">下面是網站詳細內容</p>
 
