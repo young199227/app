@@ -30,8 +30,12 @@ class TestController extends Controller
 
     public function test2(Request $req)
     {
+        // $row = DB::table('goods')
+        // ->where('Goods_id', '=', $req->goods_id)
+        // ->get();
+
         $row = DB::table('goods')
-        // ->select('*', DB::raw('(SELECT goods_img FROM goods_imges WHERE goods_id = b.goods_id LIMIT 1) as Goods_img'))
+        ->select('*', DB::raw('(SELECT goods_img FROM goods_imges WHERE Goods_id = '.$req->goods_id.' LIMIT 1) as Goods_img'))
         ->where('Goods_id', '=', $req->goods_id)
         ->get();
 

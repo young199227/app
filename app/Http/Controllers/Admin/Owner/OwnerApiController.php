@@ -174,6 +174,7 @@ class OwnerApiController extends Controller
                 ->join('order_content AS b', 'a.Order_id', '=', 'b.Order_id')
                 ->join('goods AS c', 'b.Goods_id', '=', 'c.Goods_id')
                 ->where('a.Order_state', $req->order_state)
+                ->orderByDesc('a.Order_id')
                 ->get();
 
             if ($row) {

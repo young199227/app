@@ -57,13 +57,11 @@
 
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
 
                             <span v-for="(page, index) in ajaxData" :key="index">
                                 <li class="page-item"><a class="page-link" href="#" v-on:click="message_state(index)">{{index+1}}</a></li>
                             </span>
 
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
                         </ul>
                     </nav>
 
@@ -87,7 +85,7 @@
                     <div class="col-md-12 mt-3 h-100" v-for="item in goodsData" :key="item">
 
                         <div class="card" style="width: 18rem;">
-                            <img v-bind:src="item.Goods_imges" class="card-img-top" style="width: 100%; height: 200px">
+                            <img v-bind:src="item.Goods_img" class="card-img-top" style="width: 100%; height: 200px">
                             <div class="card-body">
                                 <h5 class="card-title">名稱:{{item.Goods_name}}</h5>
                                 <p class="card-text">價錢:{{item.Goods_money}}</p>
@@ -96,6 +94,7 @@
                             </div>
                         </div>
                     </div>
+                    <h1>{{selectState}}</h1>
                 </div>
 
 
@@ -121,39 +120,26 @@
                     []
                 ],
                 listData: [],
-                goodsData: []
+                goodsData: [],
+                selectState: ""
             }
         },
         created() {
-            axios.get('/api/goods_list_api')
-                .then(response => {
-                    // console.log(response.data);
+            //進入頁面後先撈取全部商品的陣列
+            axios.get('/api/goods_list_api').then(response => {
 
-                    //把傳進來的data迴圈全部跑出來一次
-                    for (i = 0; i < response.data.length; i++) {
-
-                        //當i取this.page的餘數=0的 且 i不等於0 的時候 在ajaxData增加一個空陣列
-                        //ajaxData是一個二維陣列 ajaxData[增加這個] [] 
-                        if (i % this.page == 0 && i != 0) {
-                            this.ajaxData.push([]);
-                        }
-
-                        //把傳進來的data資料丟進ajaxData[][]
-                        //this.ajaxData.length-1 解釋 第一個[]會一直增加 -1後才能當陣列的變數
-                        //this.page是4的時候 i%this.page 0%4=0  1%4=1 2%4=2 3%4=3 如下以此類推 
-                        //ajaxData[0][0] ajaxData[0][1] ajaxData[0][2] ajaxData[0][3]
-                        //ajaxData[1][0] ajaxData[1][1] ajaxData[1][2] ajaxData[1][3]
-                        this.ajaxData[this.ajaxData.length - 1][i % this.page] = response.data[i];
-                    }
+                    //to2dArray是自定義的function能把一維陣列排序成一個二維陣列
+                    //to2dArray(要排序的陣列, 一頁有幾個資料)
+                    this.ajaxData = to2dArray(response.data, this.page);
 
                     //this.ajaxData[0]的資料先存進this.listData 讓畫面有資料
                     this.listData = this.ajaxData[0];
+
+                    //console.log(this.ajaxData);
                 })
                 .catch(error => {
                     console.error(error);
                 });
-
-
         },
         methods: {
             //跳到第幾個頁數的方法
@@ -183,13 +169,11 @@
                         ];
                         this.listData = [];
 
-                        for (i = 0; i < response.data.length; i++) {
+                        //to2dArray是自定義的function能把一維陣列排序成一個二維陣列
+                        //to2dArray(要排序的陣列, 一頁有幾個資料)
+                        this.ajaxData = to2dArray(response.data, this.page);
 
-                            if (i % this.page == 0 && i != 0) {
-                                this.ajaxData.push([]);
-                            }
-                            this.ajaxData[this.ajaxData.length - 1][i % this.page] = response.data[i];
-                        }
+                        //this.ajaxData[0]的資料先存進this.listData 讓畫面有資料
                         this.listData = this.ajaxData[0];
                     })
                     .catch(error => {
@@ -203,13 +187,23 @@
                 axios.post('/test2', {
                         goods_id: this.goodsId
                     }).then(response => {
-                        // console.log(response.data);
+                        console.log(this.goodsData.length);
                         this.goodsData = response.data;
+
+                        if (this.goodsData.length === 0) {
+                            console.log(this.goodsData.length);
+                            this.selectState = "空空如也!";
+                        } else {
+                            this.selectState = "";
+                        }
+
+
                     })
                     .catch(error => {
                         console.error(error);
+                        this.selectState = "空空如也!";
                     });
-            }
+            },
 
         },
         computed: {
@@ -218,6 +212,34 @@
     }
 
     Vue.createApp(App).mount('#app');
+
+    //把一個陣列轉換(排序)成二維陣列 arr=你要轉換的陣列 size=1頁要幾個
+    function to2dArray(arr, size) {
+
+        //宣告一個二維陣列
+        var _2dArr = [
+            []
+        ];
+
+        //把傳進來的arr陣列迴圈全部跑出來一次
+        for (i = 0; i < arr.length; i++) {
+
+            //當i取size的餘數=0 且 i不等於0 的時候 在_2dArr增加一個空陣列
+            //_2dArr是一個二維陣列 _2dArr[增加這個] [] 
+            if (i % size == 0 && i != 0) {
+                _2dArr.push([]);
+            }
+
+            //把傳進來的data資料丟進_2dArr[][]
+            //_2dArr.length-1 解釋 第一個[]會一直增加 -1後才能當陣列的變數
+            //size是4的時候 i%size 0%4=0  1%4=1 2%4=2 3%4=3 如下以此類推 
+            //_2dArr[0][0] _2dArr[0][1] _2dArr[0][2] _2dArr[0][3]
+            //_2dArr[1][0] _2dArr[1][1] _2dArr[1][2] _2dArr[1][3]
+            _2dArr[_2dArr.length - 1][i % size] = arr[i];
+        }
+
+        return _2dArr;
+    }
 </script>
 
 </html>
