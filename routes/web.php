@@ -26,6 +26,7 @@ Route::get('/vue', [TestController::class, 'vue']);
 Route::post('/testpas', [TestController::class, 'pasw']);
 
 //測試頁面
+Route::get('/php', [TestController::class, 'php']);
 Route::get('/test', [TestController::class, 'test']);
 Route::post('/test1', [TestController::class, 'test1']);
 Route::post('/test2', [TestController::class, 'test2']);
