@@ -20,57 +20,11 @@
 
             <div class="row">
 
-                <!-- 選擇每頁數量 -->
-                <div class="col-12 mt-3">
-
-                    <h1>每頁數量</h1>
-
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-
-                            <li class="page-item"><a class="page-link" href="#" v-on:click="pageUpdate(1)">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#" v-on:click="pageUpdate(2)">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#" v-on:click="pageUpdate(3)">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#" v-on:click="pageUpdate(4)">4</a></li>
-
-                        </ul>
-                    </nav>
-                </div>
-
-                <!-- 顯示商品 -->
-                <div class="col-md-3 mt-3 h-100" v-for="item in listData" :key="item">
-
-                    <div class="card" style="width: 18rem;">
-                        <img v-bind:src="item.Goods_imges" class="card-img-top" style="width: 100%; height: 200px">
-                        <div class="card-body">
-                            <h5 class="card-title">名稱:{{item.Goods_name}}</h5>
-                            <p class="card-text">價錢:{{item.Goods_money}}</p>
-                            <p class="card-text">產地:{{item.Goods_area}}</p>
-                            <p class="card-text">描述:{{item.Goods_detail}}</p>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- 換頁 -->
-                <div class="col-12 mt-3">
-
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center">
-
-                            <span v-for="(page, index) in ajaxData" :key="index">
-                                <li class="page-item"><a class="page-link" href="#" v-on:click="message_state(index)">{{index+1}}</a></li>
-                            </span>
-
-                        </ul>
-                    </nav>
-
-                </div>
-
                 <!-- 新增帳號 -->
                 <div class="col-6 mt-3">
                     <input type="text" class="form-control" placeholder="帳號" v-model="userName">
-                    <input type="text" class="form-control" placeholder="密碼" v-model="userPw">
+                    <input type="password" class="form-control" placeholder="密碼" v-model="userPw">
+                    <div style="color:red">{{userErr}}</div>
 
                     <button type="button" class="btn btn-success" v-on:click="addUser()">新增帳號</button>
                 </div>
@@ -98,6 +52,52 @@
                 </div>
 
 
+
+                <!-- 選擇每頁數量 -->
+                <div class="col-12 mt-3" v-if="userState===1">
+
+                    <h1>選擇每頁數量</h1>
+
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+
+                            <li class="page-item" v-for="(page , index) in pageMax"><a class="page-link" href="#" v-on:click="pageUpdate(page)">{{page}}</a></li>
+
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- 顯示商品 -->
+                <div class="col-md-3 mt-3 h-100" v-for="item in listData" :key="item" v-if="userState===1">
+
+                    <div class="card" style="width: 18rem;">
+                        <img v-bind:src="item.Goods_imges" class="card-img-top" style="width: 100%; height: 200px">
+                        <div class="card-body">
+                            <h5 class="card-title">名稱:{{item.Goods_name}}</h5>
+                            <p class="card-text">價錢:{{item.Goods_money}}</p>
+                            <p class="card-text">產地:{{item.Goods_area}}</p>
+                            <p class="card-text">描述:{{item.Goods_detail}}</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- 換頁 -->
+                <div class="col-12 mt-3" v-if="userState===1">
+
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+
+                            <span v-for="(page, index) in ajaxData" :key="index">
+                                <li class="page-item"><a class="page-link" href="#" v-on:click="message_state(index)">{{index+1}}</a></li>
+                            </span>
+
+                        </ul>
+                    </nav>
+
+                </div>
+
+
             </div>
 
         </div>
@@ -109,19 +109,22 @@
 <script src="/js/vue.global.js"></script>
 <script src="/js/axios.min.js"></script>
 <script>
-    var App = {
+    var app = {
         data() {
             return {
+                pageMax: 8,
                 page: 4,
                 userName: "",
                 userPw: "",
+                userErr: "",
                 goodsId: "",
                 ajaxData: [
                     []
                 ],
                 listData: [],
                 goodsData: [],
-                selectState: ""
+                selectState: "",
+                userState: 0,
             }
         },
         created() {
@@ -149,10 +152,29 @@
 
             //新增user的方法
             addUser() {
+
+                // 驗證 userName 和 userPw 是否符合規定
+                // 
+                const userNameRegex = /^[a-zA-Z0-9]{4,12}$/;
+                const userPwRegex = /^[a-zA-Z0-9]{6,12}$/;
+                if (!userNameRegex.test(this.userName)) {
+                    this.userErr = "使用者名稱不符合要求，4~12字";
+                    return;
+                }
+                if (!userPwRegex.test(this.userPw)) {
+                    this.userErr = "密碼不符合要求，6~12碼";
+                    return;
+                }
+
                 axios.post('/test1', {
                     member_email: this.userName,
                     member_password: this.userPw
                 }).then(response => {
+
+                    this.userName = "";
+                    this.userPw = "";
+                    this.userErr = "";
+                    this.userState = 1;
                     console.log(response.data);
                 });
             },
@@ -211,7 +233,9 @@
         }
     }
 
-    Vue.createApp(App).mount('#app');
+
+    Vue.createApp(app).mount('#app');
+
 
     //把一個陣列轉換(排序)成二維陣列 arr=你要轉換的陣列 size=1頁要幾個
     function to2dArray(arr, size) {
