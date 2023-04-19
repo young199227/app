@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\Member\MemberController;
 use App\Http\Controllers\Admin\Test\TestController;
 use App\Http\Controllers\Admin\Member\MemberApiController;
 use App\Http\Controllers\Admin\Goods\GoodsApiController;
+use App\Http\Controllers\Train\TrainController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +26,14 @@ Route::get('/map', [TestController::class, 'map']);
 Route::get('/vue', [TestController::class, 'vue']);
 //測試頁面2
 Route::post('/testpas', [TestController::class, 'pasw']);
+
+//train
+Route::get('/train4', [TrainController::class, 'train4']);
+Route::post('/train4_C', [TrainController::class, 'train4_C']);
+Route::get('/train4_R', [TrainController::class, 'train4_R']);
+Route::post('/train4_R_one', [TrainController::class, 'train4_R_one']);
+Route::post('/train4_U', [TrainController::class, 'train4_U']);
+Route::post('/train4_D', [TrainController::class, 'train4_D']);
 
 //測試頁面
 Route::get('/php', [TestController::class, 'php']);
