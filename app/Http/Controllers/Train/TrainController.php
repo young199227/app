@@ -62,7 +62,7 @@ class TrainController extends Controller
     //查詢全部user
     public function train4_R(Request $req)
     {
-        $row = DB::table('customer')->orderByDesc('id')->get();
+        $row = DB::table('customer')->orderByDesc('CustomerId')->get();
 
         //迴圈 生日,電話,住址 base64解密
         for ($i = 0; $i < count($row); $i++) {
@@ -79,7 +79,7 @@ class TrainController extends Controller
     public function train4_R_one(Request $req)
     {
 
-        $row = DB::table('customer')->where('id', $req->userID)->get();
+        $row = DB::table('customer')->where('CustomerId', $req->userID)->get();
 
         //解密
         $row[0]->Birthday = base64_decode($row[0]->Birthday);
@@ -121,7 +121,7 @@ class TrainController extends Controller
             }
         }
 
-        DB::table('customer')->where("id", $req->userID)
+        DB::table('customer')->where("CustomerId", $req->userID)
             ->update([
                 'Name' => $req->name,
                 'IDnumber' => $req->idnumber,
@@ -137,6 +137,6 @@ class TrainController extends Controller
     //依id刪除user
     public function train4_D(Request $req)
     {
-        DB::table('customer')->where('id', $req->userID)->delete();
+        DB::table('customer')->where('CustomerId', $req->userID)->delete();
     }
 }

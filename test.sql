@@ -2,9 +2,9 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- 主機： 127.0.0.1:3306
--- 產生時間： 2023-04-21 09:33:02
--- 伺服器版本： 8.0.31
+-- 主機： 127.0.0.1:3308
+-- 產生時間： 2023-04-23 12:52:27
+-- 伺服器版本： 5.7.40
 -- PHP 版本： 8.1.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -29,28 +29,23 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `customer`;
 CREATE TABLE IF NOT EXISTS `customer` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `Name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '姓名',
-  `IDnumber` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '身分證號',
-  `Birthday` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '生日(加密處理)',
-  `Phone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '電話(加密處理)',
-  `Postalcode` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '郵遞區號',
-  `Address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '住址(加密處理)',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `CustomerId` int(11) NOT NULL AUTO_INCREMENT COMMENT '客戶 ID',
+  `Name` varchar(50) DEFAULT NULL COMMENT '顧客姓名',
+  `IDnumber` varchar(50) DEFAULT NULL COMMENT '身分證號',
+  `Birthday` varchar(50) DEFAULT NULL COMMENT '生日(加密處理)',
+  `Phone` varchar(50) DEFAULT NULL COMMENT '電話(加密處理)',
+  `Postalcode` varchar(50) DEFAULT NULL COMMENT '郵遞區號',
+  `Address` varchar(100) DEFAULT NULL COMMENT '住址(加密處理)',
+  `CreatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '創建時間',
+  PRIMARY KEY (`CustomerId`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='客戶表格';
 
 --
 -- 傾印資料表的資料 `customer`
 --
 
-INSERT INTO `customer` (`id`, `Name`, `IDnumber`, `Birthday`, `Phone`, `Postalcode`, `Address`) VALUES
-(44, '123', '12', 'MjAyMy0wNC0yMA==', 'MTI=', '1', 'MQ=='),
-(46, '123', '12', 'MjAyMy0wNC0wNg==', 'MTI=', '123', 'MTIz'),
-(49, 'ggyy', '12', 'MjAyMy0wNC0wOA==', 'MTI=', '123', 'MQ=='),
-(48, 'ggg', '122345', 'MjAyMy0wNC0wNQ==', 'MTI=', '1', 'MTIz'),
-(45, '123', '12', 'MjAyMy0wNC0wNw==', 'MTI=', '1', 'MQ=='),
-(50, 'llll', '12', 'MjAyMy0wNC0wNg==', 'MTI=', '1', 'MQ=='),
-(51, '123', '12', 'MjAyMy0wNC0wMQ==', 'MTI=', '12', 'MTI=');
+INSERT INTO `customer` (`CustomerId`, `Name`, `IDnumber`, `Birthday`, `Phone`, `Postalcode`, `Address`, `CreatedTime`) VALUES
+(3, '123', '12', 'MjAyMy0wNC0wNg==', 'MTI=', '12', 'MTI=', '2023-04-22 07:27:01');
 
 -- --------------------------------------------------------
 
@@ -60,10 +55,21 @@ INSERT INTO `customer` (`id`, `Name`, `IDnumber`, `Birthday`, `Phone`, `Postalco
 
 DROP TABLE IF EXISTS `items`;
 CREATE TABLE IF NOT EXISTS `items` (
-  `Id` int NOT NULL AUTO_INCREMENT,
-  `Name` int NOT NULL COMMENT '產品名稱',
-  PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `ItemId` int(11) NOT NULL AUTO_INCREMENT COMMENT '產品 ID',
+  `StoreId` int(11) NOT NULL COMMENT '店家 ID',
+  `Name` varchar(50) NOT NULL DEFAULT '' COMMENT '產品名稱',
+  `Price` decimal(8,2) NOT NULL DEFAULT '0.00' COMMENT '產品售價',
+  `CreatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '創建時間',
+  PRIMARY KEY (`ItemId`),
+  KEY `StoreId` (`StoreId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='產品品項表格';
+
+--
+-- 傾印資料表的資料 `items`
+--
+
+INSERT INTO `items` (`ItemId`, `StoreId`, `Name`, `Price`, `CreatedTime`) VALUES
+(1, 1, 'gy', '10.00', '2023-04-22 07:08:09');
 
 -- --------------------------------------------------------
 
@@ -73,10 +79,15 @@ CREATE TABLE IF NOT EXISTS `items` (
 
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
-  `OrderId` int NOT NULL AUTO_INCREMENT,
-  `Name` int NOT NULL COMMENT '訂單名稱',
-  PRIMARY KEY (`OrderId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `OrderId` int(11) NOT NULL AUTO_INCREMENT COMMENT '訂單 ID',
+  `ItemId` int(11) NOT NULL COMMENT '產品 ID',
+  `CustomerId` int(11) NOT NULL COMMENT '客戶 ID',
+  `Quantity` int(11) NOT NULL DEFAULT '1' COMMENT '數量',
+  `CreatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '創建時間',
+  PRIMARY KEY (`OrderId`),
+  KEY `ItemId` (`ItemId`),
+  KEY `CustomerId` (`CustomerId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='訂單表格';
 
 -- --------------------------------------------------------
 
@@ -86,18 +97,18 @@ CREATE TABLE IF NOT EXISTS `order` (
 
 DROP TABLE IF EXISTS `sales`;
 CREATE TABLE IF NOT EXISTS `sales` (
-  `SalesId` int NOT NULL AUTO_INCREMENT,
-  `Name` int NOT NULL COMMENT '業務姓名',
+  `SalesId` int(11) NOT NULL AUTO_INCREMENT COMMENT '業務人員 ID',
+  `Name` varchar(50) NOT NULL DEFAULT '' COMMENT '姓名',
+  `CreatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '創建時間',
   PRIMARY KEY (`SalesId`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='業務人員表格';
 
 --
 -- 傾印資料表的資料 `sales`
 --
 
-INSERT INTO `sales` (`SalesId`, `Name`) VALUES
-(1, 0),
-(2, 1);
+INSERT INTO `sales` (`SalesId`, `Name`, `CreatedTime`) VALUES
+(1, 'ggyy', '2023-04-22 07:07:37');
 
 -- --------------------------------------------------------
 
@@ -107,11 +118,43 @@ INSERT INTO `sales` (`SalesId`, `Name`) VALUES
 
 DROP TABLE IF EXISTS `store`;
 CREATE TABLE IF NOT EXISTS `store` (
-  `StoreId` int NOT NULL AUTO_INCREMENT,
-  `SalesId` int NOT NULL COMMENT '業務id',
-  `Name` int NOT NULL COMMENT '店家名稱',
-  PRIMARY KEY (`StoreId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `StoreId` int(11) NOT NULL AUTO_INCREMENT COMMENT '店家 ID',
+  `SalesId` int(11) NOT NULL COMMENT '業務人員 ID',
+  `Name` varchar(50) NOT NULL DEFAULT '' COMMENT '店家名稱',
+  `CreatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '創建時間',
+  PRIMARY KEY (`StoreId`),
+  KEY `SalesId` (`SalesId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='店家表格';
+
+--
+-- 傾印資料表的資料 `store`
+--
+
+INSERT INTO `store` (`StoreId`, `SalesId`, `Name`, `CreatedTime`) VALUES
+(1, 1, 'gggyyy', '2023-04-22 07:07:53');
+
+--
+-- 已傾印資料表的限制式
+--
+
+--
+-- 資料表的限制式 `items`
+--
+ALTER TABLE `items`
+  ADD CONSTRAINT `items_ibfk_1` FOREIGN KEY (`StoreId`) REFERENCES `store` (`StoreId`);
+
+--
+-- 資料表的限制式 `order`
+--
+ALTER TABLE `order`
+  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`ItemId`) REFERENCES `items` (`ItemId`),
+  ADD CONSTRAINT `order_ibfk_2` FOREIGN KEY (`CustomerId`) REFERENCES `customer` (`CustomerId`);
+
+--
+-- 資料表的限制式 `store`
+--
+ALTER TABLE `store`
+  ADD CONSTRAINT `store_ibfk_1` FOREIGN KEY (`SalesId`) REFERENCES `sales` (`SalesId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

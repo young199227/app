@@ -99,8 +99,8 @@
                                 <td>{{item.Phone}}</td>
                                 <td>{{item.Postalcode}}</td>
                                 <td>{{item.Address}}</td>
-                                <td v-on:click="user_U_modal(item.id)" data-bs-toggle="modal" data-bs-target="#exampleModal">✎</td>
-                                <td v-on:click="user_D(item.id)">✖</td>
+                                <td v-on:click="user_U_modal(item.CustomerId)" data-bs-toggle="modal" data-bs-target="#exampleModal">✎</td>
+                                <td v-on:click="user_D(item.CustomerId)">✖</td>
                             </tr>
                         </tbody>
                     </table>
@@ -312,7 +312,7 @@
                 axios.post('/train4_R_one', {
                     userID: id
                 }).then(response => {
-                    this.updateUserID = response.data[0].id;
+                    this.updateUserID = response.data[0].CustomerId;
                     this.updateUserName = response.data[0].Name;
                     this.updateUserIDnumber = response.data[0].IDnumber;
                     this.updateUserBirthday = response.data[0].Birthday;
@@ -404,7 +404,7 @@
 
             //刪除
             user_D(id) {
-
+                // console.log(id);
                 axios.post('/train4_D', {
                     userID: id
                 }).then(response => {
