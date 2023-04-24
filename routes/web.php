@@ -37,6 +37,20 @@ Route::post('/train4_D', [TrainController::class, 'train4_D']);
 
 //train
 Route::get('/sales', [SalesController::class, 'sales']);
+//業務登入
+Route::post('/sales_login', [SalesController::class, 'sales_login']);
+//業務管理頁面
+Route::get('/sales_manage', [SalesController::class, 'sales_manage']);
+//用業務id撈對應商家
+Route::post('/sales_store_R', [SalesController::class, 'sales_store_R']);
+//業務登出
+Route::post('/sales_logout', [SalesController::class, 'sales_logout']);
+//業務新增商家
+Route::post('/store_C', [SalesController::class, 'store_C']);
+//業務修改商家狀態
+Route::post('/store_state_U', [SalesController::class, 'store_state_U']);
+
+
 
 //測試頁面
 Route::get('/php', [TestController::class, 'php']);
