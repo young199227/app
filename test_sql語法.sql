@@ -4,3 +4,10 @@ SELECT a.SalesId , b.ItemsId , b.ItemsName , b.ItemsPrice ,c.ItemsQuantity , c.I
 JOIN items AS b ON a.StoreId = b.StoreId
 JOIN order_content AS c ON b.ItemsId = c.ItemsId
 WHERE a.SalesId = 3;
+
+--用店家id查詢訂單
+SELECT * FROM store AS a
+JOIN items AS b ON a.StoreId = b.StoreId
+JOIN order_content AS c ON b.ItemsId = c.ItemsId
+JOIN `order` AS d ON c.OrderId = d.OrderId
+WHERE a.StoreId = 5;

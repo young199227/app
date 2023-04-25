@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1:3306
--- 產生時間： 2023-04-24 09:47:14
+-- 產生時間： 2023-04-25 08:37:09
 -- 伺服器版本： 8.0.31
 -- PHP 版本： 8.1.13
 
@@ -30,15 +30,15 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `customer`;
 CREATE TABLE IF NOT EXISTS `customer` (
   `CustomerId` int NOT NULL AUTO_INCREMENT COMMENT '客戶 ID',
-  `Name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '顧客姓名',
-  `IDnumber` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '身分證號',
-  `Birthday` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '生日(加密處理)',
-  `Phone` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '電話(加密處理)',
-  `Postalcode` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '郵遞區號',
-  `Address` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '住址(加密處理)',
+  `Name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '顧客姓名',
+  `IDnumber` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '身分證號',
+  `Birthday` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '生日(加密處理)',
+  `Phone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '電話(加密處理)',
+  `Postalcode` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '郵遞區號',
+  `Address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '住址(加密處理)',
   `CreatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '創建時間',
   PRIMARY KEY (`CustomerId`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='客戶表格';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='客戶表格';
 
 --
 -- 傾印資料表的資料 `customer`
@@ -49,7 +49,8 @@ INSERT INTO `customer` (`CustomerId`, `Name`, `IDnumber`, `Birthday`, `Phone`, `
 (6, 'Jack', 'M123', 'MjAyMy0wNC0yMA==', 'MTIz', '123', 'MTIz', '2023-04-24 02:18:59'),
 (7, 'Lily', 'M124', 'MjAyMy0wNC0wNA==', 'MTIz', '123', 'MTIz', '2023-04-24 02:19:10'),
 (8, 'Max', 'M125', 'MjAyMy0wNC0wMQ==', 'MTIz', '123', 'MTIz', '2023-04-24 02:19:21'),
-(9, 'Ava', 'M126', 'MjAyMy0wNC0wNw==', 'MTIz', '123', 'MTIz', '2023-04-24 02:19:30');
+(9, 'Ava', 'M126', 'MjAyMy0wNC0wNw==', 'MTIz', '123', 'MTIz', '2023-04-24 02:19:30'),
+(10, '123', '123', 'MjAyMy0wNC0yNQ==', 'MTIz', '123', 'MTIz', '2023-04-25 06:23:17');
 
 -- --------------------------------------------------------
 
@@ -61,13 +62,13 @@ DROP TABLE IF EXISTS `items`;
 CREATE TABLE IF NOT EXISTS `items` (
   `ItemsId` int NOT NULL AUTO_INCREMENT COMMENT '產品 ID',
   `StoreId` int NOT NULL COMMENT '店家 ID',
-  `ItemsName` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '產品名稱',
+  `ItemsName` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '產品名稱',
   `ItemsPrice` int DEFAULT NULL COMMENT '產品售價',
   `ItemsState` int NOT NULL DEFAULT '0' COMMENT '產品狀態0開1停',
   `CreatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '創建時間',
   PRIMARY KEY (`ItemsId`),
   KEY `StoreId` (`StoreId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='產品品項表格';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='產品品項表格';
 
 --
 -- 傾印資料表的資料 `items`
@@ -76,7 +77,10 @@ CREATE TABLE IF NOT EXISTS `items` (
 INSERT INTO `items` (`ItemsId`, `StoreId`, `ItemsName`, `ItemsPrice`, `ItemsState`, `CreatedTime`) VALUES
 (3, 2, 'apple', 15, 0, '2023-04-24 01:25:11'),
 (4, 5, 'car', 180000, 0, '2023-04-24 08:34:01'),
-(5, 8, 'pen', 5, 0, '2023-04-24 08:34:28');
+(5, 8, 'pen', 5, 0, '2023-04-24 08:34:28'),
+(9, 5, '1', 200000, 0, '2023-04-25 03:20:44'),
+(10, 5, '123456', 456, 0, '2023-04-25 03:22:40'),
+(11, 5, '1', 123, 0, '2023-04-25 03:23:04');
 
 -- --------------------------------------------------------
 
@@ -95,7 +99,15 @@ CREATE TABLE IF NOT EXISTS `items_car` (
   PRIMARY KEY (`Items_carId`),
   KEY `CustomerId` (`CustomerId`),
   KEY `itemsId` (`ItemsId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='購物車';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='購物車';
+
+--
+-- 傾印資料表的資料 `items_car`
+--
+
+INSERT INTO `items_car` (`Items_carId`, `CustomerId`, `ItemsId`, `ItemsQuantity`, `ItemsTotalMoney`, `CreatedTime`) VALUES
+(8, 10, 4, 4, 720000, '2023-04-25 07:45:45'),
+(9, 10, 3, 1, 15, '2023-04-25 07:45:47');
 
 -- --------------------------------------------------------
 
@@ -111,14 +123,37 @@ CREATE TABLE IF NOT EXISTS `order` (
   `CreatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '創建時間',
   PRIMARY KEY (`OrderId`),
   KEY `CustomerId` (`CustomerId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='訂單表格';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='訂單表格';
 
 --
 -- 傾印資料表的資料 `order`
 --
 
 INSERT INTO `order` (`OrderId`, `CustomerId`, `OrderMoney`, `CreatedTime`) VALUES
-(2, 5, 900000, '2023-04-24 08:36:39');
+(2, 5, 900000, '2023-04-24 08:36:39'),
+(3, 5, 700000, '2023-03-20 12:30:00'),
+(4, 5, 800000, '2023-03-20 13:45:00'),
+(5, 6, 600000, '2023-03-21 10:20:00'),
+(6, 6, 500000, '2023-03-21 15:30:00'),
+(7, 7, 900000, '2023-03-22 09:00:00'),
+(8, 7, 600000, '2023-03-22 17:00:00'),
+(9, 8, 800000, '2023-03-23 11:11:00'),
+(10, 8, 700000, '2023-03-23 16:00:00'),
+(11, 9, 1000000, '2023-03-24 14:30:00'),
+(12, 9, 900000, '2023-03-24 19:00:00'),
+(13, 5, 600000, '2023-03-25 09:00:00'),
+(14, 5, 800000, '2023-03-25 18:00:00'),
+(15, 6, 900000, '2023-03-26 10:00:00'),
+(16, 6, 500000, '2023-03-26 15:00:00'),
+(17, 7, 700000, '2023-03-27 11:30:00'),
+(18, 7, 800000, '2023-03-27 16:00:00'),
+(19, 8, 600000, '2023-03-28 09:00:00'),
+(20, 8, 900000, '2023-03-28 18:00:00'),
+(21, 9, 1000000, '2023-03-29 10:30:00'),
+(22, 9, 700000, '2023-03-29 15:00:00'),
+(23, 5, 800000, '2023-03-30 13:00:00'),
+(24, 5, 600000, '2023-03-30 19:00:00'),
+(25, 6, 500000, '2023-03-31 11:30:00');
 
 -- --------------------------------------------------------
 
@@ -137,14 +172,37 @@ CREATE TABLE IF NOT EXISTS `order_content` (
   PRIMARY KEY (`order_contentId`),
   KEY `OrderId` (`OrderId`),
   KEY `ItemId` (`ItemsId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='訂單內容表格';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='訂單內容表格';
 
 --
 -- 傾印資料表的資料 `order_content`
 --
 
 INSERT INTO `order_content` (`order_contentId`, `OrderId`, `ItemsId`, `ItemsQuantity`, `ItemsTotalMoney`, `CreatedTime`) VALUES
-(2, 2, 4, 5, 900000, '2023-04-24 08:37:00');
+(2, 2, 4, 5, 900000, '2023-04-24 08:37:00'),
+(3, 3, 3, 8, 120, '2023-03-20 12:00:00'),
+(4, 3, 4, 2, 360000, '2023-03-20 12:00:00'),
+(5, 4, 5, 20, 100, '2023-03-21 12:00:00'),
+(6, 4, 3, 5, 75, '2023-03-21 12:00:00'),
+(7, 5, 4, 1, 180000, '2023-03-22 12:00:00'),
+(8, 5, 5, 10, 50, '2023-03-22 12:00:00'),
+(9, 6, 3, 3, 45, '2023-03-23 12:00:00'),
+(10, 6, 4, 2, 360000, '2023-03-23 12:00:00'),
+(11, 7, 5, 15, 75, '2023-03-24 12:00:00'),
+(12, 7, 3, 6, 90, '2023-03-24 12:00:00'),
+(13, 8, 4, 3, 540000, '2023-03-25 12:00:00'),
+(14, 8, 5, 5, 25, '2023-03-25 12:00:00'),
+(15, 9, 3, 9, 135, '2023-03-26 12:00:00'),
+(16, 9, 4, 1, 180000, '2023-03-26 12:00:00'),
+(17, 10, 5, 12, 60, '2023-03-27 12:00:00'),
+(18, 10, 3, 4, 60, '2023-03-27 12:00:00'),
+(19, 11, 4, 4, 720000, '2023-03-28 12:00:00'),
+(20, 11, 5, 2, 10, '2023-03-28 12:00:00'),
+(21, 12, 3, 6, 90, '2023-03-29 12:00:00'),
+(22, 12, 4, 3, 540000, '2023-03-29 12:00:00'),
+(23, 13, 5, 8, 40, '2023-03-30 12:00:00'),
+(24, 13, 3, 5, 75, '2023-03-30 12:00:00'),
+(25, 14, 4, 5, 900000, '2023-03-31 12:00:00');
 
 -- --------------------------------------------------------
 
@@ -155,8 +213,8 @@ INSERT INTO `order_content` (`order_contentId`, `OrderId`, `ItemsId`, `ItemsQuan
 DROP TABLE IF EXISTS `sales`;
 CREATE TABLE IF NOT EXISTS `sales` (
   `SalesId` int NOT NULL AUTO_INCREMENT COMMENT '業務人員 ID',
-  `SalesName` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '業務名稱',
-  `SalesPw` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '業務密碼',
+  `SalesName` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '業務名稱',
+  `SalesPw` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '業務密碼',
   `CreatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '創建時間',
   PRIMARY KEY (`SalesId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='業務人員表格';

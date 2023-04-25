@@ -8,7 +8,11 @@ use App\Http\Controllers\Admin\Member\MemberApiController;
 use App\Http\Controllers\Admin\Goods\GoodsApiController;
 use App\Http\Controllers\Train\TrainController;
 use App\Http\Controllers\Train\SalesController;
+use App\Http\Controllers\Train\StoreController;
+use App\Http\Controllers\Train\CustomerController;
+use App\Http\Controllers\Train\ItemsController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +39,7 @@ Route::post('/train4_R_one', [TrainController::class, 'train4_R_one']);
 Route::post('/train4_U', [TrainController::class, 'train4_U']);
 Route::post('/train4_D', [TrainController::class, 'train4_D']);
 
-//train
+//業務登入畫面/sales
 Route::get('/sales', [SalesController::class, 'sales']);
 //業務登入
 Route::post('/sales_login', [SalesController::class, 'sales_login']);
@@ -49,6 +53,41 @@ Route::post('/sales_logout', [SalesController::class, 'sales_logout']);
 Route::post('/store_C', [SalesController::class, 'store_C']);
 //業務修改商家狀態
 Route::post('/store_state_U', [SalesController::class, 'store_state_U']);
+
+//店家登入畫面
+Route::get('/store', [StoreController::class, 'store']);
+//店家登入
+Route::post('/store_login', [StoreController::class, 'store_login']);
+//業務登出
+Route::post('/store_logout', [StoreController::class, 'store_logout']);
+//店家管理頁面
+Route::get('/store_manage', [StoreController::class, 'store_manage']);
+//店家詳細資料
+Route::post('/store_R', [StoreController::class, 'store_R']);
+//店家新增商品
+Route::post('/store_C', [StoreController::class, 'store_C']);
+//店家新增商品
+Route::post('/store_U', [StoreController::class, 'store_U']);
+//店家上下架商品
+Route::post('/store_D', [StoreController::class, 'store_D']);
+
+//顧客登入畫面
+Route::get('/customer', [CustomerController::class, 'customer']);
+//顧客登入
+Route::post('/customer_login', [CustomerController::class, 'customer_login']);
+//顧客登出
+Route::post('/customer_logout', [CustomerController::class, 'customer_logout']);
+//顧客把商品加入購物車
+Route::post('/add_car', [CustomerController::class, 'add_car']);
+//顧客移除購物車商品
+Route::post('/car_D', [CustomerController::class, 'car_D']);
+//顧客確認購買 新增訂單
+Route::post('/add_order', [CustomerController::class, 'add_order']);
+
+//商品頁面
+Route::get('/items', [ItemsController::class, 'items']);
+//商品詳細資料
+Route::post('/items_R', [ItemsController::class, 'items_R']);
 
 
 

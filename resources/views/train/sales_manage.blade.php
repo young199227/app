@@ -14,8 +14,9 @@
 
     <div class="container" ng-controller="myCtrl">
         <!-- 登出 -->
-        <div class="row mt-3">
-            <div class="col-1 offset-11">
+        <div class="row mt-3 justify-content-end">
+            <div class="col-1">
+                <h5>hi~{{salesName}}</h5>
                 <button type="button" class="btn btn-danger" ng-click="logout()">登出</button>
             </div>
         </div>
@@ -59,6 +60,7 @@
                             <td>{{items.StorePw}}</td>
                             <td>{{items.CreatedTime}}</td>
                             <td>
+
                                 <select class="form-select" aria-label="Default select example" ng-change="store_state_U(items.StoreId,store_state)" ng-model="store_state">
                                     <option selected ng-if="items.StoreState===0">開通</option>
                                     <option selected ng-if="items.StoreState===1">停權</option>
@@ -67,6 +69,7 @@
                                     <option value="1">停權</option>
                                     <option value="2">刪除</option>
                                 </select>
+
                             </td>
                         </tr>
                     </tbody>
@@ -74,9 +77,26 @@
             </div>
         </div>
 
-        <div class="row mt-4">
+        <div class="row mt-2">
             <div class="col-12">
-                <h1>銷售情況</h1>
+
+                <h1 class="">{{salesName}}的業績</h1>
+                <table class="table text-center mt-3">
+                    <thead class="table-danger">
+                        <tr>
+                            <th>總銷售金額</th>
+                            <th>獎金</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-striped">
+                        <tr>
+                            <td>{{totalMoney}}</td>
+                            <td>{{salesMoney}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h1>銷售詳細</h1>
                 <table class="table text-center mt-3">
                     <thead class="table-info">
                         <tr>
@@ -86,6 +106,7 @@
                             <th>價錢</th>
                             <th>數量</th>
                             <th>總價</th>
+                            <th>訂單時間</th>
                         </tr>
                     </thead>
                     <tbody class="table-striped">
@@ -96,6 +117,7 @@
                             <td>{{items.ItemsPrice}}</td>
                             <td>{{items.ItemsQuantity}}</td>
                             <td>{{items.ItemsTotalMoney}}</td>
+                            <td>{{items.CreatedTime}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -127,6 +149,13 @@
         $scope.stores = [];
         //銷售情況
         $scope.orders = [];
+        //總金額
+        $scope.totalMoney = "";
+        //業務分紅
+        $scope.salesMoney = "";
+        //業務名稱
+        $scope.salesName = "";
+
 
         axios.post('/sales_store_R', {
 
@@ -134,6 +163,10 @@
 
             $scope.stores = response.data.data;
             $scope.orders = response.data.orders;
+            $scope.totalMoney = response.data.totalMoney;
+            $scope.salesMoney = response.data.salesMoney;
+            $scope.salesName = response.data.salesName;
+            console.log(response.data);
             $scope.$apply();
 
         });
@@ -149,7 +182,7 @@
         //新增商家
         $scope.new_store = function() {
 
-            //修改前先驗證
+            //新增前先驗證
             const StoreNameRegex = /^[a-zA-Z0-9]{1,10}$/;
             const StorePwRegex = /^[a-zA-Z0-9]{1,10}$/;
 

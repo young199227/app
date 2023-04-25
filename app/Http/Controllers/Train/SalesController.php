@@ -11,7 +11,23 @@ class SalesController extends Controller
     //業務登入頁面
     public function sales()
     {
-        return view('train.sales_login');
+        //有登入session的時候直接跳轉管理頁面
+        if (session()->has('SalesId') && session()->has('SalesName')) {
+            return view('train.sales_manage');
+        } else {
+            return view('train.sales_login');
+        }
+    }
+
+    //業務管理頁面
+    public function sales_manage()
+    {
+        //有登入session才能到管理頁面
+        if (session()->has('SalesId') && session()->has('SalesName')) {
+            return view('train.sales_manage');
+        } else {
+            return view('train.sales_login');
+        }
     }
 
     //業務登入
@@ -37,17 +53,6 @@ class SalesController extends Controller
         return response()->json(['state' => false, 'message' => '登入失敗']);
     }
 
-    //業務管理頁面
-    public function sales_manage()
-    {
-        //沒有SalesId&&SalesName session 的時候不能進入
-        if (session()->has('SalesId') && session()->has('SalesName')) {
-            return view('train.sales_manage');
-        } else {
-            return view('train.sales_login');
-        }
-    }
-
     //業務底下的全部商家
     public function sales_store_R()
     {
@@ -61,11 +66,19 @@ class SalesController extends Controller
         $orders = DB::table('store as a')
             ->join('items as b', 'a.StoreId', '=', 'b.StoreId')
             ->join('order_content as c', 'b.ItemsId', '=', 'c.ItemsId')
-            ->select('a.SalesId', 'b.ItemsId', 'b.ItemsName', 'b.ItemsPrice', 'c.ItemsQuantity', 'c.ItemsTotalMoney')
+            ->select('a.SalesId', 'b.ItemsId', 'b.ItemsName', 'b.ItemsPrice', 'c.ItemsQuantity', 'c.ItemsTotalMoney', 'c.CreatedTime')
             ->where('a.SalesId', '=', $salesId)
             ->get();
 
-        return response()->json(['data' => $row, 'orders' => $orders, 'salesId' => $salesId, 'salesName' => $salesName]);;
+        //總銷售價錢與業務獎金
+        $TotalMoney = DB::table('store as a')
+            ->join('items as b', 'a.StoreId', '=', 'b.StoreId')
+            ->join('order_content as c', 'b.ItemsId', '=', 'c.ItemsId')
+            ->selectRaw('SUM(c.ItemsTotalMoney) as TotalMoney, SUM(c.ItemsTotalMoney * 0.1) as SalesMoney')
+            ->where('a.SalesId', '=', 3)
+            ->first();
+
+        return response()->json(['data' => $row, 'orders' => $orders, 'totalMoney' => $TotalMoney->TotalMoney, 'salesMoney' => $TotalMoney->SalesMoney,  'salesId' => $salesId, 'salesName' => $salesName]);;
     }
 
     //業務登出
@@ -73,7 +86,7 @@ class SalesController extends Controller
     {
         //清空session
         session()->flush();
-        //返回首頁
+        //返回登入頁面
         return view('train.sales_login');
     }
 
