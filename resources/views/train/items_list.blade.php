@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <title>商品</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
@@ -24,7 +25,7 @@
         <div class="row mt-4">
             <div class="col-12">
                 <h1>商品列表</h1>
-                <table class="table text-center">
+                <table class="table text-center align-middle">
                     <thead class="table-primary">
                         <tr>
                             <th>商品編號</th>
@@ -40,7 +41,7 @@
                             <td>{{item.ItemsId}}</td>
                             <td>{{item.StoreId}}</td>
                             <td>{{item.ItemsName}}</td>
-                            <td>{{item.ItemsPrice | number}}$</td>
+                            <td>${{item.ItemsPrice | number}}</td>
                             <td>{{item.CreatedTime}}</td>
                             <td><button type="button" class="btn btn-primary" ng-click="add_car(item.ItemsId,item.ItemsPrice)">✚</button></td>
                         </tr>
@@ -65,9 +66,9 @@
                     <tbody>
                         <tr ng-repeat="car in items_car">
                             <td>{{car.ItemsId}}</td>
-                            <td>{{car.ItemsId}}</td>
+                            <td>{{car.ItemsName}}</td>
                             <td>{{car.ItemsQuantity}}</td>
-                            <td>{{car.ItemsTotalMoney | number}}$</td>
+                            <td>${{car.ItemsTotalMoney | number}}</td>
                             <th ng-click="car_D(car.ItemsId)">✖</th>
                         </tr>
                     </tbody>

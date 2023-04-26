@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <title>商家</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
@@ -37,14 +38,14 @@
                     <div class="form-text">{{err_ItemsPrice}}</div>
                 </div>
 
-                <button type="submit" class="btn btn-primary" ng-click="new_items()">新增</button>
+                <button type="submit" class="btn btn-primary" ng-click="new_items()">新增商品</button>
 
             </div>
 
             <!-- 商品列表 -->
             <div class="col-8">
-
-                <table class="table text-center">
+                <h1>商品列表</h1>
+                <table class="table text-center align-middle">
                     <thead class="table-success">
                         <tr>
                             <th>商品編號</th>
@@ -62,12 +63,12 @@
                             <td>{{item.ItemsId}}</td>
                             <td>{{item.StoreId}}</td>
                             <td>{{item.ItemsName}}</td>
-                            <td>{{item.ItemsPrice}}</td>
+                            <td>${{item.ItemsPrice|number}}</td>
                             <td>{{item.CreatedTime}}</td>
                             <td data-bs-toggle="modal" data-bs-target="#exampleModal" ng-click="items_modal(item.ItemsId,item.ItemsName,item.ItemsPrice)">✎</td>
                             <td>
-                                <p ng-if="item.ItemsState===0">上架</p>
-                                <p ng-if="item.ItemsState===1">下架</p>
+                                <psan ng-if="item.ItemsState===0">上架</psan>
+                                <psan ng-if="item.ItemsState===1">下架</psan>
                             </td>
                             <td>
                                 <select class="form-select" aria-label="Default select example" ng-change="items_D(item.ItemsId,items_state)" ng-model="items_state">
@@ -102,9 +103,9 @@
                             <td>{{order.OrderId}}</td>
                             <td>{{order.ItemsId}}</td>
                             <td>{{order.ItemsName}}</td>
-                            <td>{{order.ItemsPrice}}</td>
+                            <td>${{order.ItemsPrice|number}}</td>
                             <td>{{order.ItemsQuantity}}</td>
-                            <td>{{order.ItemsTotalMoney}}</td>
+                            <td>${{order.ItemsTotalMoney|number}}</td>
                             <td>{{order.CreatedTime}}</td>
                         </tr>
                     </tbody>
@@ -112,7 +113,7 @@
             </div>
         </div>
 
-        <!-- 修改Modal -->
+        <!-- 修改商品Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

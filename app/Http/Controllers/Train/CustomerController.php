@@ -45,8 +45,8 @@ class CustomerController extends Controller
     //顧客登出
     public function customer_logout()
     {
-        //清空session
-        session()->flush();
+        //清空顧客session
+        session()->forget(['CustomerId','Name']);
         //返回登入頁面
         return view('train.customer_longin');
     }
@@ -117,9 +117,7 @@ class CustomerController extends Controller
             $orderMoney += $car[$i]->ItemsTotalMoney;
         }
 
-        // return $orderMoney;
-
-        //交易語法(確保資料庫一致性)
+        //交易語法(確保資料庫一致性) 
         DB::transaction(function () use ($req, $car, $orderMoney) {
 
             //先用顧客id新增一張訂單 附上訂單總金額

@@ -75,7 +75,7 @@
 
                 if (!response.data.state) {
                     console.log(response.data.state);
-                    $scope.login_err = "登入失敗";
+                    $scope.login_err = response.data.message;
                     $scope.$apply();
                 }
             });

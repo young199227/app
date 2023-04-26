@@ -46,10 +46,15 @@ class StoreController extends Controller
         //有查到帳號密碼就給一組store的session
         if (count($row) > 0) {
 
-            session(['StoreId' => $row[0]->StoreId]);
-            session(['StoreName' => $row[0]->StoreName]);
+            //商家狀態===0才能登入
+            if ($row[0]->StoreState === 0) {
+                session(['StoreId' => $row[0]->StoreId]);
+                session(['StoreName' => $row[0]->StoreName]);
 
-            return response()->json(['state' => true, 'message' => '登入成功']);
+                return response()->json(['state' => true, 'message' => '登入成功']);
+            }
+
+            return response()->json(['state' => false, 'message' => '帳號異常請連絡業務']);
         }
 
         return response()->json(['state' => false, 'message' => '登入失敗']);
@@ -59,19 +64,19 @@ class StoreController extends Controller
     public function store_R()
     {
         //拿session裡面的值
-        $salesId = session('StoreId');
-        $salesName = session('StoreName');
+        $storeId = session('StoreId');
+        $storeName = session('StoreName');
 
-        $items = DB::table('items')->where('StoreId', $salesId)->get();
+        $items = DB::table('items')->where('StoreId', $storeId)->get();
 
         $orders = DB::table('store AS a')
             ->join('items AS b', 'a.StoreId', '=', 'b.StoreId')
             ->join('order_content AS c', 'b.ItemsId', '=', 'c.ItemsId')
-            ->where('a.StoreId', $salesId)
+            ->where('a.StoreId', $storeId)
             ->select('c.OrderId', 'b.ItemsId', 'b.ItemsName', 'b.ItemsPrice', 'c.ItemsQuantity', 'c.ItemsTotalMoney', 'c.CreatedTime')
             ->get();
 
-        return response()->json(['salesId' => $salesId, 'salesName' => $salesName, 'items' => $items, 'orders' => $orders]);
+        return response()->json(['salesId' => $storeId, 'salesName' => $storeName, 'items' => $items, 'orders' => $orders]);
     }
 
     //店家新增商品
@@ -87,15 +92,14 @@ class StoreController extends Controller
             'ItemsPrice' => $req->ItemsPrice
         ]);
 
-
         return response()->json(['state' => true, 'message' => '新增成功']);
     }
 
     //店家登出
     public function store_logout()
     {
-        //清空session
-        session()->flush();
+        //清空店家session
+        session()->forget(['StoreId','StoreName']);
         //返回登入頁面
         return view('train.store_login');
     }

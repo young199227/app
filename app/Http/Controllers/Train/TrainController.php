@@ -14,6 +14,12 @@ class TrainController extends Controller
         return view('train.train5');
     }
 
+    //train6
+    public function train6()
+    {
+        return view('train.train6');
+    }
+
     //新增
     public function train4_C(Request $req)
     {

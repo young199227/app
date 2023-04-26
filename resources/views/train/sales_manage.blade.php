@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <title>業務</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
@@ -22,9 +23,9 @@
         </div>
         <!-- 新增商家&商家列表 -->
         <div class="row mt-4">
-
+            <!-- 新增商家 -->
             <div class="col-4">
-
+                <h1>新增商家</h1>
                 <div class="mb-3">
                     <label for="ex1" class="form-label">商家帳號</label>
                     <input type="text" id="ex2" class="form-control" ng-model="new_StoreName">
@@ -37,11 +38,11 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary" ng-click="new_store()">新增商家</button>
-
             </div>
+            <!-- 商家列表 -->
             <div class="col-8">
-
-                <table class="table text-center">
+                <h1>{{salesName}}的商家</h1>
+                <table class="table text-center align-middle">
                     <thead class="table-success">
                         <tr>
                             <th>編號</th>
@@ -77,9 +78,10 @@
             </div>
         </div>
 
+        <!-- 業績&銷售列表 -->
         <div class="row mt-2">
             <div class="col-12">
-
+                <!-- 業績 -->
                 <h1 class="">{{salesName}}的業績</h1>
                 <table class="table text-center mt-3">
                     <thead class="table-danger">
@@ -90,12 +92,12 @@
                     </thead>
                     <tbody class="table-striped">
                         <tr>
-                            <td>{{totalMoney}}</td>
-                            <td>{{salesMoney}}</td>
+                            <td>${{totalMoney| number}}</td>
+                            <td>${{salesMoney| number}}</td>
                         </tr>
                     </tbody>
                 </table>
-                
+                <!-- 銷售列表 -->
                 <h1>銷售詳細</h1>
                 <table class="table text-center mt-3">
                     <thead class="table-info">
@@ -114,9 +116,9 @@
                             <td>{{items.SalesId}}</td>
                             <td>{{items.ItemsId}}</td>
                             <td>{{items.ItemsName}}</td>
-                            <td>{{items.ItemsPrice}}</td>
+                            <td>${{items.ItemsPrice| number}}</td>
                             <td>{{items.ItemsQuantity}}</td>
-                            <td>{{items.ItemsTotalMoney}}</td>
+                            <td>${{items.ItemsTotalMoney| number}}</td>
                             <td>{{items.CreatedTime}}</td>
                         </tr>
                     </tbody>
@@ -141,7 +143,7 @@
         $scope.err_StorePw = "";
 
         //商家狀態的變數
-        $scope.store_state = "";
+        $scope.store_state = [0,1];
 
 
         //登入後 用後端的session直接撈取值
@@ -214,6 +216,10 @@
         //修改商家狀態
         $scope.store_state_U = function(storeId, state) {
 
+            // console.log(storeId);
+            // console.log(state);
+            // return;
+            
             //空值return
             if (storeId == "" || state == "") {
                 return;

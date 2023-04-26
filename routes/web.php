@@ -39,6 +39,8 @@ Route::post('/train4_R_one', [TrainController::class, 'train4_R_one']);
 Route::post('/train4_U', [TrainController::class, 'train4_U']);
 Route::post('/train4_D', [TrainController::class, 'train4_D']);
 
+Route::get('/train6', [TrainController::class, 'train6']);
+
 //業務登入畫面/sales
 Route::get('/sales', [SalesController::class, 'sales']);
 //業務登入

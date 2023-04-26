@@ -75,7 +75,7 @@ class SalesController extends Controller
             ->join('items as b', 'a.StoreId', '=', 'b.StoreId')
             ->join('order_content as c', 'b.ItemsId', '=', 'c.ItemsId')
             ->selectRaw('SUM(c.ItemsTotalMoney) as TotalMoney, SUM(c.ItemsTotalMoney * 0.1) as SalesMoney')
-            ->where('a.SalesId', '=', 3)
+            ->where('a.SalesId', '=', $salesId)
             ->first();
 
         return response()->json(['data' => $row, 'orders' => $orders, 'totalMoney' => $TotalMoney->TotalMoney, 'salesMoney' => $TotalMoney->SalesMoney,  'salesId' => $salesId, 'salesName' => $salesName]);;
@@ -84,8 +84,8 @@ class SalesController extends Controller
     //業務登出
     public function sales_logout()
     {
-        //清空session
-        session()->flush();
+        //清空業務session
+        session()->forget(['SalesId','SalesName']);
         //返回登入頁面
         return view('train.sales_login');
     }

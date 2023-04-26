@@ -27,9 +27,15 @@ class ItemsController extends Controller
         $CustomerId = session('CustomerId');
         $Name = session('Name');
 
-        $items = DB::table('items')->get();
+        //撈出上架狀態的商品
+        $items = DB::table('items')->where('ItemsState', 0)->get();
 
-        $items_car = DB::table('items_car')->where('CustomerId', $CustomerId)->get();
+        //用CustomerId的session 撈出購物車內容
+        $items_car = DB::table('items_car as a')
+            ->join('items as b', 'b.ItemsId', '=', 'a.ItemsId')
+            ->where('a.CustomerId', $CustomerId)
+            ->select('a.ItemsId', 'b.ItemsName', 'a.ItemsQuantity', DB::raw('(a.ItemsQuantity * b.ItemsPrice) AS ItemsTotalMoney'))
+            ->get();
 
         return response()->json(['items' => $items, 'items_car' => $items_car, 'CustomerId' => $CustomerId, 'Name' => $Name]);
     }
