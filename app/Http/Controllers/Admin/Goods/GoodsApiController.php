@@ -172,6 +172,7 @@ class GoodsApiController extends Controller
     //商品列表api
     public function goods_list_api()
     {
+        
         $row = DB::table('goods')
             ->select('*', DB::raw('(select Goods_img FROM goods_imges where Goods_id = a.Goods_id LIMIT 1) as Goods_imges'))
             ->from('goods as a')

@@ -7,69 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>vueTest</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-    <style>
-
-    </style>
 </head>
 
 <body>
     @verbatim
     <div id="app">
         <div class="container">
-
+            <!-- 分頁 -->
             <div class="row">
-
-                <!-- 新增帳號 -->
-                <div class="col-6 mt-3">
-                    <input type="text" class="form-control" placeholder="帳號" v-model="userName">
-                    <input type="password" class="form-control" placeholder="密碼" v-model="userPw">
-                    <div style="color:red">{{userErr}}</div>
-
-                    <button type="button" class="btn btn-success" v-on:click="addUser()">新增帳號</button>
-                </div>
-
-                <!-- 查詢商品 -->
-                <div class="col-6 mt-3">
-                    <h1>查詢商品id</h1>
-                    <input type="text" class="form-control" placeholder="密碼" v-model="goodsId">
-
-                    <button type="button" class="btn btn-success" v-on:click="selectGoods()">查詢</button>
-
-                    <div class="col-md-12 mt-3 h-100" v-for="item in goodsData" :key="item">
-
-                        <div class="card" style="width: 18rem;">
-                            <img v-bind:src="item.Goods_img" class="card-img-top" style="width: 100%; height: 200px">
-                            <div class="card-body">
-                                <h5 class="card-title">名稱:{{item.Goods_name}}</h5>
-                                <p class="card-text">價錢:{{item.Goods_money}}</p>
-                                <p class="card-text">產地:{{item.Goods_area}}</p>
-                                <p class="card-text">描述:{{item.Goods_detail}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <h1>{{selectState}}</h1>
-                </div>
-
-
-
                 <!-- 選擇每頁數量 -->
-                <div class="col-12 mt-3" v-if="userState===1">
-
+                <div class="col-12 mt-3">
                     <h1>選擇每頁數量</h1>
-
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
-
                             <li class="page-item" v-for="(page , index) in pageMax"><a class="page-link" href="#" v-on:click="pageUpdate(page)">{{page}}</a></li>
-
                         </ul>
                     </nav>
                 </div>
-
                 <!-- 顯示商品 -->
-                <div class="col-md-3 mt-3 h-100" v-for="item in listData" :key="item" v-if="userState===1">
-
+                <div class="col-md-3 mt-3 h-100" v-for="item in listData" :key="item">
                     <div class="card" style="width: 18rem;">
                         <img v-bind:src="item.Goods_imges" class="card-img-top" style="width: 100%; height: 200px">
                         <div class="card-body">
@@ -79,25 +35,26 @@
                             <p class="card-text">描述:{{item.Goods_detail}}</p>
                         </div>
                     </div>
-
                 </div>
-
                 <!-- 換頁 -->
-                <div class="col-12 mt-3" v-if="userState===1">
-
+                <div class="col-12 mt-3">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
-
                             <span v-for="(page, index) in ajaxData" :key="index">
                                 <li class="page-item"><a class="page-link" href="#" v-on:click="message_state(index)">{{index+1}}</a></li>
                             </span>
-
                         </ul>
                     </nav>
-
                 </div>
+            </div>
 
-
+            <!-- 統計圖 -->
+            <div class="row">
+                <div class="col-12">
+                    <div>
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -105,31 +62,31 @@
     @endverbatim
 </body>
 <script src="/js/bootstrap.bundle.min.js"></script>
-<script src="/js/jquery-3.6.1.min.js"></script>
 <script src="/js/vue.global.js"></script>
 <script src="/js/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+
     var app = {
         data() {
             return {
+                loading: false,
                 pageMax: 8,
                 page: 4,
-                userName: "",
-                userPw: "",
-                userErr: "",
-                goodsId: "",
                 ajaxData: [
                     []
                 ],
                 listData: [],
                 goodsData: [],
                 selectState: "",
-                userState: 0,
+                userState: 1,
             }
         },
         created() {
             //進入頁面後先撈取全部商品的陣列
             axios.get('/api/goods_list_api').then(response => {
+
+                    console.log(response.data);
 
                     //to2dArray是自定義的function能把一維陣列排序成一個二維陣列
                     //to2dArray(要排序的陣列, 一頁有幾個資料)
@@ -148,35 +105,6 @@
             //跳到第幾個頁數的方法
             message_state(page) {
                 this.listData = this.ajaxData[page];
-            },
-
-            //新增user的方法
-            addUser() {
-
-                // 驗證 userName 和 userPw 是否符合規定
-                // 
-                const userNameRegex = /^[a-zA-Z0-9]{4,12}$/;
-                const userPwRegex = /^[a-zA-Z0-9]{6,12}$/;
-                if (!userNameRegex.test(this.userName)) {
-                    this.userErr = "使用者名稱不符合要求，4~12字";
-                    return;
-                }
-                if (!userPwRegex.test(this.userPw)) {
-                    this.userErr = "密碼不符合要求，6~12碼";
-                    return;
-                }
-
-                axios.post('/test1', {
-                    member_email: this.userName,
-                    member_password: this.userPw
-                }).then(response => {
-
-                    this.userName = "";
-                    this.userPw = "";
-                    this.userErr = "";
-                    this.userState = 1;
-                    console.log(response.data);
-                });
             },
 
             //修改一頁顯示幾個商品的方法
@@ -203,37 +131,12 @@
                     });
             },
 
-            //用商品id查詢商品的方法
-            selectGoods() {
-
-                axios.post('/test2', {
-                        goods_id: this.goodsId
-                    }).then(response => {
-                        console.log(this.goodsData.length);
-                        this.goodsData = response.data;
-
-                        if (this.goodsData.length === 0) {
-                            console.log(this.goodsData.length);
-                            this.selectState = "空空如也!";
-                        } else {
-                            this.selectState = "";
-                        }
-
-
-                    })
-                    .catch(error => {
-                        console.error(error);
-                        this.selectState = "空空如也!";
-                    });
-            },
 
         },
         computed: {
 
         }
     }
-
-
     Vue.createApp(app).mount('#app');
 
 

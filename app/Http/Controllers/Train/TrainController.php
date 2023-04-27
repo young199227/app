@@ -68,6 +68,7 @@ class TrainController extends Controller
     //查詢全部user
     public function train4_R(Request $req)
     {
+
         $row = DB::table('customer')->orderByDesc('CustomerId')->get();
 
         //迴圈 生日,電話,住址 base64解密

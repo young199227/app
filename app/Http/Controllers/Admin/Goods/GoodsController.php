@@ -84,6 +84,7 @@ class GoodsController extends Controller
     //商品列表
     public function goods_list()
     {
+
         $row = DB::table('goods')
             ->select('*', DB::raw('(select Goods_img FROM goods_imges where Goods_id = a.Goods_id LIMIT 1) as Goods_imges'))
             ->from('goods as a')
