@@ -66,20 +66,15 @@
 <script src="/js/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-
     var app = {
         data() {
             return {
-                loading: false,
                 pageMax: 8,
                 page: 4,
                 ajaxData: [
                     []
                 ],
                 listData: [],
-                goodsData: [],
-                selectState: "",
-                userState: 1,
             }
         },
         created() {
