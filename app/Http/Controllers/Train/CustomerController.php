@@ -46,7 +46,7 @@ class CustomerController extends Controller
     public function customer_logout()
     {
         //清空顧客session
-        session()->forget(['CustomerId','Name']);
+        session()->forget(['CustomerId', 'Name']);
         //返回登入頁面
         return view('train.customer_longin');
     }
@@ -132,21 +132,21 @@ class CustomerController extends Controller
                 ->where('CustomerId', $req->CustomerId)
                 ->orderBy('CustomerId', 'desc')
                 ->first();
-            
+
             //再把購物車的內容迴圈增加到最新的訂單上
             for ($i = 0; $i < count($car); $i++) {
 
                 DB::table('order_content')
-                 ->insert([
-                        'OrderId'=> $newOrder->OrderId,
-                        'ItemsId'=> $car[$i]->ItemsId,
-                        'ItemsQuantity'=>$car[$i]->ItemsQuantity,
-                        'ItemsTotalMoney'=> $car[$i]->ItemsTotalMoney
-                 ]);
+                    ->insert([
+                        'OrderId' => $newOrder->OrderId,
+                        'ItemsId' => $car[$i]->ItemsId,
+                        'ItemsQuantity' => $car[$i]->ItemsQuantity,
+                        'ItemsTotalMoney' => $car[$i]->ItemsTotalMoney
+                    ]);
             }
 
             //成功後把原有的購物車內容刪除
-            DB::table('items_car')->where('CustomerId',$req->CustomerId)->delete();
+            DB::table('items_car')->where('CustomerId', $req->CustomerId)->delete();
         });
 
         return response()->json(['state' => false, 'message' => '新增訂單成功']);

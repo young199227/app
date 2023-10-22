@@ -97,7 +97,7 @@ Route::post('/items_R', [ItemsController::class, 'items_R']);
 Route::get('/php', [TestController::class, 'php']);
 Route::get('/test', [TestController::class, 'test']);
 Route::post('/test1', [TestController::class, 'test1']);
-Route::post('/test2', [TestController::class, 'test2']);
+Route::get('/test2', [TestController::class, 'test2']);
 
 //處理session的group (因為aip.php不能分發seeion)
 Route::group(["prefix" => "session"], function () {

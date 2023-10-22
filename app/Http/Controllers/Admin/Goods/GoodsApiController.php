@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Goods;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class GoodsApiController extends Controller
 {
@@ -161,10 +162,51 @@ class GoodsApiController extends Controller
 
                 //新增訂單後清空購物車
                 DB::table('goods_car')->where('Member_id', $req->member_id)->delete();
-            });
 
+                // LINE Messaging API URL
+                $url = 'https://api.line.me/v2/bot/message/broadcast';
+
+                // LINE Channel Access Token
+                $channelAccessToken = 'blFCEUm/yeOEVInfAcGe+9sHG9mIZxYAUQPZEwvDxSu65WT6pglb+/mCNj5PNDemgrRh4N2/Hrz+dwnc1scOE95IldCEiCoKDoW5t7aPoxG6MoRiQNiXfxvVrYwpHahhjYKuwsxpf4lr5hzpzwTPpgdB04t89/1O/w1cDnyilFU=';
+
+                // LINE Message Data
+                $data = [
+                    'messages' => [
+                        [
+                            'type' => 'text',
+                            'text' => '$$$新增了一筆訂單:編號' . $order->Order_id,
+                            'emojis' => [
+                                [
+                                    'index' => 0,
+                                    'productId' => "5ac22c9e031a6752fb806d68",
+                                    'emojiId' => "040"
+                                ],
+                                [
+                                    'index' => 1,
+                                    'productId' => "5ac22c9e031a6752fb806d68",
+                                    'emojiId' => "041"
+                                ],
+                                [
+                                    'index' => 2,
+                                    'productId' => "5ac22c9e031a6752fb806d68",
+                                    'emojiId' => "042"
+                                ],
+                            ]
+                        ]
+                    ]
+                ];
+
+                // 使用 Laravel HTTP 客户端发送请求
+                $response = Http::withHeaders([
+                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Bearer ' . $channelAccessToken,
+                ])->withOptions([
+                    'verify' => false,
+                ])->post($url, $data);
+            });
             return response()->json(['state' => true, 'message' => '成功購買!']);
         } else {
+
             return response()->json(['state' => false, 'message' => '缺少欄位或值']);
         }
     }
@@ -172,7 +214,7 @@ class GoodsApiController extends Controller
     //商品列表api
     public function goods_list_api()
     {
-        
+
         $row = DB::table('goods')
             ->select('*', DB::raw('(select Goods_img FROM goods_imges where Goods_id = a.Goods_id LIMIT 1) as Goods_imges'))
             ->from('goods as a')

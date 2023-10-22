@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Goods;
+use Illuminate\Support\Facades\Http;
 
 class TestController extends Controller
 {
@@ -30,16 +31,52 @@ class TestController extends Controller
 
     public function test2(Request $req)
     {
-        // $row = DB::table('goods')
-        // ->where('Goods_id', '=', $req->goods_id)
-        // ->get();
+        // LINE Messaging API URL
+        $url = 'https://api.line.me/v2/bot/message/broadcast';
 
-        $row = DB::table('goods')
-            ->select('*', DB::raw('(SELECT goods_img FROM goods_imges WHERE Goods_id = ' . $req->goods_id . ' LIMIT 1) as Goods_img'))
-            ->where('Goods_id', '=', $req->goods_id)
-            ->get();
+        // LINE Channel Access Token
+        $channelAccessToken = 'blFCEUm/yeOEVInfAcGe+9sHG9mIZxYAUQPZEwvDxSu65WT6pglb+/mCNj5PNDemgrRh4N2/Hrz+dwnc1scOE95IldCEiCoKDoW5t7aPoxG6MoRiQNiXfxvVrYwpHahhjYKuwsxpf4lr5hzpzwTPpgdB04t89/1O/w1cDnyilFU=';
 
-        return $row;
+        // LINE Message Data
+        $data = [
+            'messages' => [
+                [
+                    'type' => 'text',
+                    'text' => '$$$新增了一筆訂單:編號',
+                    'emojis' => [
+                        [
+                            'index' => 0,
+                            'productId' => "5ac22c9e031a6752fb806d68",
+                            'emojiId' => "040"
+                        ],
+                        [
+                            'index' => 1,
+                            'productId' => "5ac22c9e031a6752fb806d68",
+                            'emojiId' => "041"
+                        ],
+                        [
+                            'index' => 2,
+                            'productId' => "5ac22c9e031a6752fb806d68",
+                            'emojiId' => "042"
+                        ],
+                    ]
+                ]
+            ]
+        ];
+
+        // 使用 Laravel HTTP 客户端发送请求
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $channelAccessToken,
+        ])->withOptions([
+            'verify' => false,
+        ])->post($url, $data);
+
+
+        // 检查是否有错误或根据需要处理响应
+        if ($response->failed()) {
+            return response()->json(['state' => false, 'message' => 'LINE API失敗' . $response->body()]);
+        }
     }
 
     public function php()
