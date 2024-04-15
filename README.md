@@ -2,7 +2,7 @@
 
  # **Fruit World**
 
-<div class="">專題網址：<a href="https//fruit-world.capybaby.cc/">https//fruit-world.capybaby.cc/</a></div>
+<div class="">專題網址：<a href="https://fruit-world.capybaby.cc/">https://fruit-world.capybaby.cc/</a></div>
 <div class="mt-2">GitHub：<a href="https://github.com/young199227/app">https://github.com/young199227/app</a></div>
 
 <br>
