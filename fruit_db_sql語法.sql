@@ -1,4 +1,4 @@
---查出3號會員購物車裡面的商品含1張圖片
+--查出3號會員購物車裡面的商品
 SELECT a.*, b.*, 
     (SELECT goods_img FROM goods_imges WHERE goods_id = b.goods_id LIMIT 1) AS goods_img
 FROM goods_car AS a
