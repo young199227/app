@@ -45,7 +45,6 @@ CREATE TABLE IF NOT EXISTS `goods` (
 --
 
 INSERT INTO `goods` (`Goods_id`, `Goods_name`, `Goods_money`, `Goods_sum`, `Goods_area`, `Goods_detail`, `Goods_state`, `Goods_created_at`) VALUES
-(4, '蘋果', 500, 99, '南投縣仁愛鄉', '蘋果很好吃', 0, '2023-02-14 23:10:22'),
 (5, '葡萄', 3780, 99, '雲林縣古坑鄉', '葡萄很好吃', 1, '2023-02-14 23:18:05'),
 (6, '草莓', 666, 99, '苗栗縣大湖鄉', '草莓很好吃', 1, '2023-02-14 23:23:23'),
 (7, '奇異果', 888, 99, '新竹縣五峰鄉', '奇異果健康', 1, '2023-02-14 23:34:19'),
