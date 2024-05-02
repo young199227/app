@@ -159,7 +159,7 @@ Route::group(["prefix" => "member"], function () {
     Route::get('/member_login', [MemberController::class, 'member_login'])->name('member_login');
 });
 
-//owner的group
+//owner的group 123
 //check.owner中間件判斷沒有owner session時回到首頁
 Route::group(["prefix" => "owner", "middleware" => "check.owner"], function () {
     //後台首頁(顯示所有商品)
